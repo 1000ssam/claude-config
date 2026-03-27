@@ -11,6 +11,40 @@
           {
             "type": "command",
             "command": "node \"C:/Users/user/.claude/hooks/gsd-check-update.js\""
+          },
+          {
+            "type": "command",
+            "command": "node \"C:/Users/user/.claude/config-repo/config-sync.js\" --pull"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/user/.claude/config-repo/config-sync.js\" --push"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/user/.claude/config-repo/config-sync.js\" --push"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/user/.claude/config-repo/config-sync.js\" --push"
           }
         ]
       }
