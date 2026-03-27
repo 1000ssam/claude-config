@@ -1,0 +1,6 @@
+# config-sync.js는 리포에 포함 (양쪽 PC에서 사용)
+# 나머지는 sync 스크립트가 복사해오는 파일들만 커밋됨
+
+# OS
+Thumbs.db
+.DS_Store
