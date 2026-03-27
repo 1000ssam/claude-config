@@ -41,6 +41,9 @@
 ## 앱 개발 원칙
 - [feedback_changelog-on-deploy.md](feedback_changelog-on-deploy.md) — 사용자 체감 변경 시 반드시 changelog 업데이트
 
+## 2대 PC 동기화
+- [project_config-sync.md](project_config-sync.md) — config-repo(Git) 자동 동기화, Stop hook마다 push
+
 ## API 문제 해결 원칙
 - [feedback_no-api-downgrade.md](feedback_no-api-downgrade.md) — 레거시 API 다운그레이드 금지, 현재 버전에서 근본 원인 해결
 - [feedback_use-context7-for-api.md](feedback_use-context7-for-api.md) — API 탐색 시 context7 MCP 필수 사용
