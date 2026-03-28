@@ -49,7 +49,7 @@
 
 ## 복기 문서 (LESSONS_LEARNED.md) 관리
 
-- 파일 위치: `C:\dev\notes\LESSONS_LEARNED.md`
+- 파일 위치: `~/dev/notes/LESSONS_LEARNED.md`
 - 사용자가 "복기 문서에 기록해줘", "lessons learned 추가", "삽질 기록" 등을 요청하면 해당 파일을 열어 **다음 번호로 항목을 추가**한다.
 - 항목 구조는 기존 형식을 유지한다: `## N. 제목` → `### 문제` → `### 원인` → `### 해결` → `### 교훈`
 - 항목을 추가할 때 기존 내용은 절대 수정하지 않는다.
@@ -73,13 +73,13 @@
 | 노션 OAuth, Notion OAuth, OAuth 리다이렉트, OAuth state | `~/.claude/knowledge/notion-oauth.md` |
 | iOS 줌, iOS 확대, input 확대, textarea 줌, 모바일 줌 | `~/.claude/knowledge/ios-input-zoom.md` |
 
-- knowledge 파일은 `C:\Users\user\.claude\knowledge\` 디렉토리에 주제별로 관리한다.
+- knowledge 파일은 `~/.claude/knowledge/` 디렉토리에 주제별로 관리한다.
 - 새로운 범용 인사이트가 확인되면 해당 디렉토리에 파일을 추가하고 이 테이블을 업데이트한다.
 - **디버깅 중 범용적 인사이트**(특정 프로젝트에 국한되지 않는 패턴, 브라우저/프레임워크 함정 등)가 발생하면, 해결 직후 사용자에게 knowledge 파일 추가 + 라우터 업데이트를 **먼저 제안**한다.
 
 ## 임시 파일 경로 규칙
 
-- 특정 프로젝트 리포가 아닌 범용 MD/스크립트 파일은 **`C:\dev\notes\`** 아래에 생성한다.
+- 특정 프로젝트 리포가 아닌 범용 MD/스크립트 파일은 **`~/dev/notes/`** 아래에 생성한다.
 - `~`, 홈 디렉토리, 데스크톱 등에 흩뿌리지 않는다.
 
 ## Bash 도구에서 PowerShell 사용 시 주의
