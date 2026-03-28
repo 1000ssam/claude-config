@@ -79,5 +79,8 @@
     }
   },
   "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "permissions": {
+    "allow": ["Bash"]
+  }
 }
