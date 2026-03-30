@@ -10,7 +10,8 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const CLAUDE_DIR = path.join(require('os').homedir(), '.claude');
+const HOME_DIR = require('os').homedir();
+const CLAUDE_DIR = path.join(HOME_DIR, '.claude');
 const REPO_DIR = path.join(CLAUDE_DIR, 'config-repo');
 
 // 동기화 대상 매핑: [소스 (CLAUDE_DIR 기준), 목적지 (REPO_DIR 기준)]
@@ -26,6 +27,11 @@ const DIR_MAP = [
   ['commands', 'commands'],
   ['hooks', 'hooks'],
   [path.join('projects', 'C--Users-user', 'memory'), 'memory'],
+];
+
+// CLAUDE_DIR 밖의 동기화 대상: [절대경로, 목적지 (REPO_DIR 기준)]
+const EXTRA_DIR_MAP = [
+  [path.join(HOME_DIR, 'dev', 'notes'), 'notes'],
 ];
 
 function copyFile(src, dst) {
@@ -71,6 +77,9 @@ function push() {
   for (const [src, dst] of DIR_MAP) {
     copyDir(path.join(CLAUDE_DIR, src), path.join(REPO_DIR, dst));
   }
+  for (const [src, dst] of EXTRA_DIR_MAP) {
+    copyDir(src, path.join(REPO_DIR, dst));
+  }
 
   // 변경사항 확인 후 commit + push
   try {
@@ -103,6 +112,10 @@ function pull() {
       const claudePath = path.join(CLAUDE_DIR, src);
       copyDir(repoPath, claudePath);
     }
+  }
+  for (const [src, dst] of EXTRA_DIR_MAP) {
+    const repoPath = path.join(REPO_DIR, dst);
+    if (fs.existsSync(repoPath)) copyDir(repoPath, src);
   }
 }
 
