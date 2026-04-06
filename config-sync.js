@@ -30,8 +30,10 @@ const DIR_MAP = [
 ];
 
 // CLAUDE_DIR 밖의 동기화 대상: [절대경로, 목적지 (REPO_DIR 기준)]
+const isWSL = process.platform === 'linux' && fs.existsSync('/mnt/c');
+const NOTES_DIR = isWSL ? '/mnt/c/dev/notes' : 'C:\\dev\\notes';
 const EXTRA_DIR_MAP = [
-  [path.join(HOME_DIR, 'dev', 'notes'), 'notes'],
+  [NOTES_DIR, 'notes'],
 ];
 
 function copyFile(src, dst) {
@@ -68,9 +70,33 @@ function git(cmd) {
   return execSync(`git ${cmd}`, { cwd: REPO_DIR, stdio: 'pipe', timeout: 15000 }).toString().trim();
 }
 
+// settings.json 머지: hooks 섹션은 로컬 것을 보존
+function mergeSettings(localPath, repoPath, direction) {
+  const local = fs.existsSync(localPath) ? JSON.parse(fs.readFileSync(localPath, 'utf8')) : {};
+  const repo = fs.existsSync(repoPath) ? JSON.parse(fs.readFileSync(repoPath, 'utf8')) : {};
+
+  if (direction === 'push') {
+    // 로컬 → 리포: hooks 제외하고 복사
+    const { hooks: _h, ...rest } = local;
+    const merged = { ...repo, ...rest };
+    if (repo.hooks) merged.hooks = repo.hooks; // 리포의 hooks 유지
+    fs.writeFileSync(repoPath, JSON.stringify(merged, null, 2));
+  } else {
+    // 리포 → 로컬: hooks는 로컬 것 보존
+    const { hooks: localHooks, ...rest } = repo;
+    const merged = { ...local, ...rest };
+    if (local.hooks) merged.hooks = local.hooks; // 로컬 hooks 보존
+    fs.writeFileSync(localPath, JSON.stringify(merged, null, 2));
+  }
+}
+
 function push() {
   // 로컬 → 리포로 복사
   for (const [src, dst] of FILE_MAP) {
+    if (src === 'settings.json') {
+      mergeSettings(path.join(CLAUDE_DIR, src), path.join(REPO_DIR, dst), 'push');
+      continue;
+    }
     const srcPath = path.join(CLAUDE_DIR, src);
     if (fs.existsSync(srcPath)) copyFile(srcPath, path.join(REPO_DIR, dst));
   }
@@ -104,7 +130,12 @@ function pull() {
   // 리포 → 로컬로 복사
   for (const [src, dst] of FILE_MAP) {
     const repoPath = path.join(REPO_DIR, dst);
-    if (fs.existsSync(repoPath)) copyFile(repoPath, path.join(CLAUDE_DIR, src));
+    if (!fs.existsSync(repoPath)) continue;
+    if (src === 'settings.json') {
+      mergeSettings(path.join(CLAUDE_DIR, src), repoPath, 'pull');
+      continue;
+    }
+    copyFile(repoPath, path.join(CLAUDE_DIR, src));
   }
   for (const [src, dst] of DIR_MAP) {
     const repoPath = path.join(REPO_DIR, dst);
