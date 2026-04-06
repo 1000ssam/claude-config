@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>위스토리 협업 제안서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  background: #ffffff;
+}
+
+@page { size: A4; margin: 0; }
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #f9f8fc;
+  page-break-after: always;
+  position: relative;
+}
+.page:last-child { page-break-after: avoid; }
+
+.pi {
+  padding: 44px 52px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── BADGE ──────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: #ffffff;
+  padding: 7px 16px;
+  font-size: 9pt;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 14px;
+}
+
+/* ── SECTION TITLE ──────────────────────── */
+.sh2 {
+  font-family: 'Playfair Display', 'Noto Serif KR', Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30pt;
+  color: #1a1a2e;
+  line-height: 1.25;
+  margin-bottom: 22px;
+}
+
+/* ── CARDS ──────────────────────────────── */
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.cv {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.cf {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 16px 24px 22px;
+}
+.cf h3 {
+  font-size: 10.5pt;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+.cf p {
+  font-size: 8.5pt;
+  color: #64748b;
+  line-height: 1.65;
+}
+
+/* ── GRIDS ──────────────────────────────── */
+.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.g2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+
+/* ── MINI FIELD ─────────────────────────── */
+.mf {
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 5px 10px;
+}
+.ml { display:block; font-size:7.5px; color:#94a3b8; margin-bottom:2px; }
+.mv { display:block; font-size:9.5px; font-weight:600; color:#1a1a2e; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* ── MINI TAG ───────────────────────────── */
+.mt {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 3px 9px;
+  font-size: 8px;
+  color: #1a1a2e;
+  font-weight: 500;
+}
+
+/* ── STAT ───────────────────────────────── */
+.sn {
+  font-size: 30pt;
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.su { font-size:14pt; font-weight:700; color:#1a1a2e; }
+.sl { font-size:8.5pt; color:#64748b; margin-top:5px; line-height:1.4; }
+
+/* ── CHECK LIST ─────────────────────────── */
+.ci {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 9pt;
+  color: #1a1a2e;
+  line-height: 1.55;
+}
+.ci:last-child { border-bottom: none; }
+.cd {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f0edff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── TABLE ──────────────────────────────── */
+.tbl { width:100%; border-collapse:collapse; font-size:8.5pt; }
+.tbl th {
+  text-align:left; padding:8px 12px; font-size:8pt; font-weight:500;
+  color:#64748b; border-bottom:1px solid rgba(0,0,0,0.06); background:#f9f8fc;
+}
+.tbl td {
+  padding:8px 12px; color:#1a1a2e; border-bottom:1px solid rgba(0,0,0,0.06); vertical-align:middle;
+}
+.tbl tr:last-child td { border-bottom:none; }
+
+/* ── UTIL ───────────────────────────────── */
+.purple { color: #7c5cff; }
+.muted  { color: #94a3b8; }
+.sec    { color: #64748b; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 1 · COVER
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi" style="justify-content:space-between; padding-top:52px; padding-bottom:48px;">
+
+    <!-- Top: Badge -->
+    <div>
+      <div class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+        공동 개발 · 유통 협업 제안서
+      </div>
+    </div>
+
+    <!-- Center: Brand + Summary -->
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding: 24px 0 32px;">
+      <div style="margin-bottom:32px;">
+        <div style="font-family:'Playfair Display','Noto Serif KR',Georgia,serif; font-style:italic; font-weight:400; font-size:60pt; color:#1a1a2e; line-height:1.05; letter-spacing:-2px;">
+          Wee-story
+        </div>
+        <div style="font-size:18pt; font-weight:700; color:#1a1a2e; margin-top:6px; letter-spacing:-0.5px;">
+          위스토리
+        </div>
+        <div style="font-size:12pt; color:#64748b; margin-top:10px; line-height:1.5;">
+          전국 8,863개 위클래스를 위한<br>상담교사 전용 기록 관리 앱
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:24px;">
+        <div style="padding:24px 28px;">
+          <p style="font-size:9.5pt; color:#1a1a2e; line-height:1.75;">
+            전국 약 9,300개 위클래스에는 공통된 문제가 있습니다. 상담 일지를 쓰고, 나이스(NEIS)에 다시 올리고, 관리자 보고서를 또 쓰는 <strong>3중 행정 반복</strong>입니다.
+          </p>
+          <p style="font-size:9.5pt; color:#1a1a2e; line-height:1.75; margin-top:10px;">
+            위스토리는 현직 교사가 직접 도메인 지식을 설계에 녹여 만든 상담교사 전용 앱으로, 완성된 MVP · 시장성 검증 데이터 · 3.5만 팔로워 인플루언서 팀을 갖추고 있습니다. 테크빌교육과의 공동 개발 · 유통 협업을 제안합니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="g3" style="gap:12px;">
+        <div class="card">
+          <div style="padding:18px 20px;">
+            <div class="sn" style="font-size:24pt;">MVP</div>
+            <div class="sl">완성된 제품<br>Electron + React + SQLite</div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="padding:18px 20px;">
+            <div style="display:flex; align-items:baseline; gap:3px;">
+              <div class="sn" style="font-size:24pt;">1,954</div>
+              <div class="su" style="font-size:11pt;">건</div>
+            </div>
+            <div class="sl">노션 템플릿 다운로드<br>별도 마케팅 없이</div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="padding:18px 20px;">
+            <div style="display:flex; align-items:baseline; gap:2px;">
+              <div class="sn" style="font-size:24pt;">11.2</div>
+              <div class="su" style="font-size:11pt;">%</div>
+            </div>
+            <div class="sl">유료 전환율<br>업계 평균(2–5%)의 2배</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: Meta bar -->
+    <div style="border-top:1px solid rgba(0,0,0,0.06); padding-top:18px; display:flex; align-items:center; gap:24px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <img src="profile-kim.jpg" style="width:28px; height:28px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0;">
+        <div>
+          <div style="font-size:8.5pt; font-weight:600; color:#1a1a2e;">김용천</div>
+        </div>
+      </div>
+      <div style="width:1px; height:28px; background:rgba(0,0,0,0.06);"></div>
+      <div style="font-size:8.5pt; color:#64748b;">(주)테크빌교육 / 체더스</div>
+      <div style="width:1px; height:28px; background:rgba(0,0,0,0.06);"></div>
+      <div style="font-size:8.5pt; color:#64748b;">2026년 4월</div>
+      <div style="margin-left:auto;">
+        <div class="mt" style="background:#f0edff; border-color:#e0d9ff; color:#7c5cff;">비밀 유지 전제</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 2 · 문제 정의
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      문제 정의
+    </div>
+    <h2 class="sh2">상담교사의<br>행정 현실</h2>
+
+    <p style="font-size:9.5pt; color:#64748b; line-height:1.7; margin-bottom:24px; max-width:480px;">
+      한 건의 상담을 마치고 나서 교사가 해야 할 일은 상담이 아닙니다. 동일한 정보를 세 곳에 각각 입력하는 행정 작업이 기다립니다.
+    </p>
+
+    <div class="g2" style="flex:1; align-items:start;">
+
+      <!-- Card 1: 3중 행정 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:28px 24px;">
+          <div style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px;">
+
+            <div style="text-align:center; flex:1;">
+              <div style="width:48px; height:48px; border-radius:12px; background:#f0edff; display:flex; align-items:center; justify-content:center; margin:0 auto 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <div style="font-size:8px; font-weight:600; color:#1a1a2e;">상담 일지</div>
+              <div style="font-size:7.5px; color:#94a3b8; margin-top:2px;">직접 작성</div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+              <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6h16M11 1l5 5-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="font-size:6.5px; color:#94a3b8; margin-top:3px;">재입력</div>
+            </div>
+
+            <div style="text-align:center; flex:1;">
+              <div style="width:48px; height:48px; border-radius:12px; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin:0 auto 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div style="font-size:8px; font-weight:600; color:#1a1a2e;">NEIS</div>
+              <div style="font-size:7.5px; color:#94a3b8; margin-top:2px;">업로드</div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0;">
+              <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6h16M11 1l5 5-5 5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="font-size:6.5px; color:#94a3b8; margin-top:3px;">재작성</div>
+            </div>
+
+            <div style="text-align:center; flex:1;">
+              <div style="width:48px; height:48px; border-radius:12px; background:#f1f5f9; display:flex; align-items:center; justify-content:center; margin:0 auto 8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div style="font-size:8px; font-weight:600; color:#1a1a2e;">관리자 보고</div>
+              <div style="font-size:7.5px; color:#94a3b8; margin-top:2px;">별도 보고서</div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>반복되는 3중 행정 부담</h3>
+          <p>동일한 정보를 세 개의 시스템에 각각 입력하는 데 쓰이는 시간이, 학생과 마주 앉아 상담에 써야 할 시간입니다.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: 기존 도구 한계 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:20px 24px;">
+          <div style="width:100%;">
+
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#f9f8fc; border-radius:10px; margin-bottom:8px;">
+              <div style="width:32px; height:32px; border-radius:8px; background:#dcfce7; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+              </div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:8.5px; font-weight:600; color:#1a1a2e;">엑셀 / 메모장</div>
+                <div style="font-size:7.5px; color:#94a3b8;">구조 없음 · 검색 불가 · 분실 위험</div>
+              </div>
+              <div style="width:6px; height:6px; border-radius:50%; background:#ef4444; flex-shrink:0;"></div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#f9f8fc; border-radius:10px; margin-bottom:8px;">
+              <div style="width:32px; height:32px; border-radius:8px; background:#dbeafe; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:8.5px; font-weight:600; color:#1a1a2e;">나이스 직접 입력</div>
+                <div style="font-size:7.5px; color:#94a3b8;">복잡한 분류 구조 · 기록 용도 부적합</div>
+              </div>
+              <div style="width:6px; height:6px; border-radius:50%; background:#ef4444; flex-shrink:0;"></div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; background:#f9f8fc; border-radius:10px;">
+              <div style="width:32px; height:32px; border-radius:8px; background:#f3f4f6; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:8.5px; font-weight:600; color:#1a1a2e;">노션 템플릿</div>
+                <div style="font-size:7.5px; color:#94a3b8;">구조 강제 불가 · 기본 지식 필요</div>
+              </div>
+              <div style="width:6px; height:6px; border-radius:50%; background:#ef4444; flex-shrink:0;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>기존 도구의 한계</h3>
+          <p>어느 도구도 전용 솔루션이 아닙니다. 각 도구가 제 역할을 못하면서 데이터는 분산되고, 행정은 비효율적으로 반복됩니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 3 · 시장 현황
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      시장 현황
+    </div>
+    <h2 class="sh2">전국 8,863개<br>위클래스의 현실</h2>
+
+    <!-- Full-width stat card -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="padding:24px 32px;">
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+
+          <div style="padding-right:24px; border-right:1px solid rgba(0,0,0,0.06);">
+            <div class="sn" style="font-size:26pt; margin-bottom:4px;">20,480</div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;">개교</div>
+            <div class="sl">전국 초·중·고<br>학교 수</div>
+          </div>
+
+          <div style="padding: 0 24px; border-right:1px solid rgba(0,0,0,0.06);">
+            <div class="sn" style="font-size:26pt; margin-bottom:4px;">8,863</div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;">개교</div>
+            <div class="sl">위클래스 설치<br>설치율 76.8%</div>
+          </div>
+
+          <div style="padding: 0 24px; border-right:1px solid rgba(0,0,0,0.06);">
+            <div class="sn" style="font-size:26pt; margin-bottom:4px;">4,772</div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;">명</div>
+            <div class="sl">위클래스<br>전문상담인력</div>
+          </div>
+
+          <div style="padding-left:24px;">
+            <div class="sn" style="font-size:26pt; margin-bottom:4px;">992</div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;">명</div>
+            <div class="sl">상담사 1인당<br>담당 학생 수</div>
+          </div>
+
+        </div>
+        <div style="margin-top:12px; padding-top:12px; border-top:1px solid rgba(0,0,0,0.06);">
+          <div style="font-size:7.5pt; color:#94a3b8;">출처: 교육부 교육기본통계 및 국정감사 제출 자료 (2024)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="flex:1; align-items:start;">
+
+      <!-- Card: 확장 가능성 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:20px 24px;">
+          <div style="width:100%;">
+            <div style="font-size:7.5px; color:#94a3b8; margin-bottom:10px;">위클래스 설치 현황</div>
+
+            <div style="margin-bottom:8px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:8px; color:#1a1a2e; font-weight:500;">설치 완료</span>
+                <span style="font-size:8px; color:#7c5cff; font-weight:600;">8,863개교</span>
+              </div>
+              <div style="height:8px; background:#f0edff; border-radius:4px; overflow:hidden;">
+                <div style="height:100%; width:76.8%; background:#7c5cff; border-radius:4px;"></div>
+              </div>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                <span style="font-size:8px; color:#1a1a2e; font-weight:500;">미설치 (잠재 시장)</span>
+                <span style="font-size:8px; color:#94a3b8; font-weight:600;">~2,800개교</span>
+              </div>
+              <div style="height:8px; background:#f1f5f9; border-radius:4px; overflow:hidden;">
+                <div style="height:100%; width:23.2%; background:#cbd5e1; border-radius:4px;"></div>
+              </div>
+            </div>
+
+            <div style="padding:8px 10px; background:#f0edff; border-radius:8px;">
+              <div style="font-size:7.5px; color:#7c5cff; font-weight:600; line-height:1.5;">위클래스는 법적 설치 의무 대상<br>미설치 학교는 단계적 확대 예정</div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>확장 가능한 시장</h3>
+          <p>현재 설치된 8,863개교가 1차 시장이며, 미설치 약 2,800개교는 추가 확장 잠재 시장입니다.</p>
+        </div>
+      </div>
+
+      <!-- Card: 경쟁 환경 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:16px 20px; flex-direction:column; align-items:flex-start; gap:0;">
+          <div style="width:100%;">
+            <div style="font-size:7.5px; color:#94a3b8; margin-bottom:8px;">현재 시장의 유일한 전용 솔루션</div>
+
+            <!-- 위노트 프로필 -->
+            <div style="padding:10px 12px; background:#f9f8fc; border-radius:10px; border:1px solid rgba(0,0,0,0.06); margin-bottom:8px;">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:7px;">
+                <div>
+                  <div style="font-size:9px; font-weight:700; color:#1a1a2e;">위노트 (WeeNote AI)</div>
+                  <div style="font-size:7.5px; color:#94a3b8; margin-top:2px;">개인 사업자 개발 · AI 기능 탑재</div>
+                </div>
+                <div style="text-align:right; flex-shrink:0; margin-left:8px;">
+                  <div style="font-size:10px; font-weight:700; color:#1a1a2e;">25,000원</div>
+                  <div style="font-size:7px; color:#94a3b8;">베이직/월</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:4px; flex-wrap:wrap; margin-bottom:8px;">
+                <div style="font-size:7px; background:#f0edff; color:#7c5cff; border-radius:4px; padding:2px 7px; font-weight:500;">AI 크레딧제</div>
+                <div style="font-size:7px; background:#f1f5f9; color:#64748b; border-radius:4px; padding:2px 7px;">900명+ 커뮤니티</div>
+                <div style="font-size:7px; background:#f1f5f9; color:#64748b; border-radius:4px; padding:2px 7px;">개인 구독 중심</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px; padding:5px 8px; background:#fef2f2; border-radius:6px; border:1px solid rgba(239,68,68,0.08);">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <span style="font-size:7.5px; color:#ef4444; font-weight:500;">교사가 사비 부담 → 대규모 확산 한계</span>
+              </div>
+            </div>
+
+            <!-- 구분선 -->
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+              <div style="flex:1; height:1px; background:rgba(0,0,0,0.06);"></div>
+              <span style="font-size:7px; color:#94a3b8; white-space:nowrap;">위스토리의 차별화</span>
+              <div style="flex:1; height:1px; background:rgba(0,0,0,0.06);"></div>
+            </div>
+
+            <!-- 위스토리 포지셔닝 -->
+            <div style="display:flex; gap:5px; flex-wrap:wrap;">
+              <div style="font-size:7px; background:#f0edff; color:#7c5cff; border-radius:5px; padding:3px 8px; font-weight:600; border:1px solid rgba(124,92,255,0.15);">라이트(AI 제외) 저가</div>
+              <div style="font-size:7px; background:#f0edff; color:#7c5cff; border-radius:5px; padding:3px 8px; font-weight:600; border:1px solid rgba(124,92,255,0.15);">B2G 기관 라이선스</div>
+              <div style="font-size:7px; background:#f0edff; color:#7c5cff; border-radius:5px; padding:3px 8px; font-weight:600; border:1px solid rgba(124,92,255,0.15);">테크빌 브랜드</div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>경쟁 환경</h3>
+          <p>위노트는 AI 기능과 900명 이상의 커뮤니티로 강점이 명확합니다. 다만 개인 구독 중심 구조상 교사가 사비로 부담해야 하는 경우가 많아 확산에 한계가 있습니다. 위스토리는 라이트 버전 저가 + B2G 기관 계약으로 이 공백을 공략합니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 4 · 솔루션 — 핵심 기능
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      솔루션 — Wee-story
+    </div>
+    <h2 class="sh2">하나의 흐름으로<br>연결되는 상담 기록</h2>
+
+    <p style="font-size:9.5pt; color:#64748b; line-height:1.7; margin-bottom:24px; max-width:520px;">
+      케이스 관리에서 일지 작성, NEIS 출력까지 — 중복 입력 없이 한 번의 흐름으로 완결됩니다.
+    </p>
+
+    <div class="g3">
+
+      <!-- Card: 케이스 관리 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv">
+          <div style="width:190px;">
+            <div style="background:#f9f8fc; border-radius:10px; padding:10px; border:1px solid rgba(0,0,0,0.06);">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                <span style="font-size:7.5px; font-weight:600; color:#1a1a2e;">내담자 목록</span>
+                <span style="font-size:7px; color:#94a3b8;">총 12명</span>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:6px; padding:5px 0; border-bottom:1px solid rgba(0,0,0,0.06);">
+                <div style="width:22px; height:22px; border-radius:50%; background:#f0edff; flex-shrink:0;"></div>
+                <div style="flex:1; min-width:0;">
+                  <div style="font-size:8px; font-weight:500; color:#1a1a2e;">3학년 A</div>
+                  <div style="font-size:7px; color:#94a3b8;">케이스 4건</div>
+                </div>
+                <div style="font-size:7px; background:#dcfce7; color:#16a34a; border-radius:4px; padding:2px 5px; font-weight:600;">진행</div>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:6px; padding:5px 0; border-bottom:1px solid rgba(0,0,0,0.06);">
+                <div style="width:22px; height:22px; border-radius:50%; background:#f0edff; flex-shrink:0; opacity:0.5;"></div>
+                <div style="flex:1; min-width:0;">
+                  <div style="font-size:8px; font-weight:500; color:#1a1a2e;">2학년 B</div>
+                  <div style="font-size:7px; color:#94a3b8;">케이스 2건</div>
+                </div>
+                <div style="font-size:7px; background:#f1f5f9; color:#64748b; border-radius:4px; padding:2px 5px; font-weight:600;">종결</div>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:6px; padding:5px 0;">
+                <div style="width:22px; height:22px; border-radius:50%; background:#f0edff; flex-shrink:0; opacity:0.3;"></div>
+                <div style="flex:1; min-width:0;">
+                  <div style="font-size:8px; font-weight:500; color:#1a1a2e;">1학년 C</div>
+                  <div style="font-size:7px; color:#94a3b8;">케이스 1건</div>
+                </div>
+                <div style="font-size:7px; background:#fff7ed; color:#ea580c; border-radius:4px; padding:2px 5px; font-weight:600;">대기</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>정규화된 케이스 관리</h3>
+          <p>내담자 · 케이스 · 일지를 독립 DB 테이블로 관리. 데이터 중복 없이 일관된 기록 보장.</p>
+        </div>
+      </div>
+
+      <!-- Card: 일지 작성 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv">
+          <div style="width:190px;">
+            <div style="border:1px solid rgba(0,0,0,0.06); border-radius:10px; background:white; padding:10px;">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-bottom:6px;">
+                <div class="mf">
+                  <span class="ml">상담일</span>
+                  <span class="mv">2026.04.01</span>
+                </div>
+                <div class="mf">
+                  <span class="ml">회기</span>
+                  <span class="mv">3회기</span>
+                </div>
+              </div>
+              <div class="mf" style="margin-bottom:6px;">
+                <span class="ml">주호소</span>
+                <span class="mv">또래 관계 어려움</span>
+              </div>
+              <div style="border:1px solid rgba(0,0,0,0.06); border-radius:7px; padding:6px 9px; background:#f9f8fc; margin-bottom:8px;">
+                <span style="display:block; font-size:7.5px; color:#94a3b8; margin-bottom:4px;">상담 내용</span>
+                <div style="height:3px; background:rgba(0,0,0,0.06); border-radius:2px; margin-bottom:3px;"></div>
+                <div style="height:3px; background:rgba(0,0,0,0.06); border-radius:2px; margin-bottom:3px; width:80%;"></div>
+                <div style="height:3px; background:rgba(0,0,0,0.06); border-radius:2px; width:60%;"></div>
+              </div>
+              <div style="display:inline-flex; align-items:center; gap:4px; border:1px solid rgba(124,92,255,0.2); border-radius:7px; background:#f0edff; padding:4px 10px;">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span style="font-size:8px; color:#7c5cff; font-weight:600;">NEIS 출력</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>상담 일지 작성</h3>
+          <p>구조화된 폼으로 일지를 작성하면, 입력된 데이터가 NEIS 서식으로 즉시 변환됩니다.</p>
+        </div>
+      </div>
+
+      <!-- Card: NEIS 출력 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv">
+          <div style="width:190px;">
+            <div style="border:1px solid rgba(0,0,0,0.06); border-radius:10px; background:white; overflow:hidden;">
+              <div style="padding:8px 10px; background:#f9f8fc; border-bottom:1px solid rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:7.5px; font-weight:600; color:#1a1a2e;">NEIS 업로드 서식</span>
+                <span style="font-size:7px; color:#7c5cff; font-weight:500;">자동 완성</span>
+              </div>
+              <div>
+                <div style="display:flex; border-bottom:1px solid rgba(0,0,0,0.06); padding:5px 10px;">
+                  <span style="font-size:7.5px; color:#94a3b8; width:60%; flex-shrink:0;">상담구분 대분류</span>
+                  <span style="font-size:7.5px; color:#1a1a2e; font-weight:500;">개인상담</span>
+                </div>
+                <div style="display:flex; border-bottom:1px solid rgba(0,0,0,0.06); padding:5px 10px;">
+                  <span style="font-size:7.5px; color:#94a3b8; width:60%; flex-shrink:0;">상담구분 중분류</span>
+                  <span style="font-size:7.5px; color:#1a1a2e; font-weight:500;">진로·학업</span>
+                </div>
+                <div style="display:flex; border-bottom:1px solid rgba(0,0,0,0.06); padding:5px 10px;">
+                  <span style="font-size:7.5px; color:#94a3b8; width:60%; flex-shrink:0;">상담 일시</span>
+                  <span style="font-size:7.5px; color:#1a1a2e; font-weight:500;">2026.04.01</span>
+                </div>
+                <div style="display:flex; padding:5px 10px;">
+                  <span style="font-size:7.5px; color:#94a3b8; width:60%; flex-shrink:0;">상담회기</span>
+                  <span style="font-size:7.5px; color:#1a1a2e; font-weight:500;">3</span>
+                </div>
+              </div>
+              <div style="padding:8px 10px; border-top:1px solid rgba(0,0,0,0.06); text-align:center;">
+                <div style="display:inline-flex; align-items:center; gap:5px; background:#7c5cff; border-radius:7px; padding:5px 14px;">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span style="font-size:8px; color:white; font-weight:600;">내보내기</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>NEIS 자동 출력</h3>
+          <p>일지 작성 완료 시 나이스 업로드 서식으로 즉시 변환 출력. 재입력 없이 바로 사용 가능.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 5 · 솔루션 — 보안 & AI
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      솔루션 — 보안 &amp; AI
+    </div>
+    <h2 class="sh2">민감 정보를 다루는<br>설계 원칙</h2>
+
+    <p style="font-size:9.5pt; color:#64748b; line-height:1.7; margin-bottom:24px; max-width:520px;">
+      학생 상담 정보는 가장 민감한 개인정보입니다. 위스토리는 이 원칙에서 출발합니다.
+    </p>
+
+    <div class="g2" style="margin-bottom:20px;">
+
+      <!-- Card: 로컬 저장 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:28px 24px;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:14px; width:100%;">
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div style="text-align:center;">
+                <div style="width:48px; height:48px; border-radius:12px; background:#f0edff; display:flex; align-items:center; justify-content:center; margin:0 auto 6px;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div style="font-size:7.5px; color:#1a1a2e; font-weight:500;">학교 PC</div>
+              </div>
+              <svg width="28" height="16" viewBox="0 0 28 16" fill="none"><path d="M0 8h22M17 3l5 5-5 5" stroke="#7c5cff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="text-align:center;">
+                <div style="width:48px; height:48px; border-radius:12px; background:#f0edff; display:flex; align-items:center; justify-content:center; margin:0 auto 6px;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <div style="font-size:7.5px; color:#1a1a2e; font-weight:500;">로컬 DB</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; padding:7px 16px; background:#fef2f2; border-radius:8px; border:1px solid rgba(239,68,68,0.1);">
+              <div style="position:relative; width:18px; height:18px; flex-shrink:0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
+                <div style="position:absolute; top:50%; left:50%; width:22px; height:1.5px; background:#ef4444; transform:translate(-50%,-50%) rotate(-45deg);"></div>
+              </div>
+              <span style="font-size:7.5px; color:#ef4444; font-weight:500;">클라우드 전송 없음</span>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>로컬 저장 &amp; 암호화</h3>
+          <p>학교 PC에만 저장, 클라우드 전송 없음. 민감한 상담 정보 암호화 보관. 개인정보보호법 및 학생 상담 정보 보안 요건 충족.</p>
+        </div>
+      </div>
+
+      <!-- Card: AI 통합 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:24px;">
+          <div style="width:100%; max-width:210px;">
+            <div style="font-size:7.5px; color:#94a3b8; margin-bottom:10px; text-align:center;">AI 적용 방식 — 함께 검토</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="display:flex; align-items:flex-start; gap:8px; padding:8px 10px; background:#f0edff; border-radius:8px; border:1px solid rgba(124,92,255,0.15);">
+                <div style="width:20px; height:20px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                  <span style="font-size:9px; font-weight:700; color:#7c5cff;">?</span>
+                </div>
+                <div style="font-size:7.5px; color:#7c5cff; font-weight:500; line-height:1.5;">로컬 LLM 적용<br><span style="color:#94a3b8; font-weight:400;">외부 전송 없이 온디바이스 처리</span></div>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:8px; padding:8px 10px; background:#f0edff; border-radius:8px; border:1px solid rgba(124,92,255,0.15);">
+                <div style="width:20px; height:20px; border-radius:50%; background:white; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                  <span style="font-size:9px; font-weight:700; color:#7c5cff;">?</span>
+                </div>
+                <div style="font-size:7.5px; color:#7c5cff; font-weight:500; line-height:1.5;">익명화 후 API 전송<br><span style="color:#94a3b8; font-weight:400;">법적·기술적 안전망 선행 필요</span></div>
+              </div>
+              <div style="padding:7px 10px; background:#f9f8fc; border-radius:8px; text-align:center; border:1px solid rgba(0,0,0,0.06);">
+                <span style="font-size:7.5px; color:#64748b;">테크빌과 함께 검토합니다</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>AI 통합 — 협업 과제</h3>
+          <p>일지 자동 작성, 사례 개념화, 위기 징후 알림 — AI가 기여할 영역은 명확합니다. 기술적·법적 안전망 방식을 테크빌과 공동으로 설계합니다.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tech stack bar -->
+    <div class="card">
+      <div style="padding:18px 24px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div style="font-size:8.5pt; font-weight:600; color:#1a1a2e; flex-shrink:0;">기술 스택</div>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <div class="mt">Electron</div>
+          <div class="mt">React</div>
+          <div class="mt">TypeScript</div>
+          <div class="mt">SQLite</div>
+          <div class="mt" style="background:#f0edff; border-color:#e0d9ff; color:#7c5cff;">MVP 완성</div>
+        </div>
+        <div style="margin-left:auto; font-size:8pt; color:#64748b;">로컬 설치 앱 · 학교 PC 호환</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 6 · 시장성 검증
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      시장성 검증
+    </div>
+    <h2 class="sh2">이미 팔아봤습니다</h2>
+
+    <p style="font-size:9.5pt; color:#64748b; line-height:1.7; margin-bottom:20px; max-width:500px;">
+      위스토리는 아이디어에서 출발한 게 아닙니다. 2024년, 전국 최초로 위클래스 전용 노션 템플릿을 출시하여 시장을 개척했습니다.
+    </p>
+
+    <!-- Big stat card -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="padding:24px 32px;">
+        <div style="font-size:8pt; color:#94a3b8; margin-bottom:16px; font-weight:500;">Wee Class Pro — 2024.10 ~ 2026.04 (약 1년 6개월) · 별도 마케팅 예산 없음</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+
+          <div style="padding-right:24px; border-right:1px solid rgba(0,0,0,0.06);">
+            <div class="sn" style="font-size:26pt; margin-bottom:4px;">1,954</div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;">건</div>
+            <div class="sl">무료 버전<br>다운로드</div>
+          </div>
+
+          <div style="padding: 0 24px; border-right:1px solid rgba(0,0,0,0.06);">
+            <div class="sn" style="font-size:26pt; margin-bottom:4px;">219</div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;">건</div>
+            <div class="sl">유료 판매<br>건수</div>
+          </div>
+
+          <div style="padding: 0 24px; border-right:1px solid rgba(0,0,0,0.06);">
+            <div style="font-size:26pt; font-weight:700; color:#7c5cff; line-height:1; letter-spacing:-1px; margin-bottom:4px;">11.2%</div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;"></div>
+            <div class="sl">유료 전환율<br><span style="color:#7c5cff;">업계 평균 2배 이상</span></div>
+          </div>
+
+          <div style="padding-left:24px;">
+            <div style="display:flex; align-items:baseline; gap:2px; margin-bottom:4px;">
+              <div class="sn" style="font-size:26pt;">1,100</div>
+              <div style="font-size:12pt; font-weight:700; color:#1a1a2e;">만</div>
+            </div>
+            <div style="font-size:8pt; font-weight:600; color:#1a1a2e; margin-bottom:3px;">원</div>
+            <div class="sl">누적<br>매출</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="g2">
+
+      <!-- Card: 수요 실재 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:20px 24px;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:4px; width:160px;">
+            <div style="width:100%; height:34px; background:#f0edff; border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(124,92,255,0.15);">
+              <span style="font-size:8px; color:#7c5cff; font-weight:600;">1,954건 다운로드</span>
+            </div>
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M8 10L0 0h16L8 10z" fill="rgba(124,92,255,0.15)"/></svg>
+            <div style="width:76%; height:34px; background:#f0edff; border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(124,92,255,0.15);">
+              <span style="font-size:8px; color:#7c5cff; font-weight:600;">219건 유료 구매</span>
+            </div>
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M6 8L0 0h12L6 8z" fill="rgba(124,92,255,0.2)"/></svg>
+            <div style="width:52%; height:34px; background:#7c5cff; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:8px; color:white; font-weight:700;">11.2% 전환</span>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>수요는 실재합니다</h3>
+          <p>전용 도구에 돈을 내는 상담교사가 이미 존재합니다. 별도 마케팅 없이 달성한 수치입니다.</p>
+        </div>
+      </div>
+
+      <!-- Card: 한계→앱 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:20px 24px;">
+          <div style="width:100%;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; padding:10px 12px; background:#fff7ed; border-radius:8px; border:1px solid rgba(234,88,12,0.1);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <div>
+                <div style="font-size:7.5px; font-weight:600; color:#ea580c;">노션 템플릿의 한계</div>
+                <div style="font-size:7px; color:#94a3b8; margin-top:2px;">구조 강제 불가 · 데이터 일관성 미보장</div>
+              </div>
+            </div>
+            <div style="text-align:center; margin-bottom:10px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:#f0edff; border-radius:8px; border:1px solid rgba(124,92,255,0.15);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <div>
+                <div style="font-size:7.5px; font-weight:600; color:#7c5cff;">위스토리 앱으로 전환</div>
+                <div style="font-size:7px; color:#94a3b8; margin-top:2px;">동일 스키마 · 정규화 DB · 자동 출력</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>개인의 한계가 명확합니다</h3>
+          <p>배포 · 마케팅 · 보안 인프라 없이는 성장에 천장이 있습니다. 테크빌과의 협업이 필요한 이유입니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 7 · 팀 소개
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      팀 소개
+    </div>
+    <h2 class="sh2">현직 교사가 설계하고<br>현직 교사가 홍보합니다</h2>
+
+    <div class="g2" style="margin-bottom:16px;">
+
+      <!-- Card: 김용천 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:24px; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:14px;">
+          <div style="display:flex; align-items:center; gap:12px; width:100%;">
+            <img src="profile-kim.jpg" style="width:52px; height:52px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0;">
+            <div>
+              <div style="font-size:11pt; font-weight:700; color:#1a1a2e;">김용천</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:5px; width:100%;">
+            <div class="mt" style="background:#f0edff; border-color:#e0d9ff; color:#7c5cff;">노션 공식 앰버서더</div>
+            <div class="mt" style="background:#f0edff; border-color:#e0d9ff; color:#7c5cff;">공식 추천 크리에이터</div>
+            <div class="mt">Electron + React</div>
+            <div class="mt">테크빌 협업 이력</div>
+          </div>
+          <div style="width:100%; padding:8px 10px; background:#f9f8fc; border-radius:8px; border:1px solid rgba(0,0,0,0.06);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+              <span style="font-size:7.5px; color:#94a3b8;">스레드 + 인스타그램 팔로워</span>
+              <span style="font-size:8px; font-weight:700; color:#7c5cff;">10,000+</span>
+            </div>
+            <div style="height:5px; background:#f0edff; border-radius:3px; overflow:hidden;">
+              <div style="height:100%; width:29%; background:#7c5cff; border-radius:3px;"></div>
+            </div>
+            <div style="font-size:7px; color:#94a3b8; margin-top:3px;">교사 대상 생산성·에듀테크 채널</div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>제품 설계 &amp; 개발</h3>
+          <p>조열음 선생님과의 심층 인터뷰로 현장 페인포인트 수집. Wee Class Pro 설계 및 위스토리 MVP 직접 개발. 협업 후 현장-제품 연결고리 역할 담당.</p>
+        </div>
+      </div>
+
+      <!-- Card: 조열음 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:24px; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:14px;">
+          <div style="display:flex; align-items:center; gap:12px; width:100%;">
+            <img src="profile-cho.jpg" style="width:52px; height:52px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0;">
+            <div>
+              <div style="font-size:11pt; font-weight:700; color:#1a1a2e;">조열음</div>
+              <div style="font-size:8pt; color:#64748b; margin-top:2px;">전문상담교사 · 인플루언서</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:5px; width:100%;">
+            <div class="mt" style="background:#f0edff; border-color:#e0d9ff; color:#7c5cff; font-weight:700;">팔로워 3.5만명</div>
+            <div class="mt">위클래스 도메인 전문</div>
+            <div class="mt">Wee Class Pro 기획 참여</div>
+          </div>
+          <div style="width:100%; padding:8px 10px; background:#f9f8fc; border-radius:8px; border:1px solid rgba(0,0,0,0.06);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+              <span style="font-size:7.5px; color:#94a3b8;">인스타그램 팔로워</span>
+              <span style="font-size:8px; font-weight:700; color:#7c5cff;">35,000+</span>
+            </div>
+            <div style="height:5px; background:#f0edff; border-radius:3px; overflow:hidden;">
+              <div style="height:100%; width:87%; background:#7c5cff; border-radius:3px;"></div>
+            </div>
+            <div style="font-size:7px; color:#94a3b8; margin-top:3px;">상담교사 커뮤니티 최상위 인플루언서</div>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>도메인 전문성 &amp; 마케팅</h3>
+          <p>현직 전문상담교사로 실제 업무 흐름을 제품 설계에 반영. 인스타그램 3.5만 팔로워 기반 초기 확산 채널. 위스토리 출시 시 커뮤니티 확산의 중심.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <div style="padding:20px 28px; display:flex; align-items:center; gap:16px;">
+        <div style="width:3px; height:48px; background:#7c5cff; border-radius:2px; flex-shrink:0;"></div>
+        <div>
+          <p style="font-size:10pt; color:#1a1a2e; line-height:1.65; font-weight:500;">현직 교사가 직접 설계하고, 현직 교사가 홍보합니다.</p>
+          <p style="font-size:8.5pt; color:#64748b; margin-top:4px; line-height:1.5;">이것이 일반 에듀테크 스타트업과 다른 본질적 차이입니다.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 8 · 비즈니스 모델
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      비즈니스 모델
+    </div>
+    <h2 class="sh2">B2G 기관 계약이<br>핵심입니다</h2>
+
+    <p style="font-size:9.5pt; color:#64748b; line-height:1.7; margin-bottom:20px; max-width:500px;">
+      개인 상담교사에게 구독료를 청구하는 B2C 방식은 지속 가능하지 않습니다. 위스토리는 교육청·학교 단위 일괄 라이선스를 목표로 합니다.
+    </p>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="cv" style="padding:24px 32px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:12px; justify-content:center; width:100%;">
+
+          <div style="text-align:center;">
+            <div style="padding:10px 20px; background:#7c5cff; border-radius:10px; color:white; font-size:9px; font-weight:600; margin-bottom:6px;">교육청 17개</div>
+            <div style="font-size:7.5px; color:#94a3b8;">광역 단위</div>
+          </div>
+
+          <svg width="24" height="14" viewBox="0 0 24 14" fill="none"><path d="M0 7h20M15 2l5 5-5 5" stroke="#7c5cff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+          <div style="text-align:center;">
+            <div style="padding:10px 20px; background:#f0edff; border-radius:10px; color:#7c5cff; font-size:9px; font-weight:600; border:1px solid rgba(124,92,255,0.2); margin-bottom:6px;">교육지원청 176개</div>
+            <div style="font-size:7.5px; color:#94a3b8;">기초 단위</div>
+          </div>
+
+          <svg width="24" height="14" viewBox="0 0 24 14" fill="none"><path d="M0 7h20M15 2l5 5-5 5" stroke="#7c5cff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+          <div style="text-align:center;">
+            <div style="padding:10px 20px; background:#f9f8fc; border-radius:10px; color:#1a1a2e; font-size:9px; font-weight:600; border:1px solid rgba(0,0,0,0.06); margin-bottom:6px;">위클래스 8,863개</div>
+            <div style="font-size:7.5px; color:#94a3b8;">최종 사용자</div>
+          </div>
+        </div>
+      </div>
+      <div class="cf">
+        <h3>교육청 단위 일괄 라이선스 계약</h3>
+        <p>테크빌의 B2G 영업 인프라를 활용, 교육청 및 교육지원청 단위 대규모 계약을 공략합니다. 라이트(AI 제외) 버전을 저가로 제공하여 진입장벽을 낮추고, AI 프리미엄 업셀링으로 확장합니다.</p>
+      </div>
+    </div>
+
+    <div class="g2">
+
+      <div class="card">
+        <div style="padding:20px 24px;">
+          <div style="font-size:9pt; font-weight:600; color:#1a1a2e; margin-bottom:12px;">가격 전략</div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>플랜</th>
+                <th>대상</th>
+                <th>포지셔닝</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span style="color:#7c5cff; font-weight:600;">라이트</span></td>
+                <td style="font-size:8pt;">개인 · B2G</td>
+                <td style="font-size:8pt;">위노트 대비 저가</td>
+              </tr>
+              <tr>
+                <td><span style="font-weight:600;">AI 프리미엄</span></td>
+                <td style="font-size:8pt;">B2G 업셀</td>
+                <td style="font-size:8pt;">라이트 → 업그레이드</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="padding:20px 24px;">
+          <div style="font-size:9pt; font-weight:600; color:#1a1a2e; margin-bottom:12px;">수익 배분</div>
+          <div style="padding:12px 14px; background:#f0edff; border-radius:10px; border:1px solid rgba(124,92,255,0.15); margin-bottom:10px;">
+            <div style="font-size:8.5pt; color:#7c5cff; font-weight:600; margin-bottom:6px;">Revenue Share 방식 기본 제안</div>
+            <div style="font-size:8pt; color:#64748b; line-height:1.6;">구체적인 배분 비율 및 조건은 협의를 통해 결정합니다. 장기적 파트너십을 전제로 한 구조를 지향합니다.</div>
+          </div>
+          <div style="padding:10px 14px; background:#f9f8fc; border-radius:8px; border:1px solid rgba(0,0,0,0.06);">
+            <div style="font-size:7.5pt; color:#64748b; line-height:1.6;">교육부 에듀집 등록, 공공조달 입찰 등<br>테크빌의 채널 활용 방안도 함께 논의합니다.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 9 · 협업 제안
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      협업 제안
+    </div>
+    <h2 class="sh2">역할 분담</h2>
+
+    <p style="font-size:9.5pt; color:#64748b; line-height:1.7; margin-bottom:24px; max-width:500px;">
+      저는 완성된 MVP와 도메인 지식, 그리고 검증된 커뮤니티 채널을 가져옵니다. 테크빌은 코드 고도화, 배포 인프라, B2G 영업 채널을 담당합니다.
+    </p>
+
+    <div class="g2" style="flex:1; align-items:start;">
+
+      <!-- Card: 제안자 측 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:20px 24px; align-items:flex-start; justify-content:flex-start; flex-direction:column; gap:0;">
+          <div style="font-size:8.5pt; font-weight:600; color:#7c5cff; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <div style="width:24px; height:24px; border-radius:50%; background:#f0edff; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            김용천 + 조열음
+          </div>
+          <div class="ci">
+            <div class="cd"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>완성된 MVP 제공<br><span style="color:#94a3b8; font-size:8pt;">케이스 관리 → 일지 → NEIS 출력</span></span>
+          </div>
+          <div class="ci">
+            <div class="cd"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>위클래스 도메인 지식<br><span style="color:#94a3b8; font-size:8pt;">설계 방향 및 현장 요구사항 제시</span></span>
+          </div>
+          <div class="ci">
+            <div class="cd"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>조열음 채널 마케팅<br><span style="color:#94a3b8; font-size:8pt;">인스타 3.5만 팔로워 · 커뮤니티 확산</span></span>
+          </div>
+          <div class="ci">
+            <div class="cd"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>실제 상담교사 피드백 루프<br><span style="color:#94a3b8; font-size:8pt;">현장-제품 사이 연결고리 역할</span></span>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>제안자 측이 제공하는 것</h3>
+          <p>완성된 제품, 검증된 수요, 현장 채널 — 즉시 활용 가능한 자산을 가져옵니다.</p>
+        </div>
+      </div>
+
+      <!-- Card: 테크빌 측 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="padding:20px 24px; align-items:flex-start; justify-content:flex-start; flex-direction:column; gap:0;">
+          <div style="font-size:8.5pt; font-weight:600; color:#1a1a2e; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <div style="width:24px; height:24px; border-radius:50%; background:#f1f5f9; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            (주)테크빌교육 / 체더스
+          </div>
+          <div class="ci">
+            <div class="cd" style="background:#f1f5f9;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>코드 리뷰 및 품질 고도화<br><span style="color:#94a3b8; font-size:8pt;">보안, 안정성, 배포 인프라</span></span>
+          </div>
+          <div class="ci">
+            <div class="cd" style="background:#f1f5f9;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>공식 채널 등재<br><span style="color:#94a3b8; font-size:8pt;">교육부 에듀집 등록 등</span></span>
+          </div>
+          <div class="ci">
+            <div class="cd" style="background:#f1f5f9;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>B2G 영업 및 계약 체결<br><span style="color:#94a3b8; font-size:8pt;">교육청 단위 대규모 계약</span></span>
+          </div>
+          <div class="ci">
+            <div class="cd" style="background:#f1f5f9;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <span>마케팅 기획 및 집행<br><span style="color:#94a3b8; font-size:8pt;">테크빌 브랜드 활용 공식 홍보</span></span>
+          </div>
+        </div>
+        <div class="cf">
+          <h3>테크빌/체더스에 요청하는 것</h3>
+          <p>코드 품질 고도화, 배포 인프라, B2G 영업 채널 — 개인이 갖출 수 없는 인프라입니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE 10 · 왜 지금인가 + 다음 단계
+     ══════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+      왜 지금인가
+    </div>
+    <h2 class="sh2">바이브코딩 시대의<br>새로운 협업 공식</h2>
+
+    <p style="font-size:9.5pt; color:#64748b; line-height:1.7; margin-bottom:20px; max-width:540px;">
+      2026년 현재, 도메인 지식을 가진 현직 교사들이 직접 앱을 만들기 시작했습니다. 위스토리는 이 협업 공식의 첫 번째 프로토타입입니다.
+    </p>
+
+    <div class="g3" style="margin-bottom:16px;">
+
+      <!-- Card: 교사 개발자 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="flex-direction:column; gap:12px;">
+          <div style="width:44px; height:44px; border-radius:12px; background:#f0edff; display:flex; align-items:center; justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div style="width:100%; display:flex; flex-direction:column; gap:5px;">
+            <div style="display:flex; align-items:center; gap:7px; padding:5px 9px; background:#f0edff; border-radius:6px;">
+              <div style="width:5px; height:5px; border-radius:50%; background:#7c5cff; flex-shrink:0;"></div>
+              <span style="font-size:7.5px; color:#7c5cff; font-weight:500;">현장 도메인 지식</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:7px; padding:5px 9px; background:#f0edff; border-radius:6px;">
+              <div style="width:5px; height:5px; border-radius:50%; background:#7c5cff; flex-shrink:0;"></div>
+              <span style="font-size:7.5px; color:#7c5cff; font-weight:500;">페인 포인트를 아는 눈</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:7px; padding:5px 9px; background:#f0edff; border-radius:6px;">
+              <div style="width:5px; height:5px; border-radius:50%; background:#7c5cff; flex-shrink:0;"></div>
+              <span style="font-size:7.5px; color:#7c5cff; font-weight:500;">교사 커뮤니티 신뢰</span>
+            </div>
+          </div>
+        </div>
+        <div class="cf" style="min-height:128px;">
+          <h3>교사 개발자</h3>
+          <p>수십 년 축적된 현장 지식과 커뮤니티 신뢰. 이제 직접 앱을 만듭니다.</p>
+        </div>
+      </div>
+
+      <!-- Card: 협업 공식 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="flex-direction:column; gap:10px;">
+          <div style="width:44px; height:44px; border-radius:12px; background:#f0edff; display:flex; align-items:center; justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div style="text-align:center; padding:0 8px; width:100%;">
+            <div style="font-size:9px; color:#1a1a2e; font-weight:600; line-height:1.6;">교사 개발자</div>
+            <div style="font-size:9px; color:#7c5cff; font-weight:800; margin:2px 0;">+</div>
+            <div style="font-size:9px; color:#7c5cff; font-weight:700;">테크빌교육</div>
+            <div style="height:1px; background:rgba(0,0,0,0.06); margin:8px 0;"></div>
+            <div style="font-size:7.5px; color:#64748b; line-height:1.6;">더 빠르게, 더 낮은 비용으로<br>시장에 나오는 다음 제품들</div>
+          </div>
+        </div>
+        <div class="cf" style="min-height:128px;">
+          <h3>첫 번째 프로토타입</h3>
+          <p>위스토리 하나에서 끝나지 않습니다. 테크빌이 이 공식을 선점하면, 다음 제품은 더 빠르게 나옵니다.</p>
+        </div>
+      </div>
+
+      <!-- Card: 공공조달 -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="cv" style="flex-direction:column; gap:12px;">
+          <div style="width:44px; height:44px; border-radius:12px; background:#f0edff; display:flex; align-items:center; justify-content:center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c5cff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div style="width:100%; padding:10px; background:#f9f8fc; border-radius:8px; border:1px solid rgba(0,0,0,0.06);">
+            <div style="font-size:7.5px; color:#64748b; line-height:1.6;">교육청 자체 유사 시스템 도입 시,<br>시장 검증된 위스토리가<br><strong style="color:#1a1a2e;">공공조달 레퍼런스</strong>로 활용됩니다.</div>
+          </div>
+        </div>
+        <div class="cf" style="min-height:128px;">
+          <h3>공공조달 레퍼런스</h3>
+          <p>시장에서 먼저 검증된 제품은 공공 조달 입찰에서도 유효한 레퍼런스가 됩니다.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 다음 단계 + 연락처 -->
+    <div class="card">
+      <div style="padding:20px 28px; display:flex; align-items:center; gap:24px;">
+        <div style="flex:1;">
+          <div style="font-size:10pt; font-weight:600; color:#1a1a2e; margin-bottom:6px;">다음 단계</div>
+          <p style="font-size:9pt; color:#64748b; line-height:1.65;">우선 한 번 만나 뵙고 제품을 직접 보여드리고 싶습니다. 관심이 있으시다면 편하게 연락 주세요.</p>
+        </div>
+        <div style="width:1px; height:56px; background:rgba(0,0,0,0.06); flex-shrink:0;"></div>
+        <div style="flex-shrink:0;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <img src="profile-kim.jpg" style="width:28px; height:28px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0;">
+            <div>
+              <div style="font-size:9pt; font-weight:700; color:#1a1a2e;">김용천</div>
+              <div style="font-size:8pt; color:#94a3b8; margin-top:1px;">slowly007@goedu.kr</div>
+              <div style="font-size:8pt; color:#94a3b8;">010-4929-3427</div>
+            </div>
+          </div>
+          <div style="font-size:7pt; color:#94a3b8;">본 제안서는 비밀 유지를 전제로 제공됩니다.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

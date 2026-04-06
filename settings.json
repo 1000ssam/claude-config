@@ -82,6 +82,8 @@
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "permissions": {
-    "allow": ["Bash"]
+    "allow": [
+      "Bash"
+    ]
   }
 }

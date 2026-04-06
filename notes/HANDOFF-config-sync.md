@@ -61,14 +61,8 @@ git clone https://github.com/1000ssam/claude-skills.git skills
 powershell -ExecutionPolicy Bypass -File "C:\Users\user\.claude\config-repo\setup-claude-mem-junction.ps1"
 ```
 
-### Step 6: bun 설치 (claude-hud 플러그인 의존)
-```bash
-curl -fsSL https://bun.sh/install | bash
-```
-
-### Step 7: 플러그인 설치
-- Claude Code 실행하면 `enabledPlugins` 설정에 따라 자동 설치됨 (claude-hud 포함)
-- claude-hud는 bun이 필요하므로 Step 6 먼저 완료할 것
+### Step 6: 플러그인 설치
+- Claude Code 실행하면 `enabledPlugins` 설정에 따라 자동 설치됨
 
 ## 주의사항
 - 두 PC의 Windows 사용자명이 `user`로 동일해야 경로 매핑이 자연스러움

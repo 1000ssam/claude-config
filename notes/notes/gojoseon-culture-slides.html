@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고조선의 문화 범위 — 유물이 말해주는 것</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --accent: #D2886F;
+    --accent-hover: #C17760;
+    --bg: #ffffff;
+    --bg-subtle: #fafafa;
+    --text-main: #171717;
+    --text-sub: #525252;
+    --text-light: #a3a3a3;
+    --border: #e5e5e5;
+    --blue: #3b82f6;
+    --blue-light: #eff6ff;
+    --radius: 12px;
+  }
+
+  html, body {
+    height: 100%; width: 100%;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* ── Slide Container ── */
+  .deck { height: 100vh; width: 100vw; position: relative; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 5vh 6vw;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events: none;
+    text-align: center;
+  }
+  .slide.active {
+    opacity: 1; transform: translateY(0);
+    pointer-events: auto;
+  }
+  .slide.exit {
+    opacity: 0; transform: translateY(-12px);
+  }
+
+  /* ── Typography — font-light 기본, font-medium 강조 ── */
+  h1 {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 300; line-height: 1.4;
+    letter-spacing: -0.02em;
+    margin-bottom: .5em;
+    color: var(--text-main);
+  }
+  h2 {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 300; line-height: 1.4;
+    letter-spacing: -0.02em;
+    margin-bottom: .5em;
+    color: var(--text-main);
+  }
+  h3 {
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
+    font-weight: 500; line-height: 1.4;
+    letter-spacing: -0.01em;
+    margin-bottom: .4em;
+    color: var(--text-main);
+  }
+  p, li {
+    font-size: clamp(.95rem, 1.8vw, 1.2rem);
+    font-weight: 300; line-height: 1.75;
+    color: var(--text-sub);
+  }
+  .big {
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    line-height: 1.7; font-weight: 300;
+  }
+  .highlight { color: var(--accent); font-weight: 500; }
+  .highlight2 { color: var(--accent-hover); font-weight: 500; }
+  .blue { color: var(--blue); font-weight: 500; }
+
+  /* ── Cards ── */
+  .card-row {
+    display: flex; gap: 1.5rem; width: 100%; max-width: 960px;
+    justify-content: center; flex-wrap: wrap;
+    margin: 1.5rem 0;
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.8rem 2rem;
+    flex: 1; min-width: 260px; max-width: 440px;
+    text-align: left;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .card h3 { margin-bottom: .5rem; }
+  .card p { font-size: clamp(.9rem, 1.6vw, 1.05rem); }
+  .card.old { border-left: 3px solid var(--text-light); }
+  .card.new { border-left: 3px solid var(--accent); }
+  .card.wide-spread { border-left: 3px solid var(--blue); }
+  .card.core { border-left: 3px solid var(--accent); }
+
+  /* ── Question Box ── */
+  .q-box {
+    background: rgba(210,136,111,.05);
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.4rem 2rem;
+    max-width: 800px; width: 100%;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  .q-box p {
+    color: var(--accent-hover);
+    font-weight: 500;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+  .q-box .sub {
+    color: var(--text-sub);
+    font-weight: 300;
+    font-size: clamp(.85rem, 1.5vw, 1rem);
+    margin-top: .5rem;
+  }
+
+  /* ── Insight Box ── */
+  .insight {
+    background: var(--bg-subtle);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.8rem;
+    max-width: 800px; width: 100%;
+    margin-top: 1.2rem;
+  }
+  .insight p {
+    color: var(--text-sub);
+    font-weight: 300;
+    font-size: clamp(.95rem, 1.8vw, 1.1rem);
+  }
+  .insight strong, .insight span[style] { font-weight: 500; }
+
+  /* ── Phase Tag ── */
+  .phase-tag {
+    font-size: .8rem; font-weight: 500;
+    letter-spacing: .04em;
+    color: var(--accent);
+    margin-bottom: .8rem;
+    padding: .25rem .8rem;
+    background: rgba(210,136,111,.08);
+    border-radius: 100px;
+    display: inline-block;
+  }
+
+  /* ── Map ── */
+  .map-wrap {
+    width: 100%; max-width: 680px;
+    margin: 1rem auto;
+  }
+  .map-wrap svg { width: 100%; height: auto; }
+
+  /* ── Comparison Diagram ── */
+  .diagram {
+    display: flex; align-items: center; gap: 1.2rem;
+    justify-content: center; flex-wrap: wrap;
+    margin: 1.2rem 0;
+    width: 100%; max-width: 860px;
+  }
+  .diagram .arrow {
+    font-size: 1.6rem; color: var(--text-light); font-weight: 300;
+  }
+  .diagram .box {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    min-width: 170px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .diagram .box h3 { font-size: 1rem; margin-bottom: .3rem; }
+  .diagram .box p { font-size: .9rem; }
+
+  /* ── Final Quote ── */
+  .final-quote {
+    font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 700px;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  /* (progress, counter, nav-hint removed — replaced by top/bottom nav) */
+
+  /* ── Top Nav ── */
+  .top-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 48px;
+    display: flex; align-items: center;
+    padding: 0 1.5rem;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 200;
+  }
+  .top-nav .home-btn {
+    display: flex; align-items: center; gap: .4rem;
+    font-size: .85rem; font-weight: 500;
+    color: var(--text-sub);
+    cursor: pointer;
+    padding: .35rem .6rem;
+    border-radius: 8px;
+    border: none; background: none;
+    transition: all .2s;
+  }
+  .top-nav .home-btn:hover {
+    color: var(--accent);
+    background: rgba(210,136,111,.06);
+  }
+  .top-nav .home-btn svg { width: 16px; height: 16px; }
+  .top-nav .nav-title {
+    margin-left: auto;
+    font-size: .8rem; font-weight: 300;
+    color: var(--text-light);
+  }
+
+  /* ── Bottom Nav ── */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 56px;
+    display: flex; align-items: center;
+    padding: 0 1.5rem;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border);
+    z-index: 200;
+    gap: .8rem;
+  }
+  .bottom-nav .nav-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: all .2s;
+    flex-shrink: 0;
+  }
+  .bottom-nav .nav-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .bottom-nav .nav-btn:disabled {
+    opacity: .3; cursor: default;
+    border-color: var(--border); color: var(--text-light);
+  }
+  .bottom-nav .nav-btn svg { width: 16px; height: 16px; }
+  .bottom-nav .track {
+    flex: 1; height: 4px;
+    background: var(--border);
+    border-radius: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bottom-nav .track-fill {
+    position: absolute; top: 0; left: 0;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 100px;
+    transition: width .35s ease;
+  }
+  .bottom-nav .dots {
+    position: absolute; top: 50%; left: 0; right: 0;
+    transform: translateY(-50%);
+    display: flex; justify-content: space-between;
+    padding: 0 1px;
+  }
+  .bottom-nav .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: all .2s;
+    border: 2px solid transparent;
+  }
+  .bottom-nav .dot.active {
+    background: var(--accent);
+    border-color: rgba(210,136,111,.3);
+  }
+  .bottom-nav .dot.visited {
+    background: var(--accent);
+    opacity: .4;
+  }
+  .bottom-nav .slide-num {
+    font-size: .8rem; font-weight: 300;
+    color: var(--text-light);
+    min-width: 48px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Adjust slide padding for nav bars ── */
+  .slide { padding-top: calc(48px + 3vh); padding-bottom: calc(56px + 2vh); }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .slide { padding: 4vh 5vw; }
+    .card-row { gap: 1rem; }
+    .card { padding: 1.3rem 1.4rem; min-width: 100%; }
+    .q-box { padding: 1.1rem 1.3rem; }
+    .diagram { gap: .6rem; }
+    .diagram .box { min-width: 130px; padding: .9rem; }
+  }
+</style>
+</head>
+<body>
+<!-- Top Nav -->
+<nav class="top-nav">
+  <button class="home-btn" id="homeBtn" title="처음으로">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    처음으로
+  </button>
+  <span class="nav-title">김용천 선생님</span>
+</nav>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button class="nav-btn" id="prevBtn" title="이전">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="track" id="track">
+    <div class="track-fill" id="trackFill"></div>
+    <div class="dots" id="dots"></div>
+  </div>
+  <span class="slide-num" id="slideNum"></span>
+  <button class="nav-btn" id="nextBtn" title="다음">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+</nav>
+
+<div class="deck" id="deck">
+
+<!-- ════════ SLIDE 1: Title ════════ -->
+<div class="slide active">
+  <p style="font-size:clamp(1rem,1.8vw,1.2rem);font-weight:500;color:var(--accent);margin-bottom:1rem;padding:.4rem 1.2rem;background:rgba(210,136,111,.08);border-radius:100px;display:inline-block;">02 중국의 눈에 비친 고조선과 여러 나라</p>
+  <h1>우리는 과거 고조선의 문화 범위를<br>어떻게 알 수 있을까?</h1>
+  <p class="big" style="margin-top:1rem;">유물의 분포가 말해주는 것,<br>그리고 역사가의 <span class="highlight">해석</span></p>
+</div>
+
+<!-- ════════ SLIDE 2: Phase 1 — 영역 vs 문화 범위 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 1 — 같은 유물, 다른 서술</div>
+  <h2>교과서가 바뀌었다</h2>
+  <div class="card-row">
+    <div class="card old">
+      <h3 style="color:var(--text-light);">과거 교과서</h3>
+      <p>"비파형 동검과 탁자식 고인돌의 분포 지역은<br>고조선의 <strong style="color:var(--text-main);font-size:1.2em;">영역</strong>을 보여준다."</p>
+    </div>
+    <div class="card new">
+      <h3 style="color:var(--accent);">현재 교과서</h3>
+      <p>"비파형 동검과 탁자식 고인돌의 분포 지역은<br>고조선의 <strong style="color:var(--accent);font-size:1.2em;">문화 범위</strong>를 보여준다."</p>
+    </div>
+  </div>
+  <p style="margin-top:2rem;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:300;color:var(--text-main);max-width:700px;">
+    <span class="highlight">"영역"</span>과 <span class="highlight">"문화 범위"</span>는 같은 말일까?<br>
+    어떤 차이가 있을지 생각해보자.
+  </p>
+</div>
+
+<!-- ════════ SLIDE 3: Phase 2 — 시나리오 도입 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 2 — 사고 실험</div>
+  <h2 style="line-height:1.5;">서기 3026년,<br>미래의 고고학자가<br><span class="highlight">21세기</span>를 발굴합니다.</h2>
+  <p class="big" style="margin-top:1.2rem;max-width:650px;">
+    문자 기록은 모두 소실되었고,<br>
+    남은 것은 <span class="highlight">유물</span>뿐입니다.<br><br>
+    이 고고학자는 과거에 어떤 나라가 있었는지,<br>
+    어떤 민족이 어디에 살았는지 <span class="highlight2">전혀 모릅니다.</span><br>
+    오직 유물의 분포만으로 추론해야 합니다.
+  </p>
+</div>
+
+<!-- ════════ SLIDE 4: Phase 2 — 유물A ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 2 — 발굴 결과 ①</div>
+  <h2>유물 A: <span class="blue">미지의 문자가 새겨진 전자기기</span></h2>
+  <!-- 갤럭시폰 일러스트 -->
+  <svg viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" style="width:60px;height:auto;margin-bottom:.8rem;">
+    <rect x="5" y="5" width="110" height="210" rx="16" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+    <rect x="12" y="28" width="96" height="170" rx="4" fill="#2a2a3e"/>
+    <circle cx="60" cy="16" r="4" fill="#333"/>
+    <rect x="45" y="204" width="30" height="3" rx="1.5" fill="#333"/>
+    <text x="60" y="125" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="13" font-weight="500" font-family="Pretendard Variable,sans-serif" letter-spacing="2">SAMSUNG</text>
+    <text x="60" y="100" text-anchor="middle" fill="rgba(255,255,255,.35)" font-size="20" font-family="Pretendard Variable,sans-serif">가나다</text>
+  </svg>
+  <div style="display:flex;gap:1.5rem;width:100%;max-width:1000px;align-items:center;flex-wrap:wrap;justify-content:center;margin:1rem 0;">
+    <div class="card wide-spread" style="flex:1;min-width:250px;max-width:380px;">
+      <h3 style="color:var(--blue);">발굴 현황</h3>
+      <p>
+        동아시아의 한 <strong style="color:var(--text-main);">반도 지역</strong>에서 대량 출토<br>
+        동남아시아, 남아시아에서도 <strong style="color:var(--text-main);">다수</strong> 발견<br>
+        기타 대륙에서도 <strong style="color:var(--text-main);">소량</strong> 발견
+      </p>
+    </div>
+    <div style="flex:1;min-width:280px;max-width:520px;position:relative;">
+      <!-- 실제 세계 백지도 + SVG 오버레이 -->
+      <div style="position:relative;width:100%;border-radius:10px;overflow:hidden;background:#fafafa;">
+        <img src="world-map.png" alt="세계 백지도" style="width:100%;display:block;opacity:.35;">
+        <svg viewBox="0 0 1000 650" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          <!-- 한반도 — 대량 (아시아 중심 도법: 한반도 ≈ 58%, 28%) -->
+          <circle cx="580" cy="182" r="38" fill="rgba(59,130,246,.15)" stroke="#3b82f6" stroke-width="2.5"/>
+          <text x="580" y="189" text-anchor="middle" fill="#3b82f6" font-size="22" font-weight="500" font-family="Pretendard Variable,sans-serif">대량</text>
+          <!-- 동남아 — 다수 (베트남 ≈ 52%, 45%) -->
+          <circle cx="520" cy="340" r="28" fill="rgba(59,130,246,.1)" stroke="#3b82f6" stroke-width="2"/>
+          <text x="520" y="347" text-anchor="middle" fill="#3b82f6" font-size="18" font-weight="500" font-family="Pretendard Variable,sans-serif">다수</text>
+          <!-- 남아시아 (인도) — 다수 (≈ 40%, 40%) -->
+          <circle cx="395" cy="320" r="28" fill="rgba(59,130,246,.1)" stroke="#3b82f6" stroke-width="2"/>
+          <text x="395" y="327" text-anchor="middle" fill="#3b82f6" font-size="18" font-weight="500" font-family="Pretendard Variable,sans-serif">다수</text>
+          <!-- 유럽 — 소량 (≈ 22%, 20%) -->
+          <circle cx="218" cy="155" r="20" fill="rgba(59,130,246,.06)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="218" y="161" text-anchor="middle" fill="#3b82f6" font-size="14" font-weight="500" font-family="Pretendard Variable,sans-serif">소량</text>
+          <!-- 북미 — 소량 (≈ 82%, 22%) -->
+          <circle cx="830" cy="195" r="20" fill="rgba(59,130,246,.06)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="830" y="201" text-anchor="middle" fill="#3b82f6" font-size="14" font-weight="500" font-family="Pretendard Variable,sans-serif">소량</text>
+          <!-- 남미 — 소량 (≈ 85%, 62%) -->
+          <circle cx="865" cy="440" r="20" fill="rgba(59,130,246,.06)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="865" y="446" text-anchor="middle" fill="#3b82f6" font-size="14" font-weight="500" font-family="Pretendard Variable,sans-serif">소량</text>
+          <!-- 범례 -->
+          <text x="20" y="625" fill="#a3a3a3" font-size="18" font-family="Pretendard Variable,sans-serif" font-weight="300">● 미지의 문자 전자기기 출토 지점 (원 크기 = 출토량)</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="q-box">
+    <p>Q. 같은 문자가 새겨진 유물이 여러 대륙에서 발견되었습니다.<br>
+    이 분포를 보고 고고학자는 무엇을 추론할 수 있을까요?</p>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 5: Phase 2 — 교역 인사이트 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 2 — 핵심 질문</div>
+  <h2>유물이 발견된 곳 =<br>그 집단이 <span class="highlight2">살았던 곳</span>일까?</h2>
+  <p class="big" style="max-width:650px;margin:.8rem 0;">
+    같은 문자의 전자기기가 동남아에서도 나왔다고<br>
+    <span class="highlight2">그 집단이 동남아에 살았다</span>고 단정할 수 있을까?
+  </p>
+</div>
+
+<!-- ════════ SLIDE 6: Phase 2 — 유물B ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 2 — 발굴 결과 ②</div>
+  <h2>유물 B: <span class="highlight">거대한 석조 무덤</span></h2>
+  <div style="display:flex;gap:1.5rem;width:100%;max-width:1000px;align-items:center;flex-wrap:wrap;justify-content:center;margin:1rem 0;">
+    <div class="card core" style="flex:1;min-width:250px;max-width:380px;">
+      <h3 style="color:var(--accent);">발굴 현황</h3>
+      <p>
+        반도 지역 내 <strong style="color:var(--text-main);">특정 도시 반경 40km</strong>에<br>
+        약 40기가 <strong style="color:var(--text-main);">밀집</strong> 발견<br>
+        같은 반도의 다른 지역에서도<br>
+        <strong style="color:var(--text-main);">거의 없음</strong><br>
+        이동 불가능한 거대 구조물
+      </p>
+    </div>
+    <div style="flex:1;min-width:240px;max-width:400px;position:relative;">
+      <div style="position:relative;width:100%;border-radius:10px;overflow:hidden;background:#fafafa;">
+        <img src="east-asia-map.jpg" alt="동아시아 백지도" style="width:100%;display:block;opacity:.4;">
+        <svg viewBox="0 0 670 640" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+          <!-- 서울·경기 일대 — 무덤 밀집 -->
+          <circle cx="375" cy="290" r="42" fill="rgba(210,136,111,.12)" stroke="#D2886F" stroke-width="2"/>
+          <circle cx="365" cy="280" r="4" fill="#D2886F"/>
+          <circle cx="380" cy="273" r="4" fill="#D2886F"/>
+          <circle cx="390" cy="285" r="4" fill="#D2886F"/>
+          <circle cx="370" cy="295" r="4" fill="#D2886F"/>
+          <circle cx="357" cy="287" r="4" fill="#D2886F"/>
+          <circle cx="383" cy="300" r="4" fill="#D2886F"/>
+          <circle cx="395" cy="293" r="4" fill="#D2886F"/>
+          <circle cx="363" cy="270" r="4" fill="#D2886F"/>
+          <circle cx="387" cy="307" r="4" fill="#D2886F"/>
+          <circle cx="353" cy="297" r="4" fill="#D2886F"/>
+          <circle cx="400" cy="280" r="4" fill="#D2886F"/>
+          <circle cx="375" cy="263" r="4" fill="#D2886F"/>
+          <!-- 라벨 -->
+          <text x="425" y="285" fill="#D2886F" font-size="14" font-family="Pretendard Variable,sans-serif" font-weight="500">← 반경 40km</text>
+          <text x="425" y="303" fill="#D2886F" font-size="14" font-family="Pretendard Variable,sans-serif" font-weight="500">&nbsp;&nbsp;&nbsp;약 40기 밀집</text>
+          <!-- 나머지 지역 -->
+          <circle cx="420" cy="200" r="3" fill="#d4d4d4" opacity=".5"/>
+          <circle cx="400" cy="420" r="3" fill="#d4d4d4" opacity=".5"/>
+          <!-- 범례 -->
+          <circle cx="25" cy="615" r="4" fill="#D2886F"/>
+          <text x="35" y="620" fill="#a3a3a3" font-size="13" font-family="Pretendard Variable,sans-serif" font-weight="300">거대 석조 무덤 출토 지점</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="q-box">
+    <p>Q. 이 거대 무덤들은 왜 한 도시 주변에만 몰려 있을까?<br>이 분포가 말해주는 것은 무엇일까?</p>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 7: Phase 2 — 정리 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 2 — 유물의 두 가지 종류</div>
+  <h2>넓게 퍼진 유물 vs 한 곳에 집중된 유물</h2>
+  <div class="diagram">
+    <div class="box">
+      <h3 class="blue">전자기기</h3>
+      <p>여러 대륙에서 발견<br><span class="blue">→ 교역·영향력</span>의 범위</p>
+    </div>
+    <div class="arrow">+</div>
+    <div class="box">
+      <h3 class="highlight">거대 무덤</h3>
+      <p>한 도시 주변에만 밀집<br><span class="highlight">→ 권력의 중심지</span></p>
+    </div>
+    <div class="arrow">＝</div>
+    <div class="box">
+      <h3 style="color:var(--text-main);font-weight:500;">"미지 문명의 문화권"</h3>
+      <p>영향력의 <span class="blue">외곽</span>과<br>권력의 <span class="highlight">중심</span>이 보인다</p>
+    </div>
+  </div>
+  <div class="insight">
+    <p>서로 다른 분포를 가진 유물들을 겹쳐보면,<br>이름도 모르는 문명의 <strong style="color:var(--text-main);">중심과 주변</strong>을 추론할 수 있다.<br>
+    <span style="font-size:.9em;color:var(--text-light);">— 이것이 바로 고고학자가 하는 일입니다.</span></p>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 8: Phase 3 — 고조선 지도 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 3 — 고조선에 적용하기</div>
+  <h2>비파형 동검과 탁자식 고인돌의 분포</h2>
+  <div class="map-wrap" style="max-width:680px;">
+    <div style="position:relative;width:100%;border-radius:12px;overflow:hidden;background:#fafafa;">
+      <img src="east-asia-map.jpg" alt="동아시아 백지도" style="width:100%;display:block;opacity:.4;">
+      <svg viewBox="0 0 670 640" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+        <!-- 비파형 동검 분포 (넓은 범위: 만주 ~ 한반도 전역) -->
+        <ellipse cx="350" cy="320" rx="310" ry="280" fill="rgba(59,130,246,.06)" stroke="#3b82f6" stroke-width="2" stroke-dasharray="10 5"/>
+        <!-- 탁자식 고인돌 분포 (좁은 범위: 대동강 유역) -->
+        <ellipse cx="365" cy="245" rx="75" ry="60" fill="rgba(210,136,111,.12)" stroke="#D2886F" stroke-width="2.5"/>
+
+        <!-- 지명 -->
+        <text x="150" y="60" fill="#a3a3a3" font-size="15" font-family="Pretendard Variable,sans-serif" font-weight="500">랴오닝성</text>
+        <text x="340" y="60" fill="#a3a3a3" font-size="15" font-family="Pretendard Variable,sans-serif" font-weight="500">지린성</text>
+        <text x="30" y="300" fill="#a3a3a3" font-size="13" font-family="Pretendard Variable,sans-serif" font-weight="300">중국 동북 지역</text>
+
+        <!-- 주요 지점 -->
+        <circle cx="360" cy="235" r="6" fill="#D2886F"/>
+        <text x="375" y="230" fill="#D2886F" font-size="14" font-family="Pretendard Variable,sans-serif" font-weight="500">평양</text>
+        <text x="375" y="248" fill="#a3a3a3" font-size="12" font-family="Pretendard Variable,sans-serif" font-weight="300">(대동강 유역)</text>
+
+        <circle cx="210" cy="165" r="5" fill="#3b82f6"/>
+        <text x="222" y="170" fill="#3b82f6" font-size="13" font-family="Pretendard Variable,sans-serif" font-weight="300">랴오닝 중심부</text>
+
+        <circle cx="430" cy="465" r="5" fill="#3b82f6"/>
+        <text x="442" y="470" fill="#3b82f6" font-size="13" font-family="Pretendard Variable,sans-serif" font-weight="300">한반도 남부</text>
+
+        <!-- 분포 라벨 -->
+        <text x="80" y="505" fill="rgba(59,130,246,.5)" font-size="14" font-family="Pretendard Variable,sans-serif" font-weight="300" font-style="italic">비파형 동검 분포권</text>
+        <text x="318" y="295" fill="rgba(210,136,111,.65)" font-size="13" font-family="Pretendard Variable,sans-serif" font-weight="300" font-style="italic">고인돌 집중 지역</text>
+
+        <!-- 범례 -->
+        <rect x="20" y="575" width="340" height="55" rx="8" fill="rgba(255,255,255,.85)" stroke="#e5e5e5" stroke-width="1"/>
+        <line x1="38" y1="597" x2="72" y2="597" stroke="#3b82f6" stroke-width="2.5" stroke-dasharray="8 4"/>
+        <text x="80" y="602" fill="#3b82f6" font-size="13" font-family="Pretendard Variable,sans-serif" font-weight="500">비파형 동검 — 넓은 분포</text>
+        <line x1="38" y1="618" x2="72" y2="618" stroke="#D2886F" stroke-width="2.5"/>
+        <text x="80" y="623" fill="#D2886F" font-size="13" font-family="Pretendard Variable,sans-serif" font-weight="500">탁자식 고인돌 — 집중 분포</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 9: Phase 3 — 핵심 질문 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 3 — 분포의 차이가 말해주는 것</div>
+  <h2>같은 고조선인데,<br>왜 분포 범위가 <span class="highlight">다를까?</span></h2>
+  <div class="card-row">
+    <div class="card wide-spread">
+      <h3 style="color:var(--blue);">비파형 동검</h3>
+      <p>
+        랴오닝성 ~ 한반도 남부까지<br>
+        <strong style="color:var(--text-main);">광범위</strong>하게 분포<br>
+        <span style="color:var(--blue);">휴대 가능한 물건 — 검(劍)</span>
+      </p>
+    </div>
+    <div class="card core">
+      <h3 style="color:var(--accent);">탁자식 고인돌</h3>
+      <p>
+        대동강·재령강 유역 <strong style="color:var(--text-main);">중심</strong><br>
+        한강 이북에 집중<br>
+        <span style="color:var(--accent);">거대한 구조물 — 무덤</span>
+      </p>
+    </div>
+  </div>
+  <div class="q-box">
+    <p>Q. 아까 전자기기와 왕릉의 관계를 떠올려봅시다.</p>
+    <p class="sub">① 비파형 동검이 넓게 퍼진 이유는 무엇일까?<br>
+    ② 고인돌이 특정 지역에 집중된 이유는?<br>
+    ③ 두 분포를 겹쳐보면, 고조선 문화의 "중심"은 어디일까?</p>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 10: Phase 3 — 종합 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 3 — 종합</div>
+  <h2>두 유물이 함께 말해주는 것</h2>
+  <div class="diagram">
+    <div class="box">
+      <h3 class="blue">비파형 동검</h3>
+      <p>넓은 분포<br><span class="blue">교역·영향력</span>이 미친<br>문화의 <span class="blue">주변부</span></p>
+    </div>
+    <div class="arrow">+</div>
+    <div class="box">
+      <h3 class="highlight">탁자식 고인돌</h3>
+      <p>좁은 집중 분포<br><span class="highlight">직접 생활</span>한<br>문화의 <span class="highlight">중심부</span></p>
+    </div>
+    <div class="arrow">＝</div>
+    <div class="box">
+      <h3 style="color:var(--text-main);font-weight:500;">고조선 문화권</h3>
+      <p>중심과 주변을 가진<br><strong style="color:var(--accent);">문화의 범위</strong></p>
+    </div>
+  </div>
+  <div class="insight">
+    <p>"동검이 발견된 곳 = 고조선 땅"이 아니라,<br>
+    "동검이 퍼진 범위 = 고조선 문화가 <strong style="color:var(--text-main);">영향을 미친</strong> 범위"</p>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 11: Phase 4 — 해석의 변화 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 4 — 역사는 해석이다</div>
+  <h2>그래서 교과서가 바뀌었다</h2>
+  <div class="card-row">
+    <div class="card old">
+      <h3 style="color:var(--text-light);">과거 해석</h3>
+      <p>"유물이 나온 곳 = 고조선의 <strong style="color:var(--text-main);">영역</strong>"<br><br>
+      <span style="font-size:.9em;">유물 분포 = 국경선으로 본 시각<br>→ 교역·영향력의 가능성을 고려하지 않음</span></p>
+    </div>
+    <div class="card new">
+      <h3 style="color:var(--accent);">현재 해석</h3>
+      <p>"유물이 나온 곳 = 고조선의 <strong style="color:var(--accent);">문화 범위</strong>"<br><br>
+      <span style="font-size:.9em;">유물 분포 = 교역·영향력 포함 넓은 의미<br>→ 직접 지배가 아닌 문화적 관계로 해석</span></p>
+    </div>
+  </div>
+  <div class="q-box">
+    <p>Q. 유물은 그대로인데, 왜 교과서 서술이 바뀌었을까?</p>
+    <p class="sub">같은 증거도 시대에 따라 다르게 해석될 수 있다면,<br>지금 교과서의 서술도 미래에 바뀔 수 있을까?</p>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 12: Phase 4 — 해석 뒤의 욕망 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 4 — 해석 뒤에 숨은 것</div>
+  <h2>왜 과거에는 <span class="highlight">"영역"</span>이라고<br>쓰고 싶었을까?</h2>
+  <p class="big" style="margin-top:1.2rem;max-width:680px;">
+    "문화 범위"가 아니라 <span class="highlight">"영역"</span>이라고 쓰면<br>
+    고조선은 어떤 나라처럼 보이게 될까?<br><br>
+    그렇게 쓰고 싶었던 사람들은<br>
+    역사에서 무엇을 <span class="highlight2">증명하고 싶었던</span> 걸까?
+  </p>
+</div>
+
+<!-- ════════ SLIDE 13: Phase 4 — 결론 ════════ -->
+<div class="slide">
+  <div class="phase-tag">Phase 4 — 결론</div>
+  <p class="final-quote">
+    유물은 변하지 않는다.<br>
+    그러나 그것을 읽는<br>
+    우리의 해석은 변한다.
+  </p>
+  <p class="big" style="margin-top:2rem;max-width:600px;">
+    역사는 과거의 <span class="highlight2">사실</span>과<br>
+    현재의 <span class="highlight">해석</span>이 만나는 학문입니다.<br><br>
+    <span style="color:var(--text-main);font-weight:500;">그래서 역사 교과서는<br>언제든 다시 쓰일 수 있습니다.</span>
+  </p>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+(function(){
+  const slides = [...document.querySelectorAll('.slide')];
+  const trackFill = document.getElementById('trackFill');
+  const slideNum = document.getElementById('slideNum');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const homeBtn = document.getElementById('homeBtn');
+  const dotsEl = document.getElementById('dots');
+  let cur = 0;
+
+  // 도트 생성
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', e => { e.stopPropagation(); go(i); });
+    dotsEl.appendChild(d);
+  });
+  const dots = [...dotsEl.children];
+
+  function go(n) {
+    if (n < 0 || n >= slides.length || n === cur) return;
+    const prev = cur;
+    slides[prev].classList.remove('active');
+    slides[prev].classList.add('exit');
+    cur = n;
+    slides[cur].classList.add('active');
+    setTimeout(() => slides[prev].classList.remove('exit'), 400);
+    updateUI();
+  }
+
+  function updateUI() {
+    const pct = ((cur + 1) / slides.length) * 100;
+    trackFill.style.width = pct + '%';
+    slideNum.textContent = (cur + 1) + ' / ' + slides.length;
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === slides.length - 1;
+    dots.forEach((d, i) => {
+      d.classList.remove('active', 'visited');
+      if (i === cur) d.classList.add('active');
+      else if (i < cur) d.classList.add('visited');
+    });
+  }
+
+  prevBtn.addEventListener('click', e => { e.stopPropagation(); go(cur - 1); });
+  nextBtn.addEventListener('click', e => { e.stopPropagation(); go(cur + 1); });
+  homeBtn.addEventListener('click', e => { e.stopPropagation(); go(0); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(cur + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    if (e.key === 'Home') { e.preventDefault(); go(0); }
+    if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+  });
+
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) dx < 0 ? go(cur + 1) : go(cur - 1);
+  });
+
+  updateUI();
+})();
+</script>
+</body>
+</html>

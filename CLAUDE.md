@@ -1,5 +1,14 @@
 # Global CLAUDE.md
 
+## 작업 경로 규칙 (필수)
+
+- 모든 프로젝트 코드 작업은 **반드시 `/mnt/c/dev/` 하위 경로**에서 수행한다.
+- `/home/user/workspace/` 등 WSL 네이티브 폴더에 프로젝트를 생성하거나 작업하지 않는다.
+- `/mnt/c/dev/`는 Windows `C:\dev\`와 동일하게 마운트되므로, WSL에서 수정한 내용이 PowerShell에서 즉시 반영된다.
+- 새 프로젝트 클론/생성 시에도 `/mnt/c/dev/` 하위에만 한다.
+
+---
+
 ## Notion
 
 - 노션 작업 시 `~/.claude/skills/notion-pilot.md` 스킬을 읽고 따른다.
@@ -28,6 +37,18 @@
 - 사용자가 스킬 트리거 키워드를 사용하면 **반드시 Skill 도구로 해당 스킬을 먼저 호출**한 뒤 작업을 수행한다. (개별 키워드는 각 스킬의 프론트매터 description 참조)
 - 스킬의 워크플로 단계를 건너뛰지 않는다.
 
+## 스킬·스크립트 경로 규칙 (WSL 필수)
+
+- 스킬 파일(`.md`)과 스크립트(`.mjs`, `.js`, `.py`)에서 절대 경로를 쓸 때는 **반드시 `/mnt/c/` 마운트 경로**를 사용한다.
+- `C:/Users/user/` 또는 `C:\Users\user\` 형식의 Windows 경로는 **절대 사용하지 않는다** — WSL에서 실행 시 오류 발생.
+- ESM import도 동일: `file:///C:/...` → `file:///mnt/c/...`
+- 예시:
+  - ❌ `C:/Users/user/.claude/secrets/token.txt`
+  - ✅ `/mnt/c/Users/user/.claude/secrets/token.txt`
+  - ❌ `import { notion } from 'file:///C:/Users/user/.claude/skills/scripts/notion-api.mjs'`
+  - ✅ `import { notion } from 'file:///mnt/c/Users/user/.claude/skills/scripts/notion-api.mjs'`
+- 스크립트 자신의 위치를 참조할 때는 하드코딩 대신 `__dirname` / `import.meta.url` 기준 상대 경로를 사용한다.
+
 ## GitHub 리포지토리 생성 정책
 
 - `gh repo create`로 리포지토리를 생성할 때 **항상 `--private` 플래그**를 사용한다.
@@ -49,7 +70,7 @@
 
 ## 복기 문서 (LESSONS_LEARNED.md) 관리
 
-- 파일 위치: `~/workspace/notes/LESSONS_LEARNED.md`
+- 파일 위치: `/mnt/c/dev/notes/LESSONS_LEARNED.md`
 - 사용자가 "복기 문서에 기록해줘", "lessons learned 추가", "삽질 기록" 등을 요청하면 해당 파일을 열어 **다음 번호로 항목을 추가**한다.
 - 항목 구조는 기존 형식을 유지한다: `## N. 제목` → `### 문제` → `### 원인` → `### 해결` → `### 교훈`
 - 항목을 추가할 때 기존 내용은 절대 수정하지 않는다.
@@ -72,6 +93,7 @@
 |--------|------|
 | 노션 OAuth, Notion OAuth, OAuth 리다이렉트, OAuth state | `~/.claude/knowledge/notion-oauth.md` |
 | iOS 줌, iOS 확대, input 확대, textarea 줌, 모바일 줌 | `~/.claude/knowledge/ios-input-zoom.md` |
+| WSL 바이너리, WSL native module, .node 파일 Windows, better-sqlite3 WSL, 네이티브 모듈 WSL | `~/.claude/knowledge/wsl-native-module.md` |
 
 - knowledge 파일은 `~/.claude/knowledge/` 디렉토리에 주제별로 관리한다.
 - 새로운 범용 인사이트가 확인되면 해당 디렉토리에 파일을 추가하고 이 테이블을 업데이트한다.
@@ -79,7 +101,7 @@
 
 ## 임시 파일 경로 규칙
 
-- 특정 프로젝트 리포가 아닌 범용 MD/스크립트 파일은 **`~/workspace/notes/`** 아래에 생성한다.
+- 특정 프로젝트 리포가 아닌 범용 MD/스크립트 파일은 **`/mnt/c/dev/notes/`** 아래에 생성한다.
 - `~`, 홈 디렉토리, 데스크톱 등에 흩뿌리지 않는다.
 
 ## Bash 도구에서 PowerShell 사용 시 주의

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>광개토대왕릉비 비문 분석</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Serif KR', 'Malgun Gothic', serif;
+      background: #f0ece4;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ── 슬라이드 컨테이너 ── */
+    .slideshow {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 28px 36px 20px;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── 공통 헤더 ── */
+    .slide-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .slide-header h1 {
+      font-size: 21px;
+      letter-spacing: 3px;
+      margin-bottom: 4px;
+    }
+
+    .slide-header p {
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* ── 슬라이드 1: 4그리드 ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .card {
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-num {
+      position: absolute;
+      top: -13px;
+      left: 16px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 17px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .row + .row {
+      border-top: 1px dashed #ddd;
+      padding-top: 9px;
+    }
+
+    .label {
+      font-size: 12px;
+      color: #aaa;
+      font-weight: bold;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .hanja {
+      font-size: 20px;
+      line-height: 1.8;
+      letter-spacing: 2px;
+    }
+
+    .damaged { color: #ccc; }
+
+    .reading {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .interp {
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .note {
+      font-size: 11.5px;
+      color: #aaa;
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    /* ── 슬라이드 2: 해석 비교 ── */
+    .compare-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .side {
+      border-radius: 12px;
+      padding: 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+    }
+
+    .side.jp {
+      background: #fff8f0;
+      border: 2px solid #c8956c;
+    }
+
+    .side.kr {
+      background: #f0f6ff;
+      border: 2px solid #5b8fd4;
+    }
+
+    .side-title {
+      font-size: 19px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid currentColor;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .side.jp .side-title { color: #b5622a; }
+    .side.kr .side-title { color: #2f5fa3; }
+
+    .side-flag {
+      font-size: 24px;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .item-num {
+      font-size: 13px;
+      font-weight: bold;
+      color: #888;
+      letter-spacing: 1px;
+    }
+
+    .item-text {
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .side.jp .item-text { color: #4a2800; }
+    .side.kr .item-text { color: #0d2a52; }
+
+    .item-note {
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.6;
+      border-left: 3px solid #ddd;
+      padding-left: 8px;
+      margin-top: 2px;
+    }
+
+    .item + .item {
+      border-top: 1px dashed #ddd;
+      padding-top: 14px;
+    }
+
+    /* ── 네비게이션 ── */
+    .nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding-top: 14px;
+      flex-shrink: 0;
+    }
+
+    .nav button {
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 24px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+
+    .nav button:hover { background: #555; }
+    .nav button:disabled { background: #ccc; cursor: default; }
+
+    .nav-counter {
+      font-size: 14px;
+      color: #999;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    @media print {
+      body { overflow: visible; }
+      .slide { position: static; opacity: 1; pointer-events: all; page-break-after: always; height: 100vh; }
+      .nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="slideshow">
+
+  <!-- ══════════════ SLIDE 1: 비문 분석 ══════════════ -->
+  <div class="slide active">
+    <div class="slide-header">
+      <h1>광개토대왕릉비 비문 분석</h1>
+      <p>□ = 훼손된 글자&nbsp;&nbsp;|&nbsp;&nbsp;출처: 광개토대왕릉비</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <span class="card-num">①</span>
+        <div class="row">
+          <span class="label">한 자</span>
+          <span class="hanja">百殘⋅新羅, 舊是屬民由來朝貢.</span>
+        </div>
+        <div class="row">
+          <span class="label">독 음</span>
+          <span class="reading">백잔·신라, 구시속민유래조공.</span>
+        </div>
+        <div class="row">
+          <span class="label">해 석</span>
+          <div>
+            <div class="interp">백제와 신라는 예로부터 속민으로 조공하여 왔다.</div>
+            <div class="note">* 조공의 대상(고구려)이 원문에 직접 명시되지 않음.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="card-num">②</span>
+        <div class="row">
+          <span class="label">한 자</span>
+          <span class="hanja">而倭以辛卯年, 來渡<span class="damaged">□</span>破百殘<span class="damaged">□□</span></span>
+        </div>
+        <div class="row">
+          <span class="label">독 음</span>
+          <span class="reading">이왜이신묘년, 래도□파백잔□□</span>
+        </div>
+        <div class="row">
+          <span class="label">해 석</span>
+          <div>
+            <div class="interp">왜가 신묘년(391)에 바다를 건너와 백제를 격파하였다.</div>
+            <div class="note">* '백잔' 뒤 두 글자 훼손 — 다른 대상도 포함되었을 가능성 있음.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="card-num">③</span>
+        <div class="row">
+          <span class="label">한 자</span>
+          <span class="hanja">新羅以爲臣民.</span>
+        </div>
+        <div class="row">
+          <span class="label">독 음</span>
+          <span class="reading">신라이위신민.</span>
+        </div>
+        <div class="row">
+          <span class="label">해 석</span>
+          <div>
+            <div class="interp">신라가 (누군가의) 신민이 되었다.</div>
+            <div class="note">* 누구의 신민이 되었는지 원문에 직접 명시되지 않음.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="card-num">④</span>
+        <div class="row">
+          <span class="label">한 자</span>
+          <span class="hanja">以六年丙申, 王躬率<span class="damaged">□</span>軍, 討伐殘國.</span>
+        </div>
+        <div class="row">
+          <span class="label">독 음</span>
+          <span class="reading">이육년병신, 왕궁솔□군, 토벌잔국.</span>
+        </div>
+        <div class="row">
+          <span class="label">해 석</span>
+          <div>
+            <div class="interp">영락 6년(396) 광개토대왕이 친히 군사를 이끌고 백제를 토벌하였다.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="nav">
+      <button disabled>◀ 이전</button>
+      <span class="nav-counter">1 / 2</span>
+      <button onclick="goSlide(1)">다음 ▶</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ SLIDE 2: 해석 비교 ══════════════ -->
+  <div class="slide">
+    <div class="slide-header">
+      <h1>비문 해석 비교</h1>
+      <p>같은 비문, 다른 시각 — 핵심 쟁점 문장 중심</p>
+    </div>
+
+    <div class="compare-wrap">
+
+      <!-- 일본측 -->
+      <div class="side jp">
+        <div class="side-title">
+          <span class="side-flag">🇯🇵</span> 일본 측 해석
+        </div>
+
+        <div class="item">
+          <div class="item-num">① 속민 조공</div>
+          <div class="item-text">백제·신라는 원래 <strong>왜의 속민</strong>으로, 왜에 조공하여 왔다.</div>
+          <div class="item-note">주어를 왜로 읽어 한반도 남부에 대한 왜의 지배권 근거로 해석.</div>
+        </div>
+
+        <div class="item">
+          <div class="item-num">② 신묘년 도해</div>
+          <div class="item-text">왜가 바다를 건너와 <strong>백제·신라를 격파하고 신민으로 삼았다.</strong></div>
+          <div class="item-note">훼손된 □□를 '신라'로 보충 → 왜가 두 나라 모두를 정복했다는 근거로 활용. 임나일본부설의 핵심 논거.</div>
+        </div>
+
+        <div class="item">
+          <div class="item-num">③ 신민</div>
+          <div class="item-text">신라는 <strong>왜의 신민</strong>이 되었다.</div>
+          <div class="item-note">주어를 왜로 읽어 신라가 왜에 복속했다는 근거로 해석.</div>
+        </div>
+
+        <div class="item">
+          <div class="item-num">④ 영락 6년 토벌</div>
+          <div class="item-text">광개토대왕이 백제를 토벌한 것은 <strong>왜의 속국을 침략한 것</strong>이다.</div>
+          <div class="item-note">④ 자체는 사실로 인정하나, 배경 해석을 왜 중심으로 구성.</div>
+        </div>
+      </div>
+
+      <!-- 한국측 -->
+      <div class="side kr">
+        <div class="side-title">
+          <span class="side-flag">🇰🇷</span> 한국 측 해석
+        </div>
+
+        <div class="item">
+          <div class="item-num">① 속민 조공</div>
+          <div class="item-text">백제·신라는 원래 <strong>고구려의 속민</strong>으로, 고구려에 조공하여 왔다.</div>
+          <div class="item-note">비문 전체 주어는 고구려(광개토대왕)이며, 고구려 중심 서술이 자연스럽다.</div>
+        </div>
+
+        <div class="item">
+          <div class="item-num">② 신묘년 도해</div>
+          <div class="item-text">왜가 바다를 건너와 <strong>백제를 공격·교란</strong>하였다.</div>
+          <div class="item-note">훼손 부분은 백제가 왜에 끌려다닌 정황으로 해석. 왜의 정복이 아닌 한반도 정세 혼란 묘사. 비석 자체가 일본 육군에 의해 발견·탁본되며 조작 가능성도 제기됨(이진희 설).</div>
+        </div>
+
+        <div class="item">
+          <div class="item-num">③ 신민</div>
+          <div class="item-text">신라는 <strong>고구려의 신민</strong>이 되었다.</div>
+          <div class="item-note">④의 광개토대왕 토벌 결과로 신라가 고구려 영향권에 들어왔다는 흐름과 일치.</div>
+        </div>
+
+        <div class="item">
+          <div class="item-num">④ 영락 6년 토벌</div>
+          <div class="item-text">광개토대왕이 <strong>직접 백제를 응징</strong>하여 고구려의 강역을 확장하였다.</div>
+          <div class="item-note">비문 전체의 목적 — 광개토대왕의 업적 기록 — 과 맥락이 일치.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="nav">
+      <button onclick="goSlide(0)">◀ 이전</button>
+      <span class="nav-counter">2 / 2</span>
+      <button disabled>다음 ▶</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function goSlide(idx) {
+    slides[current].classList.remove('active');
+    slides[idx].classList.add('active');
+    current = idx;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' && current < slides.length - 1) goSlide(current + 1);
+    if (e.key === 'ArrowLeft'  && current > 0)                 goSlide(current - 1);
+  });
+</script>
+
+</body>
+</html>

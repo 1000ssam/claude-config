@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>광개토대왕릉비 논쟁</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --accent: #D2886F;
+    --accent-hover: #C17760;
+    --bg: #ffffff;
+    --bg-subtle: #fafafa;
+    --text-main: #171717;
+    --text-sub: #525252;
+    --text-light: #a3a3a3;
+    --border: #e5e5e5;
+    --red: #e05050;
+    --red-light: #fff0f0;
+    --blue: #3b82f6;
+    --blue-light: #eff6ff;
+    --green: #16a34a;
+    --green-light: #f0fdf4;
+    --radius: 12px;
+  }
+
+  html, body {
+    height: 100%; width: 100%;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* ── Slide Container ── */
+  .deck { height: 100vh; width: 100vw; position: relative; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: calc(48px + 4vh) 6vw calc(56px + 3vh);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events: none;
+    text-align: center;
+  }
+  .slide.active  { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .slide.exit    { opacity: 0; transform: translateY(-12px); }
+
+  /* ── Typography ── */
+  h1 {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 300; line-height: 1.4;
+    letter-spacing: -0.02em; margin-bottom: .5em;
+  }
+  h2 {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 300; line-height: 1.4;
+    letter-spacing: -0.02em; margin-bottom: .5em;
+  }
+  h3 {
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    font-weight: 500; line-height: 1.4;
+    letter-spacing: -0.01em; margin-bottom: .4em;
+  }
+  p, li {
+    font-size: clamp(.95rem, 1.8vw, 1.15rem);
+    font-weight: 300; line-height: 1.8;
+    color: var(--text-sub);
+  }
+  .big {
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    line-height: 1.7; font-weight: 300;
+  }
+  .highlight  { color: var(--accent); font-weight: 500; }
+  .highlight2 { color: var(--accent-hover); font-weight: 500; }
+  .red-text   { color: var(--red); font-weight: 500; }
+  .blue-text  { color: var(--blue); font-weight: 500; }
+  .green-text { color: var(--green); font-weight: 500; }
+
+  /* ── Phase Tag ── */
+  .phase-tag {
+    font-size: .8rem; font-weight: 500;
+    letter-spacing: .04em; color: var(--accent);
+    margin-bottom: .9rem;
+    padding: .25rem .9rem;
+    background: rgba(210,136,111,.09);
+    border-radius: 100px;
+    display: inline-block;
+  }
+
+  /* ── Cards ── */
+  .card-row {
+    display: flex; gap: 1.4rem; width: 100%; max-width: 960px;
+    justify-content: center; flex-wrap: wrap;
+    margin: 1.2rem 0;
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.6rem 1.8rem;
+    flex: 1; min-width: 240px; max-width: 460px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  }
+  .card h3 { margin-bottom: .5rem; }
+  .card p  { font-size: clamp(.88rem, 1.6vw, 1.05rem); }
+  .card.accent-left { border-left: 3px solid var(--accent); }
+  .card.red-left    { border-left: 3px solid var(--red); }
+  .card.blue-left   { border-left: 3px solid var(--blue); }
+  .card.green-left  { border-left: 3px solid var(--green); }
+  .card.grey-left   { border-left: 3px solid var(--text-light); }
+
+  /* ── Inscription Box ── */
+  .inscription-box {
+    background: #fffdf5;
+    border: 1.5px solid #e8d9a0;
+    border-radius: var(--radius);
+    padding: 2rem 2.8rem;
+    max-width: 820px; width: 100%;
+    margin: 1.2rem 0;
+  }
+  .inscription-text {
+    font-family: 'Batang', 'UnBatang', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    line-height: 2.2;
+    color: #5a4400;
+    letter-spacing: .06em;
+    text-align: center;
+  }
+  .dmg { color: #bbb; font-weight: 700; }
+  .num-badge {
+    display: inline-block;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: .72em; font-weight: 600;
+    background: rgba(210,136,111,.15);
+    color: var(--accent);
+    padding: 1px 7px;
+    border-radius: 4px;
+    margin-right: 3px;
+    vertical-align: middle;
+    letter-spacing: 0;
+  }
+
+  /* ── Summary Grid ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%; max-width: 920px;
+    margin-top: 1rem;
+  }
+  .s-card {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.6rem;
+    text-align: left;
+  }
+  .s-card-num {
+    font-size: 1.3rem; font-weight: 600;
+    margin-bottom: .3rem;
+  }
+  .s-card-text { font-size: .95rem; color: var(--text-sub); line-height: 1.7; }
+  .s-card-note { font-size: .82rem; color: var(--text-light); margin-top: .4rem; font-style: italic; }
+  .s-card.c1 { border-left: 3px solid var(--blue);  } .s-card.c1 .s-card-num { color: var(--blue); }
+  .s-card.c2 { border-left: 3px solid var(--red);   } .s-card.c2 .s-card-num { color: var(--red); }
+  .s-card.c3 { border-left: 3px solid var(--green); } .s-card.c3 .s-card-num { color: var(--green); }
+  .s-card.c4 { border-left: 3px solid var(--accent);} .s-card.c4 .s-card-num { color: var(--accent); }
+
+  /* ── Issue Box ── */
+  .issue-box {
+    background: #fff8f6;
+    border: 1.5px solid rgba(224, 80, 80, .35);
+    border-radius: var(--radius);
+    padding: 2rem 2.8rem;
+    max-width: 820px; width: 100%;
+    margin-top: 1rem;
+  }
+  .issue-insc {
+    font-family: 'Batang', serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    color: #5a4400;
+    letter-spacing: .06em;
+    margin-bottom: 1.2rem;
+    line-height: 2;
+  }
+  .issue-arrow { font-size: 1.5rem; color: var(--text-light); margin: .6rem 0; }
+  .issue-q {
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    font-weight: 600; color: var(--red);
+    margin-bottom: 1rem;
+  }
+  .issue-note {
+    font-size: clamp(.9rem, 1.7vw, 1.05rem);
+    color: var(--text-sub); line-height: 1.9;
+  }
+
+  /* ── Comparison Cards ── */
+  .compare-row {
+    display: flex; gap: 1.6rem; width: 100%; max-width: 960px;
+    justify-content: center; flex-wrap: wrap;
+    margin-top: 1.2rem;
+  }
+  .compare-card {
+    flex: 1; min-width: 280px; max-width: 440px;
+    border-radius: var(--radius);
+    padding: 1.8rem 2rem;
+    text-align: left;
+    border: 1.5px solid;
+  }
+  .compare-card.jp { background: #fff8f6; border-color: rgba(224,80,80,.3); }
+  .compare-card.kr { background: #eff6ff; border-color: rgba(59,130,246,.3); }
+  .compare-card .cc-title {
+    font-size: 1.1rem; font-weight: 600;
+    padding-bottom: .9rem; margin-bottom: .9rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-card.jp .cc-title { color: var(--red); }
+  .compare-card.kr .cc-title { color: var(--blue); }
+  .compare-card .cc-body {
+    font-size: clamp(.9rem, 1.6vw, 1rem);
+    color: var(--text-sub); line-height: 1.9;
+  }
+  .cc-subj {
+    font-weight: 600; padding: 0 4px; border-radius: 3px;
+  }
+  .compare-card.jp .cc-subj { background: rgba(224,80,80,.12); color: #c03030; }
+  .compare-card.kr .cc-subj { background: rgba(59,130,246,.12); color: #2563eb; }
+  .compare-card .cc-verdict {
+    margin-top: 1rem; font-size: .86rem;
+    padding: .7rem 1rem; border-radius: 8px;
+    background: rgba(0,0,0,.03); color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* ── Reason List ── */
+  .reason-list {
+    display: flex; flex-direction: column;
+    gap: 1rem; width: 100%; max-width: 800px;
+    margin-top: 1rem;
+  }
+  .reason-item {
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.6rem;
+    text-align: left;
+  }
+  .reason-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; margin-top: .1rem; }
+  .reason-text h3 { font-size: 1rem; margin-bottom: .25rem; color: var(--text-main); }
+  .reason-text p  { font-size: .93rem; color: var(--text-sub); line-height: 1.7; }
+
+  /* ── Flow Diagram ── */
+  .flow-row {
+    display: flex; align-items: center; gap: 1rem;
+    flex-wrap: wrap; justify-content: center;
+    margin: 1.4rem 0;
+  }
+  .flow-box {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.3rem;
+    font-size: clamp(.85rem, 1.5vw, .98rem);
+    color: var(--text-sub);
+    text-align: center;
+    line-height: 1.6;
+    min-width: 140px;
+  }
+  .flow-box.highlight-box {
+    background: #fff0ee;
+    border-color: rgba(210,136,111,.5);
+    color: var(--accent-hover);
+    font-weight: 600;
+  }
+  .flow-arrow { font-size: 1.4rem; color: var(--text-light); flex-shrink: 0; }
+
+  /* ── Sowhat Answer Box ── */
+  .sowhat-box {
+    background: #fffdf5;
+    border: 1.5px solid #e8d9a0;
+    border-radius: var(--radius);
+    padding: 1.6rem 2.2rem;
+    max-width: 820px; width: 100%;
+    text-align: left;
+  }
+  .sowhat-box p { font-size: clamp(.93rem, 1.7vw, 1.08rem); color: var(--text-sub); line-height: 2; }
+  .sowhat-box strong { font-weight: 600; color: var(--text-main); }
+
+  /* ── Verdict Cards ── */
+  .verdict-row {
+    display: flex; gap: 1.6rem; width: 100%; max-width: 960px;
+    justify-content: center; flex-wrap: wrap;
+    margin-top: 1.2rem;
+  }
+  .verdict-card {
+    flex: 1; min-width: 280px; max-width: 440px;
+    border-radius: var(--radius);
+    padding: 1.8rem 2rem;
+    text-align: left;
+    border: 1.5px solid;
+  }
+  .verdict-card.out { background: var(--red-light);   border-color: rgba(224,80,80,.3); }
+  .verdict-card.in  { background: var(--green-light); border-color: rgba(22,163,74,.3); }
+  .verdict-card h3  { font-size: 1.05rem; margin-bottom: .8rem; }
+  .verdict-card.out h3 { color: var(--red); }
+  .verdict-card.in  h3 { color: var(--green); }
+  .verdict-card p { font-size: .93rem; color: var(--text-sub); line-height: 1.85; }
+  .verdict-card strong { font-weight: 600; color: var(--text-main); }
+
+  /* ── Final Quote ── */
+  .final-quote {
+    font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+    font-weight: 300; line-height: 1.7;
+    max-width: 700px; color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .sub-points {
+    display: flex; flex-direction: column;
+    gap: .7rem; margin-top: 1.6rem;
+    max-width: 700px; width: 100%;
+  }
+  .sub-point {
+    font-size: clamp(.9rem, 1.7vw, 1.05rem);
+    font-weight: 300; color: var(--text-sub);
+    padding: .7rem 1.2rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  /* ── Insight Box ── */
+  .insight {
+    background: var(--bg-subtle); border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.6rem;
+    max-width: 800px; width: 100%;
+    margin-top: 1rem;
+  }
+  .insight p { font-size: clamp(.93rem, 1.7vw, 1.05rem); font-weight: 300; color: var(--text-sub); }
+
+  /* ── Top Nav ── */
+  .top-nav {
+    position: fixed; top: 0; left: 0; right: 0; height: 48px;
+    display: flex; align-items: center; padding: 0 1.5rem;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 200;
+  }
+  .home-btn {
+    display: flex; align-items: center; gap: .4rem;
+    font-size: .85rem; font-weight: 500; color: var(--text-sub);
+    cursor: pointer; padding: .35rem .6rem;
+    border-radius: 8px; border: none; background: none;
+    transition: all .2s; font-family: inherit;
+  }
+  .home-btn:hover { color: var(--accent); background: rgba(210,136,111,.06); }
+  .home-btn svg { width: 16px; height: 16px; }
+  .nav-title {
+    margin-left: auto;
+    font-size: .8rem; font-weight: 300; color: var(--text-light);
+  }
+
+  /* ── Bottom Nav ── */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 56px;
+    display: flex; align-items: center; padding: 0 1.5rem; gap: .8rem;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border);
+    z-index: 200;
+  }
+  .nav-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 8px; border: 1px solid var(--border);
+    background: var(--bg); color: var(--text-sub);
+    cursor: pointer; transition: all .2s; flex-shrink: 0;
+  }
+  .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btn:disabled { opacity: .3; cursor: default; border-color: var(--border); color: var(--text-light); }
+  .nav-btn svg { width: 16px; height: 16px; }
+  .track {
+    flex: 1; height: 4px;
+    background: var(--border); border-radius: 100px;
+    position: relative; overflow: hidden;
+  }
+  .track-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: var(--accent); border-radius: 100px;
+    transition: width .35s ease;
+  }
+  .dots {
+    position: absolute; top: 50%; left: 0; right: 0;
+    transform: translateY(-50%);
+    display: flex; justify-content: space-between; padding: 0 1px;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border); cursor: pointer;
+    transition: all .2s; border: 2px solid transparent;
+  }
+  .dot.active  { background: var(--accent); border-color: rgba(210,136,111,.3); }
+  .dot.visited { background: var(--accent); opacity: .4; }
+  .slide-num {
+    font-size: .8rem; font-weight: 300;
+    color: var(--text-light); min-width: 48px;
+    text-align: center; flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    .compare-row, .verdict-row { flex-direction: column; }
+    .compare-card, .verdict-card { max-width: 100%; }
+    .inscription-text { font-size: 1.1rem; }
+    .flow-row { gap: .5rem; }
+    .flow-box { min-width: 110px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top Nav -->
+<nav class="top-nav">
+  <button class="home-btn" id="homeBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    처음으로
+  </button>
+  <span class="nav-title">김용천 선생님</span>
+</nav>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button class="nav-btn" id="prevBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="track" id="track">
+    <div class="track-fill" id="trackFill"></div>
+    <div class="dots" id="dots"></div>
+  </div>
+  <span class="slide-num" id="slideNum"></span>
+  <button class="nav-btn" id="nextBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+</nav>
+
+<div class="deck" id="deck">
+
+<!-- ════════ SLIDE 1: Title ════════ -->
+<div class="slide active">
+  <p style="font-size:.85rem;font-weight:500;color:var(--accent);margin-bottom:1rem;padding:.3rem 1rem;background:rgba(210,136,111,.09);border-radius:100px;display:inline-block;letter-spacing:.04em;">광개토대왕릉비 비문 논쟁</p>
+  <h1>같은 돌에 새겨진 글자,<br>왜 세 나라가 다르게 읽을까?</h1>
+  <p class="big" style="margin-top:1rem;color:var(--text-sub);">
+    비문 한 줄이 100년 넘는 역사 전쟁이 된 이유
+  </p>
+</div>
+
+<!-- ════════ SLIDE 2: 비문 원문 ════════ -->
+<div class="slide">
+  <div class="phase-tag">비문 원문</div>
+  <h2>광개토대왕릉비에 새겨진 글자</h2>
+  <div class="inscription-box">
+    <div class="inscription-text">
+      <span class="num-badge">①</span>百殘·新羅, 舊是屬民由來朝貢.<br>
+      <span class="num-badge">②</span>而倭以辛卯年, 來渡<span class="dmg">□</span>破百殘<span class="dmg">□□</span><br>
+      <span class="num-badge">③</span>新羅以爲臣民.<br>
+      以六年丙申, <span class="num-badge">④</span>王躬率<span class="dmg">□</span>軍, 討伐殘國.
+    </div>
+  </div>
+  <p style="color:var(--text-light);font-size:.9rem;">
+    <span class="dmg" style="color:#bbb;font-weight:700;">□</span> = 훼손되어 읽을 수 없는 글자 &nbsp;|&nbsp; 5세기 고구려, 만주 집안현 소재
+  </p>
+</div>
+
+<!-- ════════ SLIDE 3: 내용 정리 ════════ -->
+<div class="slide">
+  <div class="phase-tag">내용 정리</div>
+  <h2>①~④ 각 문장이 말하는 것</h2>
+  <div class="summary-grid">
+    <div class="s-card c1">
+      <div class="s-card-num">①</div>
+      <div class="s-card-text">백제와 신라가 예전부터 <strong>속민</strong>으로서 조공해왔다.</div>
+      <div class="s-card-note">누구에게 조공했는지 직접 언급 없음</div>
+    </div>
+    <div class="s-card c2">
+      <div class="s-card-num">②</div>
+      <div class="s-card-text">왜가 신묘년(391년)에 바다를 건너와 백제를 격파하였다.</div>
+      <div class="s-card-note">□□ 부분 — 다른 나라도 언급됐을 가능성 있음</div>
+    </div>
+    <div class="s-card c3">
+      <div class="s-card-num">③</div>
+      <div class="s-card-text">신라가 <strong>신민</strong>이 되었다.</div>
+      <div class="s-card-note">누가 신민으로 삼았는지 주어가 없음 ← 핵심</div>
+    </div>
+    <div class="s-card c4">
+      <div class="s-card-num">④</div>
+      <div class="s-card-text">광개토대왕이 영락 6년(396년), 직접 군사를 이끌고 백제를 정벌하였다.</div>
+      <div class="s-card-note">주어·시점 모두 명확</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 4: 핵심 쟁점 ════════ -->
+<div class="slide">
+  <div class="phase-tag">핵심 쟁점</div>
+  <h2>도대체 뭐가 문제야?</h2>
+  <div class="issue-box">
+    <div class="issue-insc">
+      <span class="num-badge">②</span>而倭以辛卯年, 來渡<span class="dmg">□</span>破百殘<span class="dmg">□□</span><br>
+      <span class="num-badge">③</span>新羅以爲臣民.
+    </div>
+    <div class="issue-arrow">↓</div>
+    <div class="issue-q">③의 주어가 누구냐?</div>
+    <div class="issue-note">
+      ②③을 <strong>이어</strong> 읽으면 → <span class="red-text">왜(倭)</span>가 신라를 신민으로 삼은 것<br>
+      ②③을 <strong>끊어</strong> 읽으면 → <span class="blue-text">고구려</span>가 신라를 신민으로 삼은 것<br><br>
+      <span style="color:var(--text-light);">+ □(훼손 글자)에 무엇이 적혀 있었냐에 따라서도 해석이 달라진다</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 5: 두 해석 ════════ -->
+<div class="slide">
+  <div class="phase-tag">두 가지 해석</div>
+  <h2>같은 비문, 다른 역사</h2>
+  <div class="compare-row">
+    <div class="compare-card jp">
+      <div class="cc-title">🇯🇵 일본 측 해석</div>
+      <div class="cc-body">
+        백제·신라는 원래 고구려의 속민이었다.<br><br>
+        <span class="cc-subj">왜</span>가 391년에 바다를 건너와 백제를 격파하고,
+        <span class="cc-subj">왜</span>가 신라를 신민으로 삼았다.<br><br>
+        이에 광개토대왕이 396년, 백제를 정벌하였다.
+      </div>
+      <div class="cc-verdict">②③을 이어 읽음 → 왜가 주어<br>문법적으로 가장 자연스러운 독해</div>
+    </div>
+    <div class="compare-card kr">
+      <div class="cc-title">🇰🇷 한국 측 해석</div>
+      <div class="cc-body">
+        백제·신라는 원래 <span class="cc-subj">고구려</span>의 속민이었다.<br><br>
+        왜가 391년에 침략해 백제를 공격하자,
+        <span class="cc-subj">고구려</span>가 신라를 신민으로 삼아 보호하였다.<br><br>
+        광개토대왕이 396년, 백제를 정벌하였다.
+      </div>
+      <div class="cc-verdict">②③을 끊어 읽음 → 고구려가 주어<br>□ 훼손 부분에 근거 / 일부는 변조설 주장</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 6: 왜 논쟁이 됐나 ════════ -->
+<div class="slide">
+  <div class="phase-tag">논쟁이 계속되는 이유</div>
+  <h2>왜 100년 넘게 싸울까?</h2>
+  <div class="reason-list">
+    <div class="reason-item">
+      <div class="reason-icon">🔲</div>
+      <div class="reason-text">
+        <h3>훼손된 글자 (□)</h3>
+        <p>핵심 주어가 있을 수 있는 자리가 마모되어 없어졌다. 없는 글자는 추정할 수밖에 없다.</p>
+      </div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-icon">✍️</div>
+      <div class="reason-text">
+        <h3>주어 생략 (한문의 특성)</h3>
+        <p>③의 "新羅以爲臣民" — 한문은 주어를 자주 생략한다. ②의 왜를 이어받을 수도, 새 주어로 시작할 수도 있다.</p>
+      </div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-icon">🏛️</div>
+      <div class="reason-text">
+        <h3>정치적 이해관계</h3>
+        <p>일본: 일제강점기 정당화 근거로 활용 / 한국: 식민사관 반박 필요 / 중국: 고구려 역사 귀속 문제와 연결</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 7: 그냥 퉁치면 안 되나? ════════ -->
+<div class="slide">
+  <div class="phase-tag">그런데 왜 이게 그렇게 민감해?</div>
+  <h2 style="line-height:1.5;">"④에서 고구려가 싹 쓸었잖아,<br>퉁치면 되는 거 아냐?"</h2>
+  <div class="flow-row">
+    <div class="flow-box">①②③<br>왜가 백제·신라를<br>지배했다</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">④<br>고구려가<br>정리했다</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">일시적 사건,<br>퉁치면<br>되는 거 아냐?</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box highlight-box">문제는<br>이게 단독으로<br>쓰인 게 아님</div>
+  </div>
+  <div class="sowhat-box">
+    <p>
+      일본 측은 이 비문을 <strong>임나일본부설(任那日本府說)</strong>의 근거로 활용했다.<br>
+      "일본은 4~6세기에 한반도 남부에 <strong>식민 통치기관(임나일본부)</strong>을 두고 백제·신라·가야를 지배했다"<br>
+      → 따라서 <strong>1910년 일제강점은 역사적 지배의 복원</strong>이다.<br><br>
+      비문 해석이 <strong>근대 식민 지배를 정당화하는 논리의 출발점</strong>이 됐기 때문에,<br>
+      "잠깐 속방이 됐다"고 인정하는 것 자체가 그 논리 전체를 수용하는 것처럼 작동했다.
+    </p>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 8: 현재 학계 ════════ -->
+<div class="slide">
+  <div class="phase-tag">현재 학계의 입장</div>
+  <h2>지금은 어떻게 정리됐나?</h2>
+  <div class="verdict-row">
+    <div class="verdict-card out">
+      <h3>❌ 폐기된 주장</h3>
+      <p>
+        <strong>임나일본부설</strong> — 한반도 남부를 지배하는 일본 식민 기관이 실재했다는 주장.
+        한·일 공동 역사연구에서도 근거 불충분으로 사실상 폐기.<br><br>
+        <strong>변조설</strong> — 일본 육군이 비문을 석회로 변조했다는 주장.
+        현재는 학계에서 지지받지 못함.
+      </p>
+    </div>
+    <div class="verdict-card in">
+      <h3>✅ 현재 수렴 중인 견해</h3>
+      <p>
+        왜의 군사적 활동은 실재했다.<br>
+        단, <strong>임나일본부식 지배 구조는 없었다.</strong><br><br>
+        왜는 가야·백제와 교류·교역 관계였으며,
+        지배-피지배 관계로 보기 어렵다.<br><br>
+        비문 해석 논쟁은 진행 중이나,
+        <strong>정치적 목적의 과잉 해석은 양측 모두에 있었다.</strong>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SLIDE 9: 핵심 메시지 ════════ -->
+<div class="slide">
+  <div class="phase-tag">핵심 메시지</div>
+  <p class="final-quote">"역사적 사실"도<br>불완전한 사료 앞에서는<br><span class="highlight">해석</span>이 된다</p>
+  <div class="sub-points">
+    <div class="sub-point">📜 사료가 완전하지 않으면 — 같은 텍스트도 다르게 읽힐 수 있다</div>
+    <div class="sub-point">🔍 누가, 어떤 목적으로 해석하느냐 — 역사 서술에 영향을 준다</div>
+    <div class="sub-point">⚖️ 역사는 사실 + 해석의 산물 — 비판적으로 읽어야 한다</div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let cur = 0;
+
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const trackFill = document.getElementById('trackFill');
+  const dotsEl = document.getElementById('dots');
+  const slideNum = document.getElementById('slideNum');
+  const homeBtn = document.getElementById('homeBtn');
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function updateNav() {
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === total - 1;
+    trackFill.style.width = ((cur + 1) / total * 100) + '%';
+    slideNum.textContent = (cur + 1) + ' / ' + total;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.className = 'dot' + (i === cur ? ' active' : i < cur ? ' visited' : '');
+    });
+  }
+
+  function goTo(idx) {
+    slides[cur].classList.remove('active');
+    slides[cur].classList.add('exit');
+    const prev = cur;
+    cur = idx;
+    setTimeout(() => slides[prev].classList.remove('exit'), 380);
+    slides[cur].classList.add('active');
+    updateNav();
+  }
+
+  nextBtn.addEventListener('click', () => { if (cur < total - 1) goTo(cur + 1); });
+  prevBtn.addEventListener('click', () => { if (cur > 0) goTo(cur - 1); });
+  homeBtn.addEventListener('click', () => goTo(0));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { if (cur < total - 1) goTo(cur + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { if (cur > 0) goTo(cur - 1); }
+  });
+
+  updateNav();
+</script>
+</body>
+</html>
