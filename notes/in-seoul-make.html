@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>만주 IN SEOUL — 안되는 걸 되게 하는 Make 프로젝트</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f0f0f0;
+    color: #1a1a1a;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+    overflow: hidden;
+  }
+
+  /* Cover */
+  .cover {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+
+  /* Content area */
+  .content {
+    padding: 36px 44px 48px;
+  }
+
+  /* Title */
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.4;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #1a73e8;
+  }
+
+  /* Section headings */
+  h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a73e8;
+    margin: 28px 0 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin: 18px 0 8px;
+  }
+
+  /* Lists */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul li {
+    font-size: 13px;
+    color: #333;
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.7;
+  }
+
+  ul li::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+    color: #1a73e8;
+    font-weight: 700;
+  }
+
+  /* Tables */
+  .timetable-wrapper {
+    margin: 12px 0 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  table th, table td {
+    padding: 9px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e8e8e8;
+    line-height: 1.5;
+    vertical-align: middle;
+  }
+
+  table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .header-row td {
+    background: #1a73e8;
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .highlight-row td {
+    background: #e8f0fe;
+    font-weight: 600;
+  }
+
+  .time-col { width: 105px; white-space: nowrap; color: #555; }
+  .prog-col { width: 190px; }
+  .detail-col { color: #444; }
+
+  /* Callout */
+  .callout {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 12.5px;
+    line-height: 1.65;
+  }
+
+  .callout-yellow {
+    background: #fffde7;
+    border-left: 3px solid #f9a825;
+  }
+
+  .callout-blue {
+    background: #e3f2fd;
+    border-left: 3px solid #1a73e8;
+  }
+
+  .callout-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .callout-text { color: #333; }
+  .callout-text strong { font-weight: 700; }
+
+  /* Callout h2 inside */
+  .callout h2 {
+    font-size: 12.5px;
+    border-bottom: none;
+    margin: 0 0 4px;
+    color: #1a73e8;
+    padding: 0;
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <img
+    class="cover"
+    src="https://prod-files-secure.s3.us-west-2.amazonaws.com/5d7bc335-c7dd-4cb6-9fb8-f3f298cd0ce5/5a5b93ba-82d5-440f-b122-e756231f5c14/2025%E1%84%82%E1%85%A7%E1%86%AB_11%E1%84%8B%E1%85%AF%E1%86%AF_22%E1%84%8B%E1%85%B5%E1%86%AF_%E1%84%89%E1%85%A5%E1%84%8B%E1%85%AE%E1%86%AF_%E1%84%8B%E1%85%A9%E1%84%91%E1%85%B3%E1%84%85%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB_%E1%84%86%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%B7_-_%E1%84%91%E1%85%A9%E1%84%89%E1%85%B3%E1%84%90%E1%85%A5_%283%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466W32LLJRQ%2F20260407%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260407T060905Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBYaCXVzLXdlc3QtMiJGMEQCIGYoRPp412%2F3IhBOdLtAv19%2Fd4mtjOAf1tb3LEUKsT8QAiAwrQSfyv63SHAHvBg3Xy9WYNQEyQ8oqd6zy6UAaFZKWiqIBAjf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDYzNzQyMzE4MzgwNSIM7e2115QROeuzyYaEKtwDQToLzZ1Dyt6jWXlpDS9JtGmB8ILWRwl9azi9r0GepRdpOu%2BZYB4h9cYHMGFGKOmtSDmgvvyoZl2lXtAbZCkoEhw%2B6Y819BzY2iQL%2BrOCYmA2iNU7RRu%2BBtTcupx71Ibn3q0UPyZt%2Fes7UXNZ3j9Q5j02A6YH7KtmdbX8sRiEb5Adr77gPbm4s9KOYtOpXME7y3Ktb3V07D9wT3RhT8Zedz6YfGizt8FeKQZex8pC80ufCTfSBRoEt1gKHyPjEdg4EbBs8hYnv9722WlMxw%2FMQltTBjydGLD9WCBPUh44hIg4qEnAezzzRYbpztlw%2FmPX%2FpHv0RrVjN1koFpbme%2BammZUGAjFNXMJxBGXp74b3Dg9k98U3xyR4ruaE%2Bz8kdF2y%2FPhml1ZXauk5OshEm%2FDqhJuEcU2Oi8bb2lJsipHGn6weoE%2F1bBIrN6cDXyTkWbtLXuKRptLHZfzcBoQzylJCknU5PoC2MykBUmVtoOrMjZgkI313X9mVSULeSG%2BWxnGvCc2%2BMooL8kXqUDs3VcjSXJqiJtOJg%2FYOfdx6WpF9z994kxvChka3H%2Bp%2FU52%2BywJ8OEyFeWAAJeneA%2FXGJdIv5hyw102hqXtrskjyr9vbc8n1RL45T9c8J60p2Iw4bTSzgY6pgFgsJbpkO67mrsVNbiZoTG%2FLFkRvyjkSpudJ3jYOdqmBkkC3t3RVDpEfNBBYd%2BMVFoZgKcH%2FH3dbAEzHX6vJlChCUyg9LyyPxDZgJ0Yay21%2B5IZnhfj2k4W%2BthDPWRGP%2BHpZHl%2FDQhiAbWI6rfChGbEfQGNHGMz3fTCZL1%2FFYdsM%2F9az%2BHtr7%2F%2BFaEPrU8Fjth9SLcILAITU1UbPfR5O%2FzQiikP9%2FY4&X-Amz-Signature=cf674b7a2f70a6ba086c79bacc47d594bae414c68f6fa58445eb049570f311ac&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+    alt="커버 이미지"
+  />
+
+  <div class="content">
+    <div class="page-title">만주 IN SEOUL<br>안되는 걸 되게 하는 Make 프로젝트</div>
+
+    <h2>행사 개요</h2>
+    <ul>
+      <li><strong>행사명:</strong> 바이브코딩 워크샵</li>
+      <li><strong>일시:</strong> 2026년 4월 8일(수) 12:30 ~ 20:30</li>
+      <li><strong>장소:</strong> 앨고스튜디오 (논현역)</li>
+    </ul>
+
+    <h2>일정 (타임테이블)</h2>
+
+    <h3>세션 1 — 12:30 ~ 17:00</h3>
+    <div class="timetable-wrapper">
+      <table>
+        <tr class="header-row">
+          <td class="time-col"><strong>시간</strong></td>
+          <td class="prog-col"><strong>프로그램</strong></td>
+          <td class="detail-col"><strong>세부 내용</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">12:30 ~ 13:00</td>
+          <td>오픈 &amp; 체크인</td>
+          <td>명찰 배부, 참가자 네트워킹</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="time-col">13:00 ~ 14:00</td>
+          <td><strong>WORKSHOP #1</strong><br>바이브코딩 프로젝트</td>
+          <td>바이브코딩 개념 소개, 프로젝트 설계 프레임워크, AI 기반 코딩 워크플로 운영 방법론</td>
+        </tr>
+        <tr>
+          <td class="time-col">14:00 ~ 14:15</td>
+          <td>☕ 휴식</td>
+          <td>네트워킹 &amp; 다과</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="time-col">14:15 ~ 17:00</td>
+          <td><strong>WORKSHOP #2</strong><br>Make 없는 자동화 (실습)</td>
+          <td>외부 자동화 도구(Make, Zapier) 없이 노코드/로우코드로 자동화 파이프라인 구축 — 참가자 직접 실습 포함</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>세션 2 — 17:00 ~ 20:30</h3>
+    <div class="timetable-wrapper">
+      <table>
+        <tr class="header-row">
+          <td class="time-col"><strong>시간</strong></td>
+          <td class="prog-col"><strong>프로그램</strong></td>
+          <td class="detail-col"><strong>세부 내용</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">17:00 ~ 17:15</td>
+          <td>☕ 휴식</td>
+          <td>네트워킹 &amp; 다과</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="time-col">17:15 ~ 18:20</td>
+          <td><strong>WORKSHOP #3</strong><br>보안 점검 + HAR 분석</td>
+          <td>웹 보안 기초 점검 실습, HAR 파일 캡처·분석을 통한 네트워크 디버깅 기법</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="time-col">18:20 ~ 20:00</td>
+          <td><strong>실습 심화 &amp; 멘토링</strong></td>
+          <td>워크샵 복습, 개인 프로젝트 적용 실습, 연사·참가자 간 1:1 멘토링</td>
+        </tr>
+        <tr>
+          <td class="time-col">20:00 ~ 20:30</td>
+          <td>마무리 &amp; 회고</td>
+          <td>핵심 내용 정리, Q&amp;A, 후속 학습 자료 안내, 수료 인증</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="callout callout-yellow">
+      <span class="callout-icon">💡</span>
+      <span class="callout-text">세션 1(12:30~17:00) 또는 세션 2(17:00~20:30) <strong>일부 세션만 참석도 가능</strong>합니다.</span>
+    </div>
+
+    <h2>장소 안내</h2>
+    <ul>
+      <li><strong>주소:</strong> 서울특별시 강남구 논현동 (논현역 3번 출구 도보 4분)</li>
+      <li><strong>체크인 오픈:</strong> 12:30</li>
+    </ul>
+
+    <div class="callout callout-blue">
+      <span class="callout-icon">ℹ️</span>
+      <div class="callout-text">
+        <h2>안내 사항</h2>
+        원활한 입장을 위해 <strong>12:30까지</strong> 도착을 권장합니다.
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
