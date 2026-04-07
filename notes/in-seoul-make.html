@@ -8,21 +8,19 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --accent:      #D2886F;
-  --accent-10:   rgba(210,136,111,.10);
-  --accent-20:   rgba(210,136,111,.20);
-  --bg-white:    #ffffff;
-  --bg-subtle:   #fafafa;
-  --text-main:   #171717;
-  --text-sub:    #525252;
-  --text-light:  #a3a3a3;
-  --border:      #e5e5e5;
-  --shadow-sm:   0 1px 2px rgba(0,0,0,.04), 0 1px 4px rgba(0,0,0,.03);
+  --accent:     #D2886F;
+  --bg-white:   #ffffff;
+  --bg-subtle:  #fafafa;
+  --text-main:  #171717;
+  --text-sub:   #525252;
+  --text-light: #a3a3a3;
+  --border:     #e5e5e5;
+  --shadow-sm:  0 1px 2px rgba(0,0,0,.04), 0 1px 4px rgba(0,0,0,.03);
 }
 
 body {
-  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  background: #efefef;
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, system-ui, sans-serif;
+  background: #ebebeb;
   color: var(--text-main);
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
@@ -30,273 +28,228 @@ body {
   print-color-adjust: exact;
 }
 
-/* ── Page ── */
 .page {
   width: 210mm;
   min-height: 297mm;
   margin: 24px auto;
   background: var(--bg-white);
-  box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 8px 32px rgba(0,0,0,.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,.07), 0 8px 32px rgba(0,0,0,.05);
   overflow: hidden;
 }
 
-/* ── Cover ── */
-.cover-wrap {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
+/* Cover */
+.cover-wrap { width: 100%; height: 200px; overflow: hidden; }
 .cover-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%;
   display: block;
 }
 
-/* ── Body ── */
+/* Body */
 .body { padding: 36px 44px 52px; }
 
-/* ── Page title ── */
+/* Title */
 .page-title {
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 300;
   line-height: 1.35;
-  color: var(--text-main);
   letter-spacing: -0.02em;
+  color: var(--text-main);
   margin-bottom: 28px;
 }
-.page-title strong {
-  font-weight: 500;
-}
-.page-title .pill {
+.page-title strong { font-weight: 500; }
+.pill {
   display: inline-block;
   background: var(--accent);
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
-  padding: 1px 8px 2px;
-  border-radius: 4px;
-  letter-spacing: 0;
+  padding: 1px 7px 2px;
+  border-radius: 3px;
   vertical-align: middle;
-  margin-right: 2px;
+  margin-right: 3px;
+  letter-spacing: 0;
 }
 
-/* ── Section label ── */
+/* Section label */
 .section-label {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 500;
-  letter-spacing: .08em;
+  letter-spacing: .09em;
   text-transform: uppercase;
   color: var(--text-light);
-  margin: 32px 0 10px;
+  margin: 30px 0 10px;
 }
 .section-label:first-of-type { margin-top: 0; }
 
-/* ── Overview card ── */
+/* Overview */
 .overview-card {
   background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 16px 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   box-shadow: var(--shadow-sm);
 }
 .ov-item {
-  padding: 0 18px;
+  padding: 14px 18px;
   border-right: 1px solid var(--border);
 }
-.ov-item:first-child { padding-left: 0; }
-.ov-item:last-child  { border-right: none; }
+.ov-item:last-child { border-right: none; }
 .ov-label {
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: .07em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--text-light);
   margin-bottom: 4px;
 }
-.ov-value {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-main);
-  line-height: 1.4;
-}
-.ov-sub {
-  font-size: 11px;
-  font-weight: 300;
-  color: var(--text-sub);
-  margin-top: 2px;
-}
+.ov-value { font-size: 13px; font-weight: 500; color: var(--text-main); line-height: 1.4; }
+.ov-sub   { font-size: 11px; font-weight: 300; color: var(--text-sub); margin-top: 1px; }
 
-/* ── Session header ── */
-.session-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 24px 0 8px;
-}
-.session-badge {
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  background: var(--accent);
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 20px;
-}
-.session-time {
-  font-size: 11.5px;
-  font-weight: 300;
-  color: var(--text-light);
-}
-
-/* ── Timetable ── */
-.timetable {
+/* Schedule block */
+.schedule-block {
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
-.tt-row {
-  display: grid;
-  grid-template-columns: 100px 1fr 1.8fr;
+
+/* Session divider inside block */
+.session-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  background: var(--bg-subtle);
   border-bottom: 1px solid var(--border);
 }
-.tt-row:last-child { border-bottom: none; }
-
-/* Header row */
-.tt-row.tt-head { background: var(--bg-subtle); }
-.tt-head .tt-cell {
-  font-size: 9.5px;
+.session-divider + .session-divider {
+  border-top: 1px solid var(--border);
+}
+.session-badge {
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: .05em;
+  letter-spacing: .06em;
   text-transform: uppercase;
-  color: var(--text-sub);
-  padding: 8px 13px;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 20px;
 }
-
-/* Body cells */
-.tt-cell {
-  padding: 10px 13px;
-  font-size: 11.5px;
+.session-time {
+  font-size: 11px;
   font-weight: 300;
-  color: var(--text-main);
-  line-height: 1.55;
-  border-right: 1px solid var(--border);
+  color: var(--text-light);
 }
-.tt-cell:last-child { border-right: none; }
 
-/* Highlight rows */
-.tt-row.tt-hl { background: var(--bg-subtle); }
+/* Schedule row — 2 columns: time | content */
+.sched-row {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  border-bottom: 1px solid var(--border);
+  min-height: 42px;
+}
+.sched-row:last-child { border-bottom: none; }
+.sched-row.is-break { opacity: .55; }
+.sched-row.is-workshop { background: var(--bg-white); }
 
-/* Time column */
-.tt-time {
+.sched-time {
+  padding: 12px 16px;
   font-size: 10.5px;
   font-weight: 300;
   color: var(--text-light);
   white-space: nowrap;
+  line-height: 1.4;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 13px;
 }
 
-/* Program column */
-.tt-prog strong {
-  display: block;
-  font-size: 11.5px;
+.sched-content {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+}
+.sched-row.is-workshop .sched-content {
+  padding-left: 20px;
+}
+.sched-row.is-workshop .sched-content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.sched-title {
+  font-size: 12px;
   font-weight: 500;
   color: var(--text-main);
-  margin-bottom: 1px;
+  line-height: 1.3;
 }
-.tt-prog span {
+.sched-title span {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-light);
+  margin-left: 6px;
+  letter-spacing: .03em;
+}
+.sched-desc {
   font-size: 11px;
   font-weight: 300;
   color: var(--text-sub);
+  line-height: 1.5;
+  margin-top: 1px;
 }
 
-/* Detail column */
-.tt-detail {
-  font-size: 11px;
-  font-weight: 300;
-  color: var(--text-sub);
-}
-.tt-break .tt-time,
-.tt-break .tt-detail,
-.tt-break .tt-prog span { color: var(--text-light); }
-
-/* ── Callout ── */
+/* Callout */
 .callout {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   border-radius: 8px;
-  padding: 12px 14px;
-  margin: 12px 0 0;
+  padding: 11px 14px;
+  margin: 10px 0 0;
   border: 1px solid var(--border);
   background: var(--bg-subtle);
   box-shadow: var(--shadow-sm);
 }
 .callout-bar {
-  width: 2px;
-  border-radius: 2px;
-  flex-shrink: 0;
-  background: var(--accent);
-  align-self: stretch;
-  min-height: 16px;
+  width: 2px; border-radius: 2px; flex-shrink: 0;
+  background: var(--accent); align-self: stretch; min-height: 14px;
 }
-.callout-body {
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1.65;
-  color: var(--text-sub);
-}
+.callout-body { font-size: 11.5px; font-weight: 300; line-height: 1.65; color: var(--text-sub); }
 .callout-body strong { font-weight: 500; color: var(--text-main); }
 .callout-title {
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 3px;
+  font-size: 9px; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 2px;
 }
 
-/* ── Location card ── */
+/* Location */
 .location-card {
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
-.loc-row {
-  display: flex;
-  border-bottom: 1px solid var(--border);
-}
+.loc-row { display: flex; border-bottom: 1px solid var(--border); }
 .loc-row:last-child { border-bottom: none; }
 .loc-label {
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: var(--text-light);
-  background: var(--bg-subtle);
-  padding: 11px 14px;
-  min-width: 66px;
+  font-size: 9px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--text-light); background: var(--bg-subtle);
+  padding: 11px 14px; min-width: 62px;
   border-right: 1px solid var(--border);
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
 }
-.loc-val {
-  font-size: 12px;
-  font-weight: 300;
-  color: var(--text-main);
-  padding: 11px 14px;
-  line-height: 1.5;
-}
-.loc-sub {
-  font-size: 11px;
-  color: var(--text-light);
-  display: block;
-  margin-top: 2px;
-}
+.loc-val { font-size: 12px; font-weight: 300; color: var(--text-main); padding: 11px 14px; line-height: 1.5; }
+.loc-sub { font-size: 10.5px; color: var(--text-light); display: block; margin-top: 1px; }
 
 @media print {
   body { background: #fff; }
@@ -336,82 +289,97 @@ body {
       </div>
     </div>
 
-    <p class="section-label">타임테이블</p>
+    <p class="section-label">일정</p>
 
-    <div class="session-header">
-      <span class="session-badge">Session 1</span>
-      <span class="session-time">12:30 — 17:00</span>
-    </div>
-    <div class="timetable">
-      <div class="tt-row tt-head">
-        <div class="tt-cell">시간</div>
-        <div class="tt-cell">프로그램</div>
-        <div class="tt-cell">세부 내용</div>
-      </div>
-      <div class="tt-row tt-break">
-        <div class="tt-cell tt-time">12:30 — 13:00</div>
-        <div class="tt-cell tt-prog"><span>오픈 &amp; 체크인</span></div>
-        <div class="tt-cell tt-detail">명찰 배부, 참가자 네트워킹</div>
-      </div>
-      <div class="tt-row tt-hl">
-        <div class="tt-cell tt-time">13:00 — 14:00</div>
-        <div class="tt-cell tt-prog"><strong>WORKSHOP #1</strong><span>바이브코딩 프로젝트</span></div>
-        <div class="tt-cell tt-detail">바이브코딩 개념 소개, 프로젝트 설계 프레임워크, AI 기반 코딩 워크플로 운영 방법론</div>
-      </div>
-      <div class="tt-row tt-break">
-        <div class="tt-cell tt-time">14:00 — 14:15</div>
-        <div class="tt-cell tt-prog"><span>휴식</span></div>
-        <div class="tt-cell tt-detail">네트워킹 &amp; 다과</div>
-      </div>
-      <div class="tt-row tt-hl">
-        <div class="tt-cell tt-time">14:15 — 17:00</div>
-        <div class="tt-cell tt-prog"><strong>WORKSHOP #2</strong><span>Make 없는 자동화 (실습)</span></div>
-        <div class="tt-cell tt-detail">외부 자동화 도구(Make, Zapier) 없이 노코드/로우코드로 자동화 파이프라인 구축 — 참가자 직접 실습 포함</div>
-      </div>
-    </div>
+    <!-- Single unified schedule block -->
+    <div class="schedule-block">
 
-    <div class="session-header">
-      <span class="session-badge">Session 2</span>
-      <span class="session-time">17:00 — 20:30</span>
-    </div>
-    <div class="timetable">
-      <div class="tt-row tt-head">
-        <div class="tt-cell">시간</div>
-        <div class="tt-cell">프로그램</div>
-        <div class="tt-cell">세부 내용</div>
+      <!-- Session 1 header -->
+      <div class="session-divider">
+        <span class="session-badge">Session 1</span>
+        <span class="session-time">12:30 — 17:00</span>
       </div>
-      <div class="tt-row tt-break">
-        <div class="tt-cell tt-time">17:00 — 17:15</div>
-        <div class="tt-cell tt-prog"><span>휴식</span></div>
-        <div class="tt-cell tt-detail">네트워킹 &amp; 다과</div>
+
+      <div class="sched-row is-break">
+        <div class="sched-time">12:30</div>
+        <div class="sched-content">
+          <div class="sched-title">오픈 &amp; 체크인</div>
+          <div class="sched-desc">명찰 배부, 참가자 네트워킹</div>
+        </div>
       </div>
-      <div class="tt-row tt-hl">
-        <div class="tt-cell tt-time">17:15 — 18:20</div>
-        <div class="tt-cell tt-prog"><strong>WORKSHOP #3</strong><span>보안 점검 + HAR 분석</span></div>
-        <div class="tt-cell tt-detail">웹 보안 기초 점검 실습, HAR 파일 캡처·분석을 통한 네트워크 디버깅 기법</div>
+
+      <div class="sched-row is-workshop">
+        <div class="sched-time">13:00</div>
+        <div class="sched-content">
+          <div class="sched-title">WORKSHOP #1 <span>바이브코딩 프로젝트</span></div>
+          <div class="sched-desc">바이브코딩 개념 소개, 프로젝트 설계 프레임워크, AI 기반 코딩 워크플로 운영 방법론</div>
+        </div>
       </div>
-      <div class="tt-row tt-hl">
-        <div class="tt-cell tt-time">18:20 — 20:00</div>
-        <div class="tt-cell tt-prog"><strong>실습 심화 &amp; 멘토링</strong><span>개인 프로젝트 적용</span></div>
-        <div class="tt-cell tt-detail">워크샵 복습, 개인 프로젝트 적용 실습, 연사·참가자 간 1:1 멘토링</div>
+
+      <div class="sched-row is-break">
+        <div class="sched-time">14:00</div>
+        <div class="sched-content">
+          <div class="sched-title">휴식</div>
+        </div>
       </div>
-      <div class="tt-row tt-break">
-        <div class="tt-cell tt-time">20:00 — 20:30</div>
-        <div class="tt-cell tt-prog"><span>마무리 &amp; 회고</span></div>
-        <div class="tt-cell tt-detail">핵심 내용 정리, Q&amp;A, 후속 학습 자료 안내, 수료 인증</div>
+
+      <div class="sched-row is-workshop">
+        <div class="sched-time">14:15</div>
+        <div class="sched-content">
+          <div class="sched-title">WORKSHOP #2 <span>Make 없는 자동화</span></div>
+          <div class="sched-desc">외부 자동화 도구(Make, Zapier) 없이 노코드/로우코드로 자동화 파이프라인 구축 — 직접 실습 포함</div>
+        </div>
       </div>
-    </div>
+
+      <!-- Session 2 header -->
+      <div class="session-divider">
+        <span class="session-badge">Session 2</span>
+        <span class="session-time">17:00 — 20:30</span>
+      </div>
+
+      <div class="sched-row is-break">
+        <div class="sched-time">17:00</div>
+        <div class="sched-content">
+          <div class="sched-title">휴식</div>
+        </div>
+      </div>
+
+      <div class="sched-row is-workshop">
+        <div class="sched-time">17:15</div>
+        <div class="sched-content">
+          <div class="sched-title">WORKSHOP #3 <span>보안 점검 + HAR 분석</span></div>
+          <div class="sched-desc">웹 보안 기초 점검 실습, HAR 파일 캡처·분석을 통한 네트워크 디버깅 기법</div>
+        </div>
+      </div>
+
+      <div class="sched-row is-workshop">
+        <div class="sched-time">18:20</div>
+        <div class="sched-content">
+          <div class="sched-title">실습 심화 &amp; 멘토링</div>
+          <div class="sched-desc">워크샵 복습, 개인 프로젝트 적용 실습, 연사·참가자 간 1:1 멘토링</div>
+        </div>
+      </div>
+
+      <div class="sched-row is-break">
+        <div class="sched-time">20:00</div>
+        <div class="sched-content">
+          <div class="sched-title">마무리 &amp; 회고</div>
+          <div class="sched-desc">핵심 내용 정리, Q&amp;A, 후속 학습 자료 안내, 수료 인증</div>
+        </div>
+      </div>
+
+    </div><!-- /schedule-block -->
 
     <div class="callout">
       <div class="callout-bar"></div>
-      <div class="callout-body">세션 1(12:30–17:00) 또는 세션 2(17:00–20:30) <strong>일부 세션만 참석도 가능</strong>합니다.</div>
+      <div class="callout-body">세션 1 또는 세션 2 <strong>일부 세션만 참석도 가능</strong>합니다.</div>
     </div>
 
-    <p class="section-label" style="margin-top:30px;">장소 안내</p>
+    <p class="section-label" style="margin-top:28px;">장소 안내</p>
     <div class="location-card">
       <div class="loc-row">
         <span class="loc-label">주소</span>
-        <span class="loc-val">서울특별시 강남구 논현동<span class="loc-sub">논현역 3번 출구 도보 4분</span></span>
+        <span class="loc-val">서울특별시 강남구 논현동 <span class="loc-sub">논현역 3번 출구 도보 4분</span></span>
       </div>
       <div class="loc-row">
         <span class="loc-label">체크인</span>
@@ -419,7 +387,7 @@ body {
       </div>
     </div>
 
-    <div class="callout" style="margin-top:12px;">
+    <div class="callout" style="margin-top:10px;">
       <div class="callout-bar"></div>
       <div class="callout-body">
         <div class="callout-title">안내 사항</div>
