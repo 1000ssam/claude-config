@@ -1,5 +1,5 @@
 {
-  "model": "opusplan",
+  "model": "claude-opus-4-6",
   "deniedMcpServers": [],
   "hooks": {
     "SessionStart": [
@@ -85,5 +85,6 @@
     "allow": [
       "Bash"
     ]
-  }
+  },
+  "effortLevel": "high"
 }
