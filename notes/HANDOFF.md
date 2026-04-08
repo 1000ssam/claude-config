@@ -1,66 +1,64 @@
-# HANDOFF — 생기부 초안 생성 Notion Worker (student-record-writer)
+# HANDOFF — wee-log 인쇄 기능 세션
 
-> 작성: 2026-03-27 KST (최종 업데이트)
+작성일: 2026-04-08
 
-## 현재 상태
+---
 
-**배포 완료 + 실행 성공. Rate limit 재시도 로직 추가 후 재배포 필요.**
+## 현재 브랜치 상태
 
-## 완료된 것
+| 브랜치 | 상태 | 내용 |
+|--------|------|------|
+| `main` | 안정 | test-calendar 머지까지만 (캘린더 일정 기능 + Autofill 비활성화) |
+| `feature/calendar-drag-reminders` | 검토 대기 | 드래그앤드랍 날짜 변경 + Windows Task Scheduler 리마인더 + 딥링크 |
+| `feature/print-records` | 검토 대기 | 상담일지/사례/학생 레벨 인쇄 기능 |
 
-### 워커 배포 + 실행 확인
-- **Notion Worker 이름**: `student-record-writer`
-- **Tool**: `writeStudentRecord` (제목: 학생 성취기록 작성)
-- **Windows 소스**: `C:\dev\notion-workers\projects\student-record-writer\`
-- **WSL 배포용**: `~/dev/notion-workers/projects/seunggibu-worker/` (WSL 쪽은 이름 변경 전)
-- Notion Custom Agent에 연결하여 실행 성공 확인
-- Anthropic API 환경변수 등록 완료 (`ntn workers env set`)
+**머지 정책**: 사용자가 직접 검토 후 명시적 "머지해" 지시 시에만 main 반영.
 
-### 코드 구성
-- `src/systemPrompt.ts` — 교과세특 프롬프트 (few-shot 3개, 캐싱 임계값 충족)
-- `src/generateDraft.ts` — Claude Sonnet 4.6 호출 + 프롬프트 캐싱 + rate limit 재시도
-- `src/notionHelpers.ts` — Notion DB 쿼리/쓰기 (isFullPage, 속성명 상수화, 2000자 분할)
-- `src/index.ts` — Worker tool 정의 + 병렬 처리 (동시 10개, worker pool 패턴)
+---
 
-### 설계 결정
-- Claude 단일 호출 (Gemini 파이프라인 불필요)
-- 1명당 1호출 + 병렬 처리 (컨텍스트 격리로 품질 일관성)
-- 프롬프트 캐싱 (cache_control: ephemeral)
-- 성취수준은 AI가 활동 주제에서 추론
-- Rate limit 시 지수 백오프 재시도 (5s→10s→20s, 최대 3회)
+## feature/calendar-drag-reminders 상세
 
-### 대상 Notion DB
-- 누가기록 DB ID: `2eedd1dc-d644-81f5-960c-cf72311a10ac`
-- 입력 필드: `누가기록 종합` (formula)
-- 출력 필드: `AI 생기부 초안` (text)
+### 드래그앤드랍 (0067366)
+- `@dnd-kit/core` 사용
+- CalendarView에서 세션 pill을 다른 날짜 셀로 드래그 → `sessions:update-date` IPC 호출
+- 낙관적 업데이트 + 실패 시 롤백
+- 회색 셀(비현재월)은 드롭 비활성화
+- 클릭 시 `navigate(..., { state: { from: 'calendar' } })` — SessionDetailPage 뒤로가기에서 "캘린더로 돌아가기" 분기
 
-### 환경
-- **ntn CLI**: WSL Ubuntu에서만 실행 가능 (Windows 미지원)
-- **Node.js**: 22.22.0 (WSL)
-- **인증**: `ntn login` 완료 (workspace: 1000쌤의 학교에서 노션하기)
+### Task Scheduler 리마인더 (4d02489, f6da279)
+- `lib/reminders/task-scheduler.ts` — PowerShell로 Windows Task Scheduler 등록/해제
+- WinRT toast 알림 (UTF-16LE BOM PS1), 클릭 시 `wee-log://session/{id}/case/{id}` 프로토콜 실행
+- 앱 cold start: `auth:get-pending-url` pull 패턴으로 타이밍 레이스 방지
+- 앱 이미 실행 중: `second-instance` 이벤트 → `navigate-to` IPC
+- 상담일지 생성/수정/삭제/날짜변경 시 자동 등록/해제/재등록
+- 잠금 해제 시 `getUpcomingReminders()`로 전체 일괄 등록
+- **보안**: 내담자명 Task XML에 미포함 (평문 디스크 저장 금지)
+- `NavigationHandler` 컴포넌트: App.tsx 내 BrowserRouter 안에 위치
 
-## 미완료 / 주의사항
+---
 
-1. **rate limit 재시도 코드가 아직 재배포 안 됨** — Windows 소스는 수정 완료, WSL에 복사+재배포 필요:
-   ```bash
-   # WSL에서
-   cp /mnt/c/dev/notion-workers/projects/student-record-writer/src/*.ts src/
-   ntn workers deploy
-   ```
+## feature/print-records 상세
 
-2. **Anthropic API 키 로테이션 필요** — 대화에 키가 노출됨. Console에서 재발급 후:
-   ```bash
-   ntn workers env set ANTHROPIC_API_KEY=새키
-   ```
+### 구현 내용
+- **상담일지 (SessionDetailPage)**: 우상단 인쇄 버튼 → `window.print()`. 인쇄 전용 헤더(사례번호/회차/출력일), 버튼류 `print:hidden`
+- **사례 (CaseDetailPage)**: 우상단 인쇄 버튼 → `window.print()`. 화면용 세션 목록은 `print:hidden`, 대신 세션 전체 내용을 `hidden print:block` 섹션으로 펼쳐 출력
+- **학생 (StudentsPage)**: 각 row에 프린터 아이콘 → `StudentPrintModal` 열림 → 학생정보 + 연결된 사례 + 세션 전체 미리보기 → 인쇄 버튼
+- `StudentPrintModal`: `fixed inset-0 z-50 bg-white` 풀스크린 오버레이. 인쇄 시 `<style>` 태그 주입으로 모달 외 영역 숨김
 
-3. **WSL 쪽 폴더 이름 불일치** — Windows는 `student-record-writer`, WSL은 `seunggibu-worker`. 기능에 영향 없으나 정리하려면:
-   ```bash
-   # WSL에서
-   cd ~/dev/notion-workers/projects
-   mv seunggibu-worker student-record-writer
-   ```
+### 신규 IPC
+- `cases:list-by-student(studentId)` → `getCasesByStudentId` 쿼리
 
-4. **Notion AI 크레딧** — 에이전트 1회 호출 시 ~6크레딧 소모 (내부 멀티턴). 학생 수와 무관하게 고정.
+---
 
-## 삽질 기록
-`C:\dev\notes\LESSONS_LEARNED.md` 항목 #9에 상세 기록.
+## 다음 세션에서 할 일
+
+1. **feature/calendar-drag-reminders 검토 + 테스트** → 이상 없으면 main 머지
+2. **feature/print-records 검토 + 테스트** → 이상 없으면 main 머지
+3. 추가 기능 개발 계속
+
+---
+
+## 주의사항
+
+- 이번 세션에서 확인된 브랜치 정책 위반 이력 있음 (Task Scheduler 작업이 실수로 main에 직접 커밋됨 → revert로 복구 완료)
+- **앞으로 모든 작업은 feature 브랜치에서, 사용자 검토 후 명시적 머지 지시 시에만 main 반영**
