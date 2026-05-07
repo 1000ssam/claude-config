@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>노션톡 — 배경색 비교 (청자 액센트 고정)</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+  />
+  <style>
+    :root {
+      --dark: #1C1917;
+      --dark-light: #292524;
+      --sub: #57534E;
+      --muted: #A8A29E;
+      --edge: #E7E5E4;
+      --accent: #1F5D5C;
+      --accent-hover: #154645;
+      --accent-rgb: 31,93,92;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Pretendard Variable", Pretendard, -apple-system,
+        BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", sans-serif;
+      background: #fff;
+      color: var(--dark);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.7;
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding: 56px 24px 96px;
+    }
+
+    /* ─── page header ─── */
+    .container { max-width: 1200px; margin: 0 auto; }
+    .page-title {
+      font-size: 2.25rem;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .page-lead {
+      font-size: 1rem;
+      color: var(--sub);
+      margin-bottom: 16px;
+      max-width: 740px;
+    }
+    .page-note {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 14px 18px;
+      background: #FAFAFA;
+      border: 1px dashed #DDD;
+      border-radius: 10px;
+      margin-bottom: 32px;
+      max-width: 740px;
+    }
+    .page-note strong { color: var(--sub); }
+    .toc {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+      padding: 14px 18px;
+      background: white;
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+    }
+    .toc a {
+      font-size: 0.8125rem;
+      color: var(--sub);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .toc a:hover { background: #F4F4F2; color: var(--dark); }
+
+    /* ─── option block ─── */
+    .option {
+      border: 1px solid var(--edge);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+      scroll-margin-top: 24px;
+      background: white;
+    }
+    .option-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--edge);
+    }
+    .option-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .option-bg-chip {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      background: var(--bg);
+      border: 1px solid var(--edge);
+    }
+    .option-tag {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .option-blurb {
+      font-size: 0.875rem;
+      color: var(--sub);
+      margin-bottom: 22px;
+      line-height: 1.6;
+      max-width: 820px;
+    }
+
+    /* ─── preview panel: 사이트 mock ─── */
+    .preview {
+      background: var(--bg);
+      border: 1px solid var(--edge);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .preview-eyebrow {
+      font-size: 0.875rem;
+      color: var(--sub);
+      margin-bottom: 18px;
+      display: block;
+    }
+    .preview-headline {
+      font-size: 2.25rem;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .accent-text { color: var(--accent); }
+    .preview-sub {
+      font-size: 1rem;
+      color: var(--sub);
+      max-width: 480px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .button-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-secondary {
+      color: var(--sub);
+      background: transparent;
+      border: 1px solid var(--edge);
+    }
+    .btn-secondary:hover { border-color: var(--muted); }
+
+    .metrics {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding-top: 18px;
+      border-top: 1px solid var(--edge);
+      font-size: 0.875rem;
+      margin-bottom: 36px;
+    }
+    .metric { display: flex; align-items: baseline; gap: 6px; }
+    .metric strong {
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--dark);
+    }
+    .metric span { color: var(--muted); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .card {
+      padding: 22px;
+      border-radius: 14px;
+      border: 1px solid var(--edge);
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 130px;
+    }
+    .card-accent { background: rgba(var(--accent-rgb), 0.08); border-color: transparent; }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .card-accent h3 { font-size: 1.25rem; }
+    .card p {
+      font-size: 0.8rem;
+      color: var(--sub);
+      line-height: 1.6;
+    }
+    .arrow {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    /* ─── option-specific bg vars ─── */
+    /* anchor 0: 베이스라인 비교용 (Anthropic 디폴트 톤) */
+    .opt-anthropic   { --bg: #FAF8F5; --bg-dark: #F0EDE8; --accent: #D4654A; --accent-hover: #C04E35; --accent-rgb: 212,101,74; }
+    /* anchor 1: 액센트만 청자로 (이전 단계 결정) */
+    .opt-current     { --bg: #FAF8F5; --bg-dark: #F0EDE8; }
+    /* 새 후보 */
+    .opt-stone       { --bg: #F4F4F2; --bg-dark: #EBEBE9; }
+    .opt-vintage     { --bg: #EDE6D3; --bg-dark: #E2DAC2; }
+    .opt-mint        { --bg: #F2F6F4; --bg-dark: #E6EEEA; }
+    .opt-pure        { --bg: #FFFFFF; --bg-dark: #F5F5F4; }
+
+    @media (max-width: 720px) {
+      .preview-headline { font-size: 1.75rem; }
+      .cards { grid-template-columns: 1fr; }
+      .preview { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="page-title">노션톡 — 배경색 비교</h1>
+    <p class="page-lead">
+      액센트는 <strong>청자 청록 #1F5D5C</strong>로 고정. 배경 톤만 바꿔서 비교합니다.
+      cream 배경은 청자로 액센트만 바꿔도 여전히 "Anthropic 디자인 시스템" 잔향이 남기 때문에,
+      배경 자체를 옮겨야 진짜 차별화됩니다.
+    </p>
+    <div class="page-note">
+      <strong>비교 순서</strong> — 0. Anthropic 베이스라인(현재 = cream + burnt orange) → 1. cream + 청자(액센트만 바꾼 직전 단계) → 2~5. 새 배경 후보 4개 (전부 청자 액센트). 0과 1을 보면 "액센트만 바꿨을 때의 거리감", 1과 2~5를 보면 "배경까지 옮겼을 때의 거리감"이 보입니다.
+    </div>
+    <nav class="toc">
+      <a href="#anthropic">0. Anthropic 베이스라인</a>
+      <a href="#current">1. cream + 청자</a>
+      <a href="#stone">2. 스톤 그레이 #F4F4F2</a>
+      <a href="#vintage">3. 빈티지 페이퍼 #EDE6D3</a>
+      <a href="#mint">4. 민트 화이트 #F2F6F4</a>
+      <a href="#pure">5. 순백 #FFFFFF</a>
+    </nav>
+
+    <!-- 0. Anthropic 베이스라인 -->
+    <section id="anthropic" class="option opt-anthropic">
+      <header class="option-head">
+        <div class="option-name">
+          <span class="option-bg-chip"></span>
+          0. Anthropic 베이스라인 — cream + burnt orange
+        </div>
+        <div class="option-tag">BG #FAF8F5 / ACC #D4654A</div>
+      </header>
+      <p class="option-blurb">
+        현재 사이트 그대로. 비교 기준점.
+      </p>
+      <div class="preview"><!-- preview-content -->
+        <span class="preview-eyebrow">노션 공식 앰배서더 · 현직 교사</span>
+        <h2 class="preview-headline">
+          배움까지 혼자<br />
+          짊어지지 마세요.<br />
+          <span class="accent-text">노션·AI 지름길</span>,<br />
+          이미 깔아뒀어요
+        </h2>
+        <p class="preview-sub">
+          노션 템플릿부터 AI 자동화 앱까지, 14년차 교사가 검증한 가이드와 결과물.
+        </p>
+        <div class="button-row">
+          <a href="#" class="btn btn-primary">무료 교무수첩 받기 →</a>
+          <a href="#" class="btn btn-secondary">90분 입문 강의</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>25,000+</strong><span>다운로드</span></div>
+          <div class="metric"><strong>15,000+</strong><span>SNS 팔로워</span></div>
+          <div class="metric"><strong>1,400+</strong><span>커뮤니티</span></div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div><h3>노션+AI 꿀팁</h3><p>실전에서 검증한 활용법과 자동화 노하우</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card card-accent">
+            <div><h3>노션 템플릿</h3><p>교무수첩, 수업계획, 업무 자동화</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card">
+            <div><h3>툴킷</h3><p>AI 에이전트 스킬, 업무 경감 앱</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. cream + 청자 -->
+    <section id="current" class="option opt-current">
+      <header class="option-head">
+        <div class="option-name">
+          <span class="option-bg-chip"></span>
+          1. cream + 청자 (액센트만 바꾼 단계)
+        </div>
+        <div class="option-tag">BG #FAF8F5 / ACC #1F5D5C</div>
+      </header>
+      <p class="option-blurb">
+        배경은 그대로 cream. 액센트만 청자로. 따뜻함 보존, 차별화는 부분적. AI 톤 잔향 약간 남음.
+      </p>
+      <div class="preview">
+        <span class="preview-eyebrow">노션 공식 앰배서더 · 현직 교사</span>
+        <h2 class="preview-headline">
+          배움까지 혼자<br />
+          짊어지지 마세요.<br />
+          <span class="accent-text">노션·AI 지름길</span>,<br />
+          이미 깔아뒀어요
+        </h2>
+        <p class="preview-sub">
+          노션 템플릿부터 AI 자동화 앱까지, 14년차 교사가 검증한 가이드와 결과물.
+        </p>
+        <div class="button-row">
+          <a href="#" class="btn btn-primary">무료 교무수첩 받기 →</a>
+          <a href="#" class="btn btn-secondary">90분 입문 강의</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>25,000+</strong><span>다운로드</span></div>
+          <div class="metric"><strong>15,000+</strong><span>SNS 팔로워</span></div>
+          <div class="metric"><strong>1,400+</strong><span>커뮤니티</span></div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div><h3>노션+AI 꿀팁</h3><p>실전에서 검증한 활용법과 자동화 노하우</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card card-accent">
+            <div><h3>노션 템플릿</h3><p>교무수첩, 수업계획, 업무 자동화</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card">
+            <div><h3>툴킷</h3><p>AI 에이전트 스킬, 업무 경감 앱</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 스톤 그레이 -->
+    <section id="stone" class="option opt-stone">
+      <header class="option-head">
+        <div class="option-name">
+          <span class="option-bg-chip"></span>
+          2. 스톤 그레이 — 따뜻함 제거, 가장 모던
+        </div>
+        <div class="option-tag">BG #F4F4F2 / ACC #1F5D5C</div>
+      </header>
+      <p class="option-blurb">
+        warm beige를 완전히 떼어낸 중성 회색. AI cream과 가장 멀리. 모던하고 깔끔. 청자가 cream 위보다 더 또렷하게 떠오름. 단점: 약간 차가워질 수 있음 — "교사 커뮤니티"의 따뜻함이 약해질 가능성.
+      </p>
+      <div class="preview">
+        <span class="preview-eyebrow">노션 공식 앰배서더 · 현직 교사</span>
+        <h2 class="preview-headline">
+          배움까지 혼자<br />
+          짊어지지 마세요.<br />
+          <span class="accent-text">노션·AI 지름길</span>,<br />
+          이미 깔아뒀어요
+        </h2>
+        <p class="preview-sub">
+          노션 템플릿부터 AI 자동화 앱까지, 14년차 교사가 검증한 가이드와 결과물.
+        </p>
+        <div class="button-row">
+          <a href="#" class="btn btn-primary">무료 교무수첩 받기 →</a>
+          <a href="#" class="btn btn-secondary">90분 입문 강의</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>25,000+</strong><span>다운로드</span></div>
+          <div class="metric"><strong>15,000+</strong><span>SNS 팔로워</span></div>
+          <div class="metric"><strong>1,400+</strong><span>커뮤니티</span></div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div><h3>노션+AI 꿀팁</h3><p>실전에서 검증한 활용법과 자동화 노하우</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card card-accent">
+            <div><h3>노션 템플릿</h3><p>교무수첩, 수업계획, 업무 자동화</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card">
+            <div><h3>툴킷</h3><p>AI 에이전트 스킬, 업무 경감 앱</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 빈티지 페이퍼 -->
+    <section id="vintage" class="option opt-vintage">
+      <header class="option-head">
+        <div class="option-name">
+          <span class="option-bg-chip"></span>
+          3. 빈티지 페이퍼 — "AI cream"보다 훨씬 진한 종이
+        </div>
+        <div class="option-tag">BG #EDE6D3 / ACC #1F5D5C</div>
+      </header>
+      <p class="option-blurb">
+        AI가 절대 디폴트로 안 뽑는 톤. 현대 LLM은 항상 #FAF8F5~#F8F5F0 정도의 옅은 cream만 선택하기 때문에 #EDE6D3는 "사람이 의도적으로 골랐다"는 시그널이 가장 명확. 한국 옛 책·필사본 종이 톤. 청자와의 대비도 가장 강함. 단점: 아주 좋아하거나 부담스럽거나 — 호불호 갈릴 가능성 가장 높음.
+      </p>
+      <div class="preview">
+        <span class="preview-eyebrow">노션 공식 앰배서더 · 현직 교사</span>
+        <h2 class="preview-headline">
+          배움까지 혼자<br />
+          짊어지지 마세요.<br />
+          <span class="accent-text">노션·AI 지름길</span>,<br />
+          이미 깔아뒀어요
+        </h2>
+        <p class="preview-sub">
+          노션 템플릿부터 AI 자동화 앱까지, 14년차 교사가 검증한 가이드와 결과물.
+        </p>
+        <div class="button-row">
+          <a href="#" class="btn btn-primary">무료 교무수첩 받기 →</a>
+          <a href="#" class="btn btn-secondary">90분 입문 강의</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>25,000+</strong><span>다운로드</span></div>
+          <div class="metric"><strong>15,000+</strong><span>SNS 팔로워</span></div>
+          <div class="metric"><strong>1,400+</strong><span>커뮤니티</span></div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div><h3>노션+AI 꿀팁</h3><p>실전에서 검증한 활용법과 자동화 노하우</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card card-accent">
+            <div><h3>노션 템플릿</h3><p>교무수첩, 수업계획, 업무 자동화</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card">
+            <div><h3>툴킷</h3><p>AI 에이전트 스킬, 업무 경감 앱</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 민트 화이트 -->
+    <section id="mint" class="option opt-mint">
+      <header class="option-head">
+        <div class="option-name">
+          <span class="option-bg-chip"></span>
+          4. 민트 화이트 — 청자와 같은 가족톤
+        </div>
+        <div class="option-tag">BG #F2F6F4 / ACC #1F5D5C</div>
+      </header>
+      <p class="option-blurb">
+        청자(teal)의 가족톤을 배경에 미세하게 깔아 모노크로마틱 조화. AI들이 절대 안 뽑는 패턴(브랜드 컬러를 배경에 미세하게 섞는 디자인 결정). 차분하고 통일감 강함. 단점: 너무 미묘해서 "그냥 흰색"으로 보일 수도 — 차별화 신호가 약할 수 있음.
+      </p>
+      <div class="preview">
+        <span class="preview-eyebrow">노션 공식 앰배서더 · 현직 교사</span>
+        <h2 class="preview-headline">
+          배움까지 혼자<br />
+          짊어지지 마세요.<br />
+          <span class="accent-text">노션·AI 지름길</span>,<br />
+          이미 깔아뒀어요
+        </h2>
+        <p class="preview-sub">
+          노션 템플릿부터 AI 자동화 앱까지, 14년차 교사가 검증한 가이드와 결과물.
+        </p>
+        <div class="button-row">
+          <a href="#" class="btn btn-primary">무료 교무수첩 받기 →</a>
+          <a href="#" class="btn btn-secondary">90분 입문 강의</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>25,000+</strong><span>다운로드</span></div>
+          <div class="metric"><strong>15,000+</strong><span>SNS 팔로워</span></div>
+          <div class="metric"><strong>1,400+</strong><span>커뮤니티</span></div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div><h3>노션+AI 꿀팁</h3><p>실전에서 검증한 활용법과 자동화 노하우</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card card-accent">
+            <div><h3>노션 템플릿</h3><p>교무수첩, 수업계획, 업무 자동화</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card">
+            <div><h3>툴킷</h3><p>AI 에이전트 스킬, 업무 경감 앱</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 순백 -->
+    <section id="pure" class="option opt-pure">
+      <header class="option-head">
+        <div class="option-name">
+          <span class="option-bg-chip"></span>
+          5. 순백 — 가장 보수적 선택
+        </div>
+        <div class="option-tag">BG #FFFFFF / ACC #1F5D5C</div>
+      </header>
+      <p class="option-blurb">
+        가장 안전. AI cream에서 정반대로 도망. 단점: 깨끗하지만 캐릭터 0. "이 사이트가 누구의 것인지" 안 보임. 비교용 베이스로 함께 보세요.
+      </p>
+      <div class="preview">
+        <span class="preview-eyebrow">노션 공식 앰배서더 · 현직 교사</span>
+        <h2 class="preview-headline">
+          배움까지 혼자<br />
+          짊어지지 마세요.<br />
+          <span class="accent-text">노션·AI 지름길</span>,<br />
+          이미 깔아뒀어요
+        </h2>
+        <p class="preview-sub">
+          노션 템플릿부터 AI 자동화 앱까지, 14년차 교사가 검증한 가이드와 결과물.
+        </p>
+        <div class="button-row">
+          <a href="#" class="btn btn-primary">무료 교무수첩 받기 →</a>
+          <a href="#" class="btn btn-secondary">90분 입문 강의</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>25,000+</strong><span>다운로드</span></div>
+          <div class="metric"><strong>15,000+</strong><span>SNS 팔로워</span></div>
+          <div class="metric"><strong>1,400+</strong><span>커뮤니티</span></div>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div><h3>노션+AI 꿀팁</h3><p>실전에서 검증한 활용법과 자동화 노하우</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card card-accent">
+            <div><h3>노션 템플릿</h3><p>교무수첩, 수업계획, 업무 자동화</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+          <div class="card">
+            <div><h3>툴킷</h3><p>AI 에이전트 스킬, 업무 경감 앱</p></div>
+            <div class="arrow">둘러보기 →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

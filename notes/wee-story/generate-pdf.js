@@ -26,10 +26,11 @@ const path = require('path');
   console.log('🖨️  PDF 생성 중...');
   await page.pdf({
     path: outputPath,
-    format: 'A4',
+    width: '1920px',
+    height: '1080px',
     printBackground: true,
     margin: { top: 0, right: 0, bottom: 0, left: 0 },
-    preferCSSPageSize: false,
+    preferCSSPageSize: true,
   });
 
   await browser.close();

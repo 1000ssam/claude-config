@@ -1,0 +1,81 @@
+{
+  "countries": [
+    { "id": "silla", "name": "신라", "color": "#d97706" },
+    { "id": "goguryeo", "name": "고구려", "color": "#059669" },
+    { "id": "baekje", "name": "백제", "color": "#2563eb" },
+    { "id": "tang", "name": "당", "color": "#dc2626" },
+    { "id": "wae", "name": "왜", "color": "#7c3aed" }
+  ],
+  "persons": [
+    {
+      "id": "munmu",
+      "number": 1,
+      "name": "문무왕",
+      "summary": "나당전쟁을 완수한 신라 왕",
+      "origin": "silla",
+      "source": "병기를 녹여 농기구를 만들어 백성으로 하여금 천수를 다하도록 하며, 납세와 부역을 줄여 집집이 넉넉하고 사람마다 풍족하게 해 백성은 자기의 집을 편하게 여기고 나라에는 근심이 사라지게 하라.",
+      "citation": "삼국사기"
+    },
+    {
+      "id": "goguryeo-people",
+      "number": 2,
+      "name": "고구려 민중",
+      "summary": "당나라가 중국으로 강제 이주시킨 고구려 민중들",
+      "origin": "goguryeo",
+      "source": "(당나라 군대가) 고구려의 2만 8천 2백호(약 20만 명)와 수레 1천 8십 승, 소 3천 3백 두, 말 2천 9백 필, 낙타 6십 두를 당으로 옮겼는데 …… 강회 이남과 산남, 병주 양주 이서의 여러 주의 빈 땅에 안치케 하였다.",
+      "citation": "구당서"
+    },
+    {
+      "id": "gasil",
+      "number": 3,
+      "name": "가실",
+      "summary": "결혼을 앞두고 전장에 나간 신라인",
+      "origin": "silla",
+      "source": "당신께서 교대하고 돌아온 연후에 예식을 치르더라도 늦지 않을 것입니다 …… 공교롭게도 나라에 변고가 있어 가실은 6년이 되도록 돌아오지 못하였다. 아버지는 딸에게 \"이미 기한을 넘겼구나. 다른 집안에 시집가는 것이 좋겠다.\"라고 하였다.",
+      "citation": "삼국사기"
+    },
+    {
+      "id": "gwisil",
+      "number": 4,
+      "name": "귀실집사",
+      "summary": "왜로 망명한 백제 귀족",
+      "origin": "baekje",
+      "source": "(망명한 백제인들에게 관위를 주기 위해) 백제국 관위를 검토하였다. 귀실집사에게 12위 관등을 주었다. 또 백제 남녀 4백여 인을 근강국의 신전군에 살게 하였다. …… 신전군의 백제인들에게 토지를 지급하였다.",
+      "citation": "일본서기"
+    },
+    {
+      "id": "yeon-namsaeng",
+      "number": 5,
+      "name": "연남생",
+      "summary": "고구려 태막리지였으나 당에 투항한 인물",
+      "origin": "goguryeo",
+      "source": "공이 국경 지역을 순행하던 중, 두 아우 남산과 남건이 하루아침에 패악해져 병력을 일으켜 항거했다. 남생의 어린 아들이 무고하게 살해되었고 (중략) 남생은 아들 헌성을 보내 당 황제에게 투항했다. 황제는 기뻐하며 그를 평양도행군대총관으로 삼아 고구려 군대를 이끌게 했다. (중략) 668년 가을, 조서를 받들어 당나라 군대와 함께 바람처럼 달려가 평양성에 임했다. 성 안의 신성(信誠) 등이 내응하여 성에 깃발을 꽂았고 고구려는 멸망했다. 공은 그 공로로 현도군개국공에 봉해지고 식읍 2,000호를 받았으며, 46세에 안동부 관사에서 사망했다.",
+      "citation": "천남생묘지명"
+    },
+    {
+      "id": "wae-army",
+      "number": 6,
+      "name": "왜군",
+      "summary": "백제 구원을 위해 파병했다가 백강에서 궤멸된 왜군",
+      "origin": "wae",
+      "source": "위기에 빠진 사람을 돕고 끊어진 것을 이어주는 것은 고전에도 적혀있다. 백제국이 곤궁하여 우리나라에 의지해 와서 '본국은 나라가 망하여 …… 반드시 구원해 달라'고 멀리서 와서 표를 올렸다. 그 마음을 저버릴 수 없다. 장군들에게 …… 여러 길로 함께 군대를 파견하도록 하라. (『일본서기』)\n\n유인궤가 백강 어귀에서 부여풍의 군대를 만나 네 번 싸워 모두 승리하고 [왜의] 배 400척을 불태우니, 적의 무리는 크게 궤멸되고 부여풍은 몸만 빠져나와 달아났다. 부여충승·충지 등은 왜군을 이끌고 함께 항복하였다. (『구당서』)",
+      "citation": "일본서기 · 구당서"
+    },
+    {
+      "id": "baekje-farmer",
+      "number": 7,
+      "name": "백제 농민",
+      "summary": "전투 경험 없이 왕조의 교체만 전해들은 백제 평민 (가상의 인물)",
+      "origin": "baekje",
+      "source": "?? 우리나라가 신라로 바뀌었다구요 ??",
+      "citation": "가상의 인물"
+    }
+  ],
+  "relationshipPresets": [
+    { "id": "friendly", "label": "우호", "dash": "solid", "arrowheadStart": "none", "arrowheadEnd": "none", "color": "green" },
+    { "id": "hostile", "label": "적대", "dash": "solid", "arrowheadStart": "arrow", "arrowheadEnd": "arrow", "color": "red" },
+    { "id": "surrender", "label": "투항/항복", "dash": "solid", "arrowheadStart": "none", "arrowheadEnd": "arrow", "color": "orange" },
+    { "id": "exile", "label": "망명", "dash": "dotted", "arrowheadStart": "none", "arrowheadEnd": "arrow", "color": "blue" },
+    { "id": "forced-migration", "label": "징집·강제이주", "dash": "dashed", "arrowheadStart": "none", "arrowheadEnd": "arrow", "color": "black" }
+  ]
+}

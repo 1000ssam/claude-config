@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>wee-log 다음 과제</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:system-ui,sans-serif;max-width:720px;margin:0 auto;padding:16px;line-height:1.5}
+h1{font-size:1.2rem;margin:0 0 12px}
+h2{font-size:1rem;margin:20px 0 6px;border-bottom:1px solid #ccc;padding-bottom:4px}
+ul{list-style:none;padding:0;margin:0}
+li{padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px solid #f0f0f0}
+input[type=checkbox]{margin-top:4px;flex-shrink:0;width:18px;height:18px}
+label{flex:1;cursor:pointer}
+.done label{text-decoration:line-through;color:#999}
+.num{font-size:.75rem;color:#888;margin-right:4px;font-weight:600}
+.desc{font-size:.8rem;color:#666;margin-top:2px;display:block}
+.think{background:#fff4cc;border-left:3px solid #e6b800;padding:2px 6px;font-size:.7rem;color:#7a5a00;margin-left:4px;border-radius:2px}
+textarea{width:100%;min-height:180px;padding:10px;border:1px solid #ccc;border-radius:4px;font:inherit;resize:vertical;margin-top:8px}
+.row{display:flex;gap:8px;align-items:center;margin-top:20px;flex-wrap:wrap}
+button{padding:6px 12px;font-size:.85rem;cursor:pointer}
+.count{font-size:.85rem;color:#666;margin-left:8px;font-weight:normal}
+.saved{font-size:.75rem;color:#090;margin-left:6px;opacity:0;transition:opacity .3s}
+.saved.show{opacity:1}
+</style>
+</head>
+<body>
+<h1>wee-log 다음 과제 <span class="count" id="count"></span></h1>
+
+<h2>구현 과제</h2>
+<ul data-group="impl">
+<li><input type="checkbox" id="b16"><label for="b16"><span class="num">#16</span>인쇄 미리보기에 인쇄 버튼 UI가 함께 노출되는 문제<span class="desc">@media print 숨김 누락. #5와 통합 가능.</span></label></li>
+<li><input type="checkbox" id="b17"><label for="b17"><span class="num">#17</span>인쇄 미리보기에서 이전 단계로 돌아가는 UI 부재<span class="desc">상단 좌측 돌아가기 버튼 + ESC 단축.</span></label></li>
+<li><input type="checkbox" id="b19"><label for="b19"><span class="num">#19</span>사례 → 세션 진입 후 뒤로가기 시 탭 컨텍스트 복원<span class="desc">현재 상담 기록에서 들어갔다가 돌아오면 개요 탭으로 리셋됨.</span></label></li>
+<li><input type="checkbox" id="b20"><label for="b20"><span class="num">#20</span>사례 개요 → 내담자 정보에서 학생 카드 바로가기 링크<span class="desc">학생 이름 클릭 시 /students/:id 이동.</span></label></li>
+</ul>
+
+<h2>설계 고민</h2>
+<ul data-group="design">
+<li><input type="checkbox" id="b21"><label for="b21"><span class="num">#21</span>"일정만 빠르게 등록" 워크플로우 재설계 <span class="think">논의 선행</span><span class="desc">#18로 제목/내용 필수를 해제했지만 여전히 사례 없이 세션을 만들 수는 없음. 임시 사례 자동 생성(A)·별도 appointment 엔티티(B)·타임테이블 레이어(C)·빠른 사례+세션 단일 폼(D) 중 선택. 현장 워크플로우 확인 후 방향 결정.</span></label></li>
+</ul>
+
+<h2>메모</h2>
+<textarea id="memo" placeholder="여기에 메모를 작성하세요. 자동 저장됩니다."></textarea>
+<div class="row">
+  <button onclick="if(confirm('체크 상태 초기화?')){localStorage.removeItem(K_CHECK);location.reload()}">체크 초기화</button>
+  <button onclick="if(confirm('메모 비우기?')){document.getElementById('memo').value='';localStorage.removeItem(K_MEMO)}">메모 비우기</button>
+  <span class="saved" id="saved">저장됨</span>
+</div>
+
+<script>
+const K_CHECK='weelog-next-check';
+const K_MEMO='weelog-next-memo';
+
+const saved=JSON.parse(localStorage.getItem(K_CHECK)||'{}');
+const boxes=document.querySelectorAll('input[type=checkbox]');
+function updateCount(){
+  const done=[...boxes].filter(b=>b.checked).length;
+  document.getElementById('count').textContent=`${done}/${boxes.length}`;
+}
+boxes.forEach(b=>{
+  if(saved[b.id]){b.checked=true;b.closest('li').classList.add('done')}
+  b.addEventListener('change',()=>{
+    saved[b.id]=b.checked;
+    localStorage.setItem(K_CHECK,JSON.stringify(saved));
+    b.closest('li').classList.toggle('done',b.checked);
+    updateCount();
+  });
+});
+updateCount();
+
+const memo=document.getElementById('memo');
+const savedFlag=document.getElementById('saved');
+memo.value=localStorage.getItem(K_MEMO)||'';
+let t;
+memo.addEventListener('input',()=>{
+  clearTimeout(t);
+  t=setTimeout(()=>{
+    localStorage.setItem(K_MEMO,memo.value);
+    savedFlag.classList.add('show');
+    setTimeout(()=>savedFlag.classList.remove('show'),800);
+  },400);
+});
+</script>
+</body>
+</html>

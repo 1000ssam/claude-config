@@ -4,3 +4,23 @@
 # OS
 Thumbs.db
 .DS_Store
+
+# Node 의존성 (notes/ 안 프로젝트들이 끌고 들어옴)
+**/node_modules/
+**/dist/
+**/.next/
+**/.cache/
+
+# 잘못된 중첩 경로 (과거 매핑 버그 흔적)
+notes/notes/
+
+# 시크릿 (sync 매핑상 이미 제외돼 있지만 belt-and-suspenders)
+secrets/
+secrets.bak/
+.credentials.json
+credentials.json
+*.token
+*.key
+*.pem
+.env
+.env.*

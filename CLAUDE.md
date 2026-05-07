@@ -60,6 +60,30 @@
 - 브랜치를 명시하지 않은 일반적인 커밋+푸시 요청은 **test 브랜치**에 먼저 한다. test 브랜치가 없거나 사용 불가능하면 별도 테스트 브랜치를 신설한다.
 - "잘 됐다", "완벽하다" 등의 반응은 main 푸시 지시가 **아니다**.
 
+## 동시 다중 에이전트 작업 (git worktree 필수)
+
+같은 리포에서 **다른 에이전트가 이미 작업 중**임을 인지하면 (사용자 안내, 미커밋 변경사항 발견, reflog에 본인이 만들지 않은 커밋 등), 같은 디렉토리에서 진행하지 않고 **즉시 git worktree로 분리해 작업**한다.
+
+같은 디렉토리·`.git`을 공유한 채 동시 작업하면 두 가지 위험이 발생한다:
+1. **파일 시스템 동시 쓰기 충돌**: 두 프로세스가 같은 파일에 동시에 write → OS 레벨에서 마지막 쓰기가 이김. 한쪽 작업이 통째로 소실되며 git이 개입할 수 없다.
+2. **공유 ref 손상**: 한쪽의 `git checkout` / `branch -D` / `reset` 등이 다른 쪽 HEAD·브랜치까지 흔든다 (브랜치 ref는 `.git`에 저장되므로 공유됨).
+
+worktree는 별도 물리 디렉토리·별도 HEAD를 가지지만 같은 `.git` 객체 저장소를 공유한다 → 동시 쓰기 충돌 원천 차단. 머지 시점의 의미적 충돌은 git이 정상 처리하므로 별개 문제.
+
+명령:
+```bash
+# 격리 작업 시작
+git worktree add /mnt/c/dev/<repo-name>-<task> -b feat/<task-name>
+cd /mnt/c/dev/<repo-name>-<task>
+# 작업, 커밋, 푸시
+# 작업 종료 후 원본 디렉토리에서
+git worktree remove /mnt/c/dev/<repo-name>-<task>
+```
+
+추가 안전 수칙:
+- 본인이 만들지 않은 브랜치·커밋은 함부로 삭제·리셋하지 않는다 (다른 에이전트의 미푸시 작업일 수 있음).
+- worktree는 같은 브랜치를 두 곳에서 체크아웃할 수 없으므로, 원본 디렉토리와 다른 브랜치로 시작한다.
+
 ## 보안
 
 - 매 빌드마다 보안 스킬을 호출하지 **않는다**. 다음 시점에만 호출한다:
@@ -94,6 +118,9 @@
 | 노션 OAuth, Notion OAuth, OAuth 리다이렉트, OAuth state | `~/.claude/knowledge/notion-oauth.md` |
 | iOS 줌, iOS 확대, input 확대, textarea 줌, 모바일 줌 | `~/.claude/knowledge/ios-input-zoom.md` |
 | WSL 바이너리, WSL native module, .node 파일 Windows, better-sqlite3 WSL, 네이티브 모듈 WSL | `~/.claude/knowledge/wsl-native-module.md` |
+| Claude 디자인, 아티팩트 프롬프트, 디자인 시스템 프롬프트, Tweaks 프로토콜, AI 슬롭, starter component, deck_stage | `~/.claude/knowledge/claude-design-system-prompt.md` |
+| 스레드 문투, 스레드 톤, 글 고쳐, 문투에 맞게, 스레드 작성, 스레드 스타일 | `~/.claude/knowledge/threads-writing-style.md` |
+| PowerShell symlink, mklink, 심볼릭 링크 권한, 배치 파일 인코딩, symlink 권한 | `~/.claude/knowledge/powershell-symlink.md` |
 
 - knowledge 파일은 `~/.claude/knowledge/` 디렉토리에 주제별로 관리한다.
 - 새로운 범용 인사이트가 확인되면 해당 디렉토리에 파일을 추가하고 이 테이블을 업데이트한다.
