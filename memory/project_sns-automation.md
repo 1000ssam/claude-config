@@ -4,7 +4,7 @@ description: 스레드→노션AI→캔바 오토필→인스타 자동화 파�
 type: project
 ---
 
-## SNS-automation (C:\dev\SNS-automation)
+## SNS-automation (~/dev/SNS-automation)
 
 스레드 글 수집 → 노션 AI 캐러셀 편집 → 캔바 오토필 → 인스타 게시 자동화
 

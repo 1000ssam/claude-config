@@ -1,0 +1,11 @@
+{
+  "name": "live-tutorial",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "watch": "node render.mjs"
+  },
+  "dependencies": {
+    "marked": "^14.1.3"
+  }
+}

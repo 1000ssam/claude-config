@@ -6,7 +6,8 @@
   },
   "enabledPlugins": {
     "claude-mem@thedotmack": true,
-    "claude-hud@claude-hud": true
+    "claude-hud@claude-hud": true,
+    "lazyweb@lazyweb": true
   },
   "extraKnownMarketplaces": {
     "thedotmack": {
@@ -19,6 +20,12 @@
       "source": {
         "source": "github",
         "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "lazyweb": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/aboul3ata/lazyweb-skill.git"
       }
     }
   },

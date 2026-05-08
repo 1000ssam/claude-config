@@ -14,6 +14,6 @@ Threads 인사이트 수집 스킬 완성 (2026-03-23).
 - API 모듈: `~/.claude/skills/scripts/threads-api.mjs`
 - 수집 스크립트: `~/.claude/skills/scripts/threads-collect.mjs`
 - 스킬: `~/.claude/skills/threads-insights/SKILL.md`
-- 데이터: `C:\dev\threads-data/` (posts/, snapshots/, analysis/)
+- 데이터: `~/dev/threads-data/` (posts/, snapshots/, analysis/)
 - 토큰 만료: 2026-05-22 (60일 주기 갱신 필요)
 - 계정: @iooo_tttt / 팔로워 5,304 / 총 1,294 게시물 (원본 470)

@@ -4,7 +4,7 @@ description: 골든래빗 출판사 노션 책 집필 프로젝트 - Google Docs
 type: project
 ---
 
-## 프로젝트: book-writer (C:\dev\book-writer)
+## 프로젝트: book-writer (~/dev/book-writer)
 
 ### 책 정보
 - 제목(후보): "선생님을 위한 8282 업무자동화 노션" 등
