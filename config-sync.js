@@ -77,11 +77,13 @@ const GREEN = '\x1b[32m';
 const RESET = '\x1b[0m';
 
 function git(cmd, opts = {}) {
-  return execSync(`git ${cmd}`, {
+  const out = execSync(`git ${cmd}`, {
     cwd: REPO_DIR,
     stdio: opts.inherit ? 'inherit' : 'pipe',
     timeout: 30000,
-  }).toString().trim();
+  });
+  // stdio: 'inherit' 인 경우 execSync 는 null 을 반환한다.
+  return out ? out.toString().trim() : '';
 }
 
 function gitSafe(cmd) {
