@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>동아시아사 수행평가 설계 — 백워드 디자인</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; max-width: 1180px; margin: 24px auto; padding: 0 20px; color: #1f2937; line-height: 1.55; background: #fafafa; }
+  h1 { font-size: 22px; border-bottom: 3px solid #111; padding-bottom: 8px; margin-bottom: 24px; }
+  h2 { font-size: 18px; background: #111; color: #fff; padding: 6px 12px; margin-top: 32px; }
+  h3 { font-size: 15px; margin: 14px 0 6px; }
+  .section { background: #fff; padding: 16px 20px; border: 1px solid #e5e7eb; margin-bottom: 16px; }
+  .row { display: grid; grid-template-columns: 100px 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px dashed #e5e7eb; }
+  .row:last-child { border-bottom: none; }
+  .label { font-weight: 700; color: #6366f1; font-size: 13px; }
+  .badge { display: inline-block; background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; margin-left: 6px; }
+  .badge-green { background: #d1fae5; color: #065f46; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .quote { background: #f3f4f6; border-left: 4px solid #6366f1; padding: 10px 14px; margin: 8px 0; font-size: 14px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .option { background: #fff; border: 2px solid #e5e7eb; padding: 14px; border-radius: 6px; }
+  .option.recommend { border-color: #6366f1; background: #f5f3ff; }
+  .option h4 { margin: 0 0 8px; font-size: 14px; }
+  .option .score { font-size: 22px; font-weight: 800; color: #6366f1; margin: 6px 0; }
+  .option ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; }
+  .option .pros { color: #047857; font-size: 12px; margin-top: 8px; }
+  .option .cons { color: #b91c1c; font-size: 12px; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  table th { background: #f3f4f6; padding: 8px; text-align: left; border: 1px solid #d1d5db; }
+  table td { padding: 8px; border: 1px solid #e5e7eb; vertical-align: top; }
+  .small { font-size: 12px; color: #6b7280; }
+  .flow { display: flex; align-items: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+  .step { background: #111; color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 13px; font-weight: 700; }
+  .arrow { color: #6366f1; font-weight: 700; }
+  .checked { color: #047857; }
+  .pending { color: #b91c1c; }
+</style>
+</head>
+<body>
+
+<h1>동아시아사 수행평가 — 백워드 설계 (40점)</h1>
+
+<div class="flow">
+  <span class="step checked">✓ 1. 논술 주제 확정</span>
+  <span class="arrow">→</span>
+  <span class="step" style="background:#6366f1;">2. 독서 기록 양식 선택 (지금 결정)</span>
+  <span class="arrow">→</span>
+  <span class="step" style="background:#9ca3af;">3. 채점 기준 (다음 단계)</span>
+</div>
+
+<h2>📝 논술 (20점) — 확정</h2>
+<div class="section">
+
+<h3>1부 — 본문 분석 <span class="badge">10점</span><span class="badge badge-blue">객관형</span></h3>
+<p>본문에 등장하는 다음 사례 중 <b>2가지를 선택</b>하여, 각 사례가 어떻게 "중화/오랑캐의 경계가 가변적·허구적"임을 보여주는지 본문의 서술을 근거로 설명하시오.</p>
+<div class="row"><span class="label">① 시조 전승</span><span>흉노와 중화의 시조 전승 공유 (《사기》 〈흉노열전〉)</span></div>
+<div class="row"><span class="label">② 화번공주</span><span>관계 역전 — 고조-묵특 vs 원제-호한야</span></div>
+<div class="row"><span class="label">③ 화이론 논쟁</span><span>옹정제 《대의각미록》 vs 증정의 화이론</span></div>
+<div class="row"><span class="label">④ 조선 중화주의</span><span>동이가 중화를 자처하는 자기모순</span></div>
+<div class="row"><span class="label">⑤ 외왕내제</span><span>베트남·고구려·일본의 독자 천하관</span></div>
+
+<h3 style="margin-top:20px;">2부 — 성찰 <span class="badge">10점</span><span class="badge badge-green">주관형</span></h3>
+<p>다음 두 문장을 인용하고, 그 통찰을 자기 사고·태도·경험에 비추어 성찰하시오. <span class="small">(외부 시사·역사 사례 인용 금지)</span></p>
+<div class="quote">
+  ① <b>"오랑캐라 불린 나라들 사이에서도 자기 나라를 우월하게 여기고 다른 나라를 멸시하는 인식이 만연했다는 뜻이기도 합니다."</b>
+</div>
+<div class="quote">
+  ② <b>"'중화'를 중심으로 동아시아 역사를 바라보는 데 익숙한 우리의 시각과, 종족과 민족을 근거로 인간 사회의 우열을 가리는 세상의 논리를 한 번쯤 되돌아보면 어떨까요?"</b>
+</div>
+
+</div>
+
+<h2>📖 독서 (20점) — 양식 선택</h2>
+
+<div class="section">
+
+<h3>역설계 매핑</h3>
+<table>
+  <tr><th style="width:48%;">논술에서 요구되는 것</th><th>→ 독서에서 기록해야 할 것</th></tr>
+  <tr><td>1부: 사례 5개 중 2개 선택 + 본문 근거 + 가변성/허구성 짚기</td><td>5개 사례 <b>모두</b> 정리 (선택지 확보) / 본문 인용 / 균열 지점</td></tr>
+  <tr><td>2부: 앵커 2문장 인용</td><td>두 문장을 책에서 찾아 표시 + 자기 언어 풀이</td></tr>
+  <tr><td>2부: 자기 사고·경험으로 성찰</td><td>읽는 중 떠오른 자기 경험 자유 메모</td></tr>
+</table>
+
+<h3>독서 기록 양식 (3가지 안)</h3>
+
+<div class="three-col">
+
+  <div class="option">
+    <h4>안 1. 사례 정리 강화</h4>
+    <div class="score">A14 + B4 + C2</div>
+    <ul>
+      <li><b>A. 사례 정리표</b> 14점<br><span class="small">5개 사례 × 2.8점</span></li>
+      <li><b>B. 앵커 문장 메모</b> 4점</li>
+      <li><b>C. 성찰 메모</b> 2점<br><span class="small">최소 2개</span></li>
+    </ul>
+    <p class="pros">↑ 1부 대비 충실, 독해력 변별</p>
+    <p class="cons">↓ 2부 성찰 준비 약함</p>
+  </div>
+
+  <div class="option recommend">
+    <h4>안 2. 균형 (추천)</h4>
+    <div class="score">A12 + B4 + C4</div>
+    <ul>
+      <li><b>A. 사례 정리표</b> 12점<br><span class="small">5개 사례 × 2.4점</span></li>
+      <li><b>B. 앵커 문장 메모</b> 4점</li>
+      <li><b>C. 성찰 메모</b> 4점<br><span class="small">최소 3개</span></li>
+    </ul>
+    <p class="pros">↑ 1부·2부 균형, 채점 명료</p>
+    <p class="cons">↓ 평이</p>
+  </div>
+
+  <div class="option">
+    <h4>안 3. 성찰 강화</h4>
+    <div class="score">A10 + B4 + C6</div>
+    <ul>
+      <li><b>A. 사례 정리표</b> 10점<br><span class="small">5개 사례 × 2점</span></li>
+      <li><b>B. 앵커 문장 메모</b> 4점</li>
+      <li><b>C. 성찰 메모</b> 6점<br><span class="small">최소 4개 + 깊이</span></li>
+    </ul>
+    <p class="pros">↑ 2부 준비 탄탄, 사고 깊이</p>
+    <p class="cons">↓ 성찰 채점 편차 위험</p>
+  </div>
+
+</div>
+
+<h3 style="margin-top:20px;">각 항목 세부 설계 (모든 안 공통)</h3>
+
+<table>
+<tr><th style="width:80px;">항목</th><th>내용</th><th>학생 작성 분량</th></tr>
+<tr>
+  <td><b>A.</b> 사례 정리표</td>
+  <td>5개 사례 각각 다음 3칸 채우기:<br>
+    ① <b>언제·누가·무엇</b> (사실 1~2줄)<br>
+    ② <b>본문 인용</b> (사례를 보여주는 핵심 문장 1~2개 직접 옮김)<br>
+    ③ <b>균열 지점</b> ('중화/오랑캐 경계가 어떻게 흔들리는지' 한 줄)
+  </td>
+  <td>5개 사례 × 3칸</td>
+</tr>
+<tr>
+  <td><b>B.</b> 앵커 문장 메모</td>
+  <td>두 앵커 문장(2부 ①②)을 책에서 찾아 <b>그대로 옮겨 적기</b> + 각 문장의 핵심 통찰을 <b>자기 언어로 1~2줄</b></td>
+  <td>2문장 × (인용+풀이)</td>
+</tr>
+<tr>
+  <td><b>C.</b> 성찰 메모</td>
+  <td>본문 읽으며 떠오른 <b>자신의 경험·생각·태도</b> 자유 형식 기록.<br>형식: "p.OOO를 읽다가 → 떠오른 생각/경험"</td>
+  <td>안마다 최소 항목수 다름</td>
+</tr>
+</table>
+
+</div>
+
+<h2 style="background:#9ca3af;">⚙️ 다음 단계 — 채점 기준 (TBD)</h2>
+<div class="section small">
+독서 양식 확정 후 진행 예정:<br>
+• 1부 채점 루브릭 (사례 선택의 적절성 / 본문 근거 정확성 / 가변성 짚기의 명료성)<br>
+• 2부 채점 루브릭 (앵커 인용 정확성 / 성찰의 구체성 / 본문과의 연결성)<br>
+• 독서 채점 루브릭 (각 항목 만점 기준 / 부분 점수 / 미작성 처리)
+</div>
+
+</body>
+</html>
