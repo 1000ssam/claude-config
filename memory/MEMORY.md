@@ -69,6 +69,7 @@
 - [feedback_textbook-headings-verbatim.md](feedback_textbook-headings-verbatim.md) — 학습지는 교과서 헤딩·소절명 그대로. 부제 추가·위계 평탄화·이모지 번호 임의 부착 금지
 - [feedback_seo-blog-human-led.md](feedback_seo-blog-human-led.md) — SEO 블로그는 메타·구조까지만 AI 도출, 본문은 사용자가 직접 작성. seo-blog-writer 스킬 톤 수정 금지
 - [feedback_no-fabrication.md](feedback_no-fabrication.md) — **🚨 최상위**: 출처에 없는 기능·시나리오·플랜 제약·후킹 카피·부정 단정 절대 발명 금지. 의심되면 삭제
+- [feedback_analysis-stay-descriptive.md](feedback_analysis-stay-descriptive.md) — 전략·분석은 서술에서 멈춤. 비판적인 척·예리한 척, 냉소적 표현(위장막·인질 등) 금지
 
 ## 핸드오프 출력 규칙
 - [feedback_handoff-path-output.md](feedback_handoff-path-output.md) — HANDOFF 파일 작성/갱신 후 절대 경로를 응답 마지막에 단독 노출 (다음 세션 복사용)
@@ -142,6 +143,9 @@
 
 ## zoom-meeting 스킬
 - [feedback_zoom-defaults.md](feedback_zoom-defaults.md) — 줌 회의 기본값: 대기실 OFF, 입장음소거 ON, 호스트없이입장 ON, PMI 사용, 비번 1000
+
+## 인창고 2026 정보보호 감사
+- [project_inchang-2026-roster.md](project_inchang-2026-roster.md) — 2026학년도 재직자 85명 단일 명단 (정보보호 감사·개인정보취급자 서약서 대상 판정용). 문서: /mnt/c/dev/inchang-security-audit-2026/2026_재직자_명단.md
 
 ## notion-flow 후속과제
 

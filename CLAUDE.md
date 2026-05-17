@@ -32,6 +32,24 @@
 - **타임라인/규모 가정 금지**: 사용자의 우선순위를 임의로 가정하지 않는다.
 - 모든 이슈/추천에 대해 **구체적 트레이드오프를 설명**하고, **의견이 있는 추천**을 하되, 방향을 가정하기 전에 **사용자 입력을 구한다**.
 
+## 작업 방식 사전 제안 원칙
+
+작업 진행 중 다음 조건에 해당하면, **현재 방식대로 진행하지 말고 먼저 제안**한다:
+
+1. **토큰 소모를 크게 줄일 수 있는 대안**이 있는 경우
+   - 예: 긴 파일을 LLM에 통째로 읽히는 대신, 결정론적 치환 스크립트로 1차 처리 후 LLM은 잔여분만 처리
+   - 예: 반복 호출이 예상되면 프롬프트 캐싱·배치 API 사용
+
+2. **컨텍스트 오염/lost-in-the-middle 위험**이 있는 경우
+   - 예: 25K 토큰 이상의 단일 파일 전체 처리
+   - 예: 동일 작업이 같은 파일에 반복 적용되어 컨텍스트가 비대해질 때
+   - 대안: 청크 분할 + 메타 컨텍스트를 시스템 프롬프트로 분리
+
+3. **결정론적으로 처리 가능한데 LLM에 맡기고 있는** 경우
+   - 예: 단순 치환·정규식·파일 조작을 Edit 반복 호출로 처리
+
+제안 형식: "현재 방식의 트레이드오프 + 대안 + 대안의 트레이드오프"를 1~3문장으로 제시하고, 사용자 입력 대기. 사용자가 명시적으로 "그냥 진행해"라고 한 경우엔 제안 생략.
+
 ## 스킬 호출 규칙
 
 - 사용자가 스킬 트리거 키워드를 사용하면 **반드시 Skill 도구로 해당 스킬을 먼저 호출**한 뒤 작업을 수행한다. (개별 키워드는 각 스킬의 프론트매터 description 참조)
@@ -121,6 +139,8 @@ git worktree remove /mnt/c/dev/<repo-name>-<task>
 | Claude 디자인, 아티팩트 프롬프트, 디자인 시스템 프롬프트, Tweaks 프로토콜, AI 슬롭, starter component, deck_stage | `~/.claude/knowledge/claude-design-system-prompt.md` |
 | 스레드 문투, 스레드 톤, 글 고쳐, 문투에 맞게, 스레드 작성, 스레드 스타일 | `~/.claude/knowledge/threads-writing-style.md` |
 | PowerShell symlink, mklink, 심볼릭 링크 권한, 배치 파일 인코딩, symlink 권한 | `~/.claude/knowledge/powershell-symlink.md` |
+| Vercel env add preview, git_branch_required, vercel CLI 50, preview 환경변수 등록 | `~/.claude/knowledge/vercel-cli-preview-env.md` |
+| 노션 archived, archived should be not present, in_trash, 페이지 삭제, 노션 휴지통, 페이지 복원 | `~/.claude/knowledge/notion-api-archived-to-in-trash.md` |
 
 - knowledge 파일은 `~/.claude/knowledge/` 디렉토리에 주제별로 관리한다.
 - 새로운 범용 인사이트가 확인되면 해당 디렉토리에 파일을 추가하고 이 테이블을 업데이트한다.

@@ -37,6 +37,8 @@
     ]
   },
   "effortLevel": "high",
+  "theme": "light",
+  "agentPushNotifEnabled": true,
   "hooks": {
     "SessionStart": [
       {
