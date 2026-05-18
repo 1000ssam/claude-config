@@ -1,6 +1,6 @@
 ---
 name: 핸드오프 파일 작성 후 절대 경로 출력 필수
-description: HANDOFF*.md 등 인계 문서 작성·갱신 시 파일 절대 경로를 응답에 명확히 노출해 사용자가 다음 세션에서 즉시 복사·읽기 가능하게 함
+description: HANDOFF*.md 등 인계 문서 작성·갱신 시 파일 절대 경로를 응답에 명확히 노출해 사용자가 다음 세션에서 즉시 복사·읽기 가능하게 함. 또한 작성 직후 project-autopush로 변경분을 푸시
 type: feedback
 originSessionId: ad543f70-e88e-4185-9d4e-d3de1ef3ec62
 ---
@@ -19,3 +19,8 @@ originSessionId: ad543f70-e88e-4185-9d4e-d3de1ef3ec62
 - 여러 핸드오프 같이 쓰면 모두 나열
 - 코드 블록(\``로 감싸기) 으로 감싸면 클릭 한 번에 복사하기 쉬움
 - 응답이 길어도 핸드오프 경로는 마지막 단락에 별도 노출 (요약·다른 안내와 섞지 말 것)
+
+**핸드오프 직후 푸시 (2026-05-18 추가):**
+- 핸드오프 문서를 작성·갱신한 직후 `node ~/.claude/hooks/project-autopush.mjs` 를 실행해 변경된 프로젝트 리포를 커밋·푸시한다. 핸드오프 시점 = 작업 인계·중단 시점이므로 동기화 타이밍으로 맞다.
+- 핸드오프가 `/mnt/c/dev/notes/` 안에 있으면 그건 project-autopush 대상(개별 git 리포)이 아니라 config-repo 동기화 대상이므로, `/sync-push` 도 함께 안내한다.
+- 관련: [[feedback_git-init-on-new-work]]

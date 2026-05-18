@@ -80,6 +80,7 @@
 
 ## 2대 PC 동기화
 - [project_config-sync.md](project_config-sync.md) — config-repo(Git) 자동 동기화, SessionStart→pull / PreCompact→push
+- [feedback_git-init-on-new-work.md](feedback_git-init-on-new-work.md) — 새 작업 암시 시 /mnt/c/dev/ 폴더 + git init + 비공개 리모트 먼저 제안 (project-autopush 대상화)
 
 ## 개발 사전 체크
 - [feedback_check-platform-compat.md](feedback_check-platform-compat.md) — CLI/패키지 플랫폼 호환성 반드시 사전 확인 (win32 환경)
