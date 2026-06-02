@@ -1,5 +1,14 @@
 # Memory
 
+## ppt-deck 스킬 (PPT 자동 생성)
+- [project_ppt-deck-skill.md](project_ppt-deck-skill.md) — jay.pm.ai 가이드 하네스 구현. 카탈로그(46 variant)+5팔레트 토큰→python-pptx 빌드. `build-template.py --palette N --spec`. QA는 Windows PowerPoint 렌더. 36 variant 검증완료
+- [project_ppt-lab-skill.md](project_ppt-lab-skill.md) — 연습용 제로베이스 샌드박스(별도 git repo, ppt-deck와 격리). PPTX 측정기(extract-pptx.py)+카탈로그 자동생성(render-catalog.py)으로 내 변종 흡수 학습
+
+## running-challenge-3 프로젝트
+- [project_running-challenge-cron-toggle.md](project_running-challenge-cron-toggle.md) — 일일 SMS 크론 on/off는 노션 '챌린지 정보' 페이지 '발송 상태'(진행/중단)로 제어. 다음 기수엔 '진행'으로
+- [project_running-challenge-public-demo.md](project_running-challenge-public-demo.md) — 챌린저 공유용 공개 데모 리포(1000ssam/notiontalk-running-challenge-demo). 비공개 원본과 혼동 금지
+- [project_running-challenge-webhook-automation.md](project_running-challenge-webhook-automation.md) — 인증했는데 SMS 미발송 진단: 발송내역 0건=웹훅 미발화(노션 자동화). 멱등 수동 호출로 복구+검증. 기수 초기 일시 미발화 주의
+
 ## 협업 모드
 - [feedback_proactive-feature-proposal.md](feedback_proactive-feature-proposal.md) — 사용자가 모를 만한 클로드코드 기능을 빌드 흐름 중 능동 제안. 교재 만들 때 특히.
 
@@ -16,9 +25,14 @@
 - [feedback_always-give-preview-url.md](feedback_always-give-preview-url.md) — feat 브랜치 푸시 후 보고 시 preview URL 항상 자동 안내
 - [reference_vercel-cli-rest-api.md](reference_vercel-cli-rest-api.md) — CLI 한계 작업(도메인 redirect, deploy hook 삭제 등)은 OAuth 토큰으로 REST API 직접 호출
 
+## gws (Google Workspace CLI)
+- [reference_gws-account-actual.md](reference_gws-account-actual.md) — gws는 env var 무관하게 slowly008@gmail.com으로만 인증됨. 파일 생성 위치 보고 전 `about get`으로 실제 주체 확인 필수
+
 ## bullet.so (notiontalk.com 호스팅)
 - [reference_bullet-so-redirects.md](reference_bullet-so-redirects.md) — 리다이렉트 와일드카드 문법: `From: /old/*` → `To: /new/:splat` (Netlify 스타일 splat)
 - [project_notiontalk-architecture.md](project_notiontalk-architecture.md) — Vercel 랜딩 + bullet `/contents` 서브디렉토리 reverse proxy 구조. 신규 bullet 페이지 추가 시 next.config.ts redirect 갱신 필요
+- [project_notiontalk-nav-config.md](project_notiontalk-nav-config.md) — 네비 메뉴 단일출처 패키지(@notiontalk/nav-config, 공개 repo). 랜딩+뉴스레터 공유. 메뉴 변경=index.js 수정→두 앱 npm update+재배포→bullet 수동. 공개 상시 유지 필수
+- [project_notion-action-relay.md](project_notion-action-relay.md) — 🚀 **시크릿 기반 자동화 액션 통합 파이프라인**(GitHub Actions, repo `1000ssam/notion-action-relay`). 새 자동화/시크릿 작업·노션 버튼 트리거·bullet 배포 요청 시 **먼저 이 repo부터 참조**. 완전가동(노션→Vercel→Actions 검증완료). 새 액션 추가 = `actions/<name>.py` + Secrets + 워크플로 env 한 줄
 
 ## 스킬 경로
 - 스킬 디렉토리: `~/.claude/skills\` (Claude가 인식하는 경로 + git 리포)
@@ -53,20 +67,28 @@
 
 ## exam-analyzer 스킬 개선 사항
 - [feedback_exam-analyzer-keyword-bug.md](feedback_exam-analyzer-keyword-bug.md) — 오답 선지 키워드로 인한 false positive 문제. 발문+제시문에서만 키워드 추출, 정답지 사전 매핑 필요
+- [feedback_worksheet-include-integrated-exams.md](feedback_worksheet-include-integrated-exams.md) — 시기통합·단원통합 문항도 해당 차시로 풀 수 있으면 포함. 선지/보기까지 스캔 (false positive와 구분)
 
 ## 바이브 코딩 학습 기록
-- [feedback_vibe-learning-log.md](feedback_vibe-learning-log.md) — 기술 용어 질문 시 ~/workspace/notes\vibe-coding-learning.md에 추가
+- [feedback_vibe-learning-log.md](feedback_vibe-learning-log.md) — 기술 용어 질문 시 /mnt/c/dev/notes/vibe-coding-learning.md에 추가
 
 ## UI 모킹 원칙
 - [feedback_no-emoji-in-ui.md](feedback_no-emoji-in-ui.md) — 프리뷰/모킹에서도 이모지 아이콘 사용 금지, SVG만 사용
 
 ## 진단·검증 원칙
+- [feedback_user-facing-availability-robust-fix.md](feedback_user-facing-availability-robust-fix.md) — 유저 대면 가용성 문제는 "캐시 지워라" 류 로컬 워크어라운드 금지. 근본·견고한 수정(커스텀 도메인 등) 우선
 - [feedback_websearch-us-only.md](feedback_websearch-us-only.md) — WebSearch는 미국 Google. 한국 SERP 결론을 단독으로 내리지 말 것
 - [feedback_verify-before-asserting.md](feedback_verify-before-asserting.md) — grep/regex "없음" 단정 전 nested·multiline 케이스 재검증
+- [feedback_measure-layout-before-changing.md](feedback_measure-layout-before-changing.md) — UI 정렬 어긋남은 동일조건 픽셀 실측으로 원인 격리 후 수정. 감·코드구조 추측·핸드오프 맹신 금지
+- [feedback_korean-linebreak-visual-qa.md](feedback_korean-linebreak-visual-qa.md) — 한글 헤드라인 줄바꿈은 실제 표시 폭(복수)에서 직접 검수 + word-break:keep-all 기본. 단일폭·썸네일 검수 금지
+
+## 원고 검토 메모
+- [feedback_review-memo-tone-terse.md](feedback_review-memo-tone-terse.md) — 검토 메모는 아주 짧게+소프트 플래그('확인 필요'). 단정·명령형·강한 평가어 금지
 
 ## 카피 수정 원칙
 - [feedback_dont-overtrim-copy.md](feedback_dont-overtrim-copy.md) — 카피 수정 시 사용자가 지목한 부분만 손댐. 주변 문장 임의 압축/재작성 금지
 - [feedback_textbook-headings-verbatim.md](feedback_textbook-headings-verbatim.md) — 학습지는 교과서 헤딩·소절명 그대로. 부제 추가·위계 평탄화·이모지 번호 임의 부착 금지
+- [feedback_worksheet-gaesik-myeongsahyeong.md](feedback_worksheet-gaesik-myeongsahyeong.md) — 워크시트 본문은 개조식+명사형 어미(서술형 문장 금지). 스킬 실행 전 기존 산출물 형식 먼저 확인
 - [feedback_seo-blog-human-led.md](feedback_seo-blog-human-led.md) — SEO 블로그는 메타·구조까지만 AI 도출, 본문은 사용자가 직접 작성. seo-blog-writer 스킬 톤 수정 금지
 - [feedback_no-fabrication.md](feedback_no-fabrication.md) — **🚨 최상위**: 출처에 없는 기능·시나리오·플랜 제약·후킹 카피·부정 단정 절대 발명 금지. 의심되면 삭제
 - [feedback_analysis-stay-descriptive.md](feedback_analysis-stay-descriptive.md) — 전략·분석은 서술에서 멈춤. 비판적인 척·예리한 척, 냉소적 표현(위장막·인질 등) 금지
@@ -85,6 +107,12 @@
 ## 개발 사전 체크
 - [feedback_check-platform-compat.md](feedback_check-platform-compat.md) — CLI/패키지 플랫폼 호환성 반드시 사전 확인 (win32 환경)
 
+## 메일리 콘텐츠 이관
+- [project_maily-content-import.md](project_maily-content-import.md) — 메일리 발행글→노션 임포터(/mnt/c/dev/maily-import). 메일리 콘텐츠API無·서버렌더 스크래핑. 공개분=쿠키無, 유료/미발행=_letter_box_session 쿠키. @notionhq/client v2.2.15 고정 필수
+
+## 뉴스레터 홈 카드
+- [project_newsletter-home-card.md](project_newsletter-home-card.md) — 홈 레터 카드 구조(cover썸네일/부제목/에디터 Written by). 줄수예약으로 카드높이 고정→썸네일 동일크기. 웰컴레터 최하단. 2026-06-01 main 배포
+
 ## API 문제 해결 원칙
 - [feedback_no-api-downgrade.md](feedback_no-api-downgrade.md) — 레거시 API 다운그레이드 금지, 현재 버전에서 근본 원인 해결
 - [feedback_use-context7-for-api.md](feedback_use-context7-for-api.md) — API 탐색 시 context7 MCP 필수 사용
@@ -93,15 +121,20 @@
 ## notion-to-docs 프로젝트
 - [project_notion-to-docs.md](project_notion-to-docs.md) — Notion→Google Docs 변환기, 스킬 등록됨
 - [project_notion-to-docs-deploy.md](project_notion-to-docs-deploy.md) — 배포 계획: 공유 스킬(우선) + 크롬 익스텐션(후순위)
+- [project_notion-to-docs-comments.md](project_notion-to-docs-comments.md) — discussion-urls span 버그 수정✅. 댓글 이관은 보류(Drive anchor 미동작). 향후 댓글 붙은 Docs 역분석 과제
 
 ## 노션 작업 원칙
 - [feedback_notion-pilot-always.md](feedback_notion-pilot-always.md) — 노션 아키텍처 설계 단계에서도 반드시 notion-pilot 스킬 참조
+- [reference_notion-formula-api-relation.md](reference_notion-formula-api-relation.md) — API 생성 relation은 수식 map/join 순회 불가 → rollup(show_original)으로 대체. eastasia-worksheet 폼 DB STEP4 함정
 
 ## 클립보드 이미지
 - [feedback_clipboard-shortcut.md](feedback_clipboard-shortcut.md) — "클립보드" 말하면 즉시 PowerShell 이미지 저장+읽기
 
 ## notion-print 프로젝트
 - [project_notion-print.md](project_notion-print.md) — 노션 A4 인쇄 미리보기 웹앱, MVP 완성, 텍스트 리플로우 분할이 핵심 후속과제
+
+## MWN 블로그 시리즈
+- [project_mwn-blog-series.md](project_mwn-blog-series.md) — notiontalk 'Make with Notion 2026' 9편 시리즈 초안 완성·미발행. git 리포: /mnt/c/dev/mwn-blog-series/
 
 ## 프롬프트 모음
 - [reference_notion-to-app-prompts.md](reference_notion-to-app-prompts.md) — 노션 AI(PRD) + 클로드 코드(기술 설계) 2단계 프롬프트 → `~/workspace/notes/notion-to-app-prompts.md`
@@ -112,14 +145,26 @@
 ## 경로 자동 탐색
 - [feedback_auto-find-path.md](feedback_auto-find-path.md) — 경로 없으면 유사 이름 자동 탐색, 되묻지 말 것
 
+## 자율 실행 모드
+- [feedback_goal-mode-no-trivial-questions.md](feedback_goal-mode-no-trivial-questions.md) — /goal 자율 실행 중 사소한 선택은 묻지 말고 합리적 기본값으로 진행
+
 ## 자체 뉴스레터 서비스
-- [project_newsletter-self-host.md](project_newsletter-self-host.md) — Maily 대체, AWS SES + Notion DB 구축 예정 (AWS 계정 미생성)
+- [project_newsletter-self-host.md](project_newsletter-self-host.md) — Maily 대체, AWS SES+Notion+Vercel. 라이브·Turnstile·SES프로덕션승인✅. 웹UX/캐싱/단계발송·레이트제한 전부 main 머지·배포(2026-05-28). 🚩다음=발송도메인 apex→서브도메인(news.notiontalk.com) 전환(별도SES ID검증 필요, Gabia 2-dot은 Route53 위임). 가이드=notes/newsletter-subdomain-migration-2026-05-28.md
+- [project_newsletter-editor-db.md](project_newsletter-editor-db.md) — 레터 에디터(아바타+이름)·발송일 메타. 단계적 마스터 에디터 DB(bullet 3정본 통합은 후속). 코드 main 배포✅, 노션 공유+relation 셋업 대기
+- [project_newsletter-marketing-consent.md](project_newsletter-marketing-consent.md) — 구독 폼 필수 마케팅 동의 + 개인정보처리방침(/privacy) main 배포✅. 🚩첫 광고성 발송 전 제목"(광고)"+전송자정보 표기 과제 남음
+
+## 뉴스레터 구독자 지표
+- [project_newsletter-subscriber-metrics.md](project_newsletter-subscriber-metrics.md) — 메일리식 구독자별 롤업→노션 구독자 DB. 레터 동기화 워크플로에 통합(한 버튼/크론으로 둘 다). 실발송 이력無→backfill 불필요. 2026-06-01 배포
 
 ## ai-club 프로젝트
 - [project_ai-club.md](project_ai-club.md) — 고1 AI 동아리 웹페이지 + Notion 제출 시스템. 2회차까지 완료. Vercel env add 개행문자 버그 주의.
 
 ## wee-log 프로젝트
 - [project_wee-log.md](project_wee-log.md) — 인수인계 시 필수 체크리스트 (API 키 처리 등)
+- [feedback_diarization-no-manual-toggle.md](feedback_diarization-no-manual-toggle.md) — STT 화자 분리 '사용자가 화자마다 버튼 누르는' UX 절대 제안 금지. 자동 솔루션 우선, 안 되면 "안 된다"고 답함
+
+## wee-log-migration 프로젝트 (v2→v3 노션 마이그레이션 웹앱, ≠ wee-log STT앱)
+- [project_wee-log-migration.md](project_wee-log-migration.md) — 🚨 v2 절대보존 하드룰 + 본문 마크다운 이관(2026-03-11 retrieveMarkdown/updateMarkdown) + 이미지 A안(콜아웃 안내)
 
 ## 테스트 원칙
 - [feedback_never-overwrite-existing-data.md](feedback_never-overwrite-existing-data.md) — 테스트 시 기존 데이터 페이지에 절대 덮어쓰지 말 것. 신규 생성으로만 테스트

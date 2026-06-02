@@ -1,0 +1,23 @@
+{
+  "_comment": "스크립트가 적재할 대상 Notion DB(YouTube 요약)의 스키마. scrape.mjs는 아래 property 이름에 그대로 의존함. 사용자가 다른 DB를 쓰려면 동일한 property 이름으로 맞추거나 scrape.mjs를 수정해야 함.",
+  "title": "YouTube 요약",
+  "icon": "🎬",
+  "required_properties": {
+    "제목": "title (영상 제목 — upsert 매칭 키)",
+    "영상ID": "rich_text (YouTube 11자리 ID)",
+    "채널": "select (채널명)",
+    "URL": "url (영상 링크)",
+    "게시일": "date (게시일)",
+    "by AI": "checkbox (AI 생성 표식)"
+  },
+  "optional_properties": {
+    "조회수": "number",
+    "좋아요": "number",
+    "요약": "rich_text",
+    "태그": "multi_select"
+  },
+  "cover": {
+    "type": "external",
+    "url_template": "https://img.youtube.com/vi/{VIDEO_ID}/maxresdefault.jpg"
+  }
+}

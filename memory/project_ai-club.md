@@ -1,17 +1,23 @@
 ---
-name: ai-club 프로젝트
-description: 고1 AI 동아리 연간 운영 — 회차별 웹페이지 + Notion DB 제출 시스템
-type: project
+name: ai-club
+description: "고1 AI 동아리 '휴먼링크' 연간 운영 — 회차별 웹페이지 + Notion DB 제출 시스템"
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 71523a8d-61d1-4154-89ee-b2d282bf78fb
 ---
 
-# AI 동아리 프로젝트
+# AI 동아리 프로젝트 (휴먼링크)
 
 ## 기본 정보
+- **동아리명**: 휴먼링크 (사용자가 "휴먼링크 동아리"로 부르는 그 동아리 = 이 리포)
 - **경로**: `/mnt/c/dev/ai-club`
 - **리포**: https://github.com/1000ssam/ai-club (private)
 - **배포**: https://ai-club-eight.vercel.app/
 - **대상**: 고1, 6명, 코딩/AI 선행지식 없음, 유료 구독 없음
 - **도구**: 무료 도구만 — 전반부 Gemini 웹, 후반부 AI Studio
+
+> 참고: 동명의 `1000ssam/humanlink`, `1000ssam/humanlinkannualreport` GitHub 리포는 이 프로젝트와 무관 (2025년 말 업데이트, 자료 생성 활동 없음)
 
 ## 회차별 현황
 | 회차 | 날짜 | 주제 | URL | 상태 |

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUBJECT ASSESSMENT // EYES ONLY</title>
+<style>
+  :root{
+    --paper:#e8e4d8; --ink:#1a1a17; --red:#8b1a1a; --redink:#7a1313;
+    --stamp:#9a2828; --muted:#5a564c; --line:#bdb6a3; --hi:#c9a227;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:#3a3833;
+    font-family:"Courier New",ui-monospace,Menlo,monospace;
+    color:var(--ink); line-height:1.6; padding:40px 16px;
+  }
+  .doc{
+    max-width:860px; margin:0 auto; background:var(--paper);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(0,0,0,.025) 0, transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(0,0,0,.03) 0, transparent 55%);
+    padding:54px 56px 70px; position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    border:1px solid #00000022;
+  }
+  .doc::before{
+    content:""; position:absolute; inset:0;
+    background:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(0,0,0,.012) 28px);
+    pointer-events:none;
+  }
+  .topbar{display:flex; justify-content:space-between; font-size:11px; letter-spacing:2px; color:var(--muted); border-bottom:2px solid var(--ink); padding-bottom:8px;}
+  .class{
+    text-align:center; color:var(--red); font-weight:bold; letter-spacing:6px;
+    font-size:15px; margin:18px 0 6px; border-top:3px double var(--red);
+    border-bottom:3px double var(--red); padding:7px 0;
+  }
+  h1{font-size:22px; letter-spacing:3px; margin:26px 0 2px;}
+  .sub{font-size:12px; color:var(--muted); letter-spacing:1px; margin-bottom:24px;}
+  .stamp{
+    position:absolute; top:120px; right:40px; transform:rotate(-14deg);
+    border:4px solid var(--stamp); color:var(--stamp); font-weight:bold;
+    padding:6px 16px; font-size:26px; letter-spacing:4px; opacity:.82;
+    border-radius:6px; text-transform:uppercase;
+  }
+  .meta{display:grid; grid-template-columns:1fr 1fr; gap:4px 28px; font-size:12.5px; border:1px solid var(--line); padding:16px 20px; background:#00000008; margin-bottom:6px;}
+  .meta b{color:var(--redink); letter-spacing:1px;}
+  h2{
+    font-size:14px; letter-spacing:3px; margin:38px 0 12px; color:var(--ink);
+    border-bottom:1px solid var(--ink); padding-bottom:5px;
+  }
+  h2 .n{color:var(--red); margin-right:8px;}
+  p{font-size:13.5px; margin:0 0 12px;}
+  .lead{font-size:13.5px; background:#00000007; border-left:3px solid var(--red); padding:12px 16px; margin-bottom:8px;}
+  .finding{margin:0 0 18px;}
+  .finding .h{font-weight:bold; color:var(--redink); font-size:13.5px; letter-spacing:.5px;}
+  .ev{font-size:11.5px; color:var(--muted); border-top:1px dotted var(--line); margin-top:6px; padding-top:5px;}
+  .ev b{color:var(--ink);}
+  .redact{background:var(--ink); color:var(--ink); user-select:none; padding:0 3px; border-radius:1px;}
+  ul{margin:6px 0 14px; padding-left:20px;} li{font-size:13px; margin-bottom:7px;}
+  .threat{border:2px solid var(--red); padding:18px 22px; margin-top:14px; background:#8b1a1a0d;}
+  .threat .lbl{color:var(--red); font-weight:bold; letter-spacing:3px; font-size:12px;}
+  .threat .big{font-size:16px; font-weight:bold; margin:8px 0; color:var(--redink);}
+  .grade{display:inline-block; border:2px solid var(--ink); padding:1px 9px; font-weight:bold; letter-spacing:1px; font-size:12px;}
+  .foot{margin-top:40px; border-top:2px solid var(--ink); padding-top:10px; font-size:10.5px; color:var(--muted); letter-spacing:1px; display:flex; justify-content:space-between;}
+  .scale{font-size:11px; color:var(--muted); margin-top:4px;}
+  .bar{height:7px; background:#00000015; border:1px solid var(--line); margin:3px 0 12px; position:relative;}
+  .bar span{position:absolute; left:0; top:0; bottom:0; background:var(--red); opacity:.7;}
+  .twocol{display:grid; grid-template-columns:1fr 1fr; gap:0 30px;}
+  code{background:#00000010; border:1px solid var(--line); padding:0 4px; font-size:11.5px; color:var(--redink);}
+  @media(max-width:680px){.doc{padding:32px 22px}.meta,.twocol{grid-template-columns:1fr}.stamp{font-size:18px; top:90px; right:18px}}
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="topbar"><span>CENTRAL ANALYSIS DIVISION</span><span>FILE NO. 1000-KR-7553</span></div>
+  <div class="class">// CLASSIFIED · NOFORN · EYES ONLY //</div>
+
+  <div class="stamp">SUBJECT</div>
+
+  <h1>대상 행동 평가 보고서</h1>
+  <div class="sub">PSYCHOLOGICAL &amp; BEHAVIORAL PROFILE — 협조 출처(self) 기반 / 윤색 없음</div>
+
+  <div class="meta">
+    <div><b>코드네임</b> · "1000쌤" / 김용천</div>
+    <div><b>직군</b> · 현직 교사 + 자가구축 자동화 운영자</div>
+    <div><b>활동시간대</b> · 야간 집중 (23:00~)</div>
+    <div><b>위협등급</b> · <span class="grade">자기소진(SELF) 高</span></div>
+    <div><b>관찰 표본</b> · 60+ 메모리, 30+ 동시 프로젝트</div>
+    <div><b>신뢰도</b> · HIGH (행동 로그 일치)</div>
+  </div>
+
+  <p class="lead">대상은 교사이면서 동시에 자기 업무를 통째로 자동화·문서화하는 1인 시스템을 운영 중. 자료는 풍부하고 자기문서화 수준은 전문 정보기관급. 다만 그 철저함 자체가 동시에 가장 큰 취약점이다. 아래는 본인이 인지하지 못하거나, 인지하고도 통제 못 하는 패턴 위주로 기술한다.</p>
+
+  <h2><span class="n">01</span>핵심 성격 구조</h2>
+  <div class="finding">
+    <div class="h">A. 통제형 완벽주의 — "AI를 못 믿어서 규칙으로 가둔다"</div>
+    <p>대상의 메모리 절반 이상이 "하지 마라" 규칙이다. 날조 금지, 카피 과편집 금지, 단정 전 재검증, 다운그레이드 금지, 브랜치 무단 머지 금지. 이건 협업 가이드가 아니라 <b>불신의 화석</b>이다. 과거에 도구(혹은 사람)에게 데인 경험이 누적돼, 매번 새 가드레일을 세우는 방식으로 안전감을 확보한다.</p>
+    <div class="ev"><b>증거:</b> feedback_no-fabrication("🚨 최상위"), verify-before-asserting, dont-overtrim-copy, branch-policy-strict, no-api-downgrade — 전부 "통제 실패에 대한 사후 봉합".</div>
+  </div>
+  <div class="finding">
+    <div class="h">B. 메타작업 중독 — 일보다 "일을 시키는 시스템"을 더 즐긴다</div>
+    <p>스킬, 지식 라우터, 메모리 인덱스, 토큰 킬러(RTK), 동기화 리포, 핸드오프 규칙… 대상은 작업을 하기 전에 <b>작업을 관리하는 인프라</b>를 먼저 짓는다. 효율적으로 보이지만, 상당 부분은 "진짜 어려운 결정을 미루는 고급 회피"다. 시스템 정비는 끝이 없고, 그동안 본 작업은 'MVP 완성' 상태로 동결된다.</p>
+    <div class="ev"><b>증거:</b> CLAUDE.md에만 워크플로 규칙 20+개. 다수 프로젝트가 "MVP 완성 / 핵심 후속과제 남음"에서 정지.</div>
+  </div>
+
+  <h2><span class="n">02</span>숨은 패턴 &amp; 강박</h2>
+  <div class="twocol">
+    <div>
+      <div class="finding"><div class="h">▸ 프로젝트 다발 점화</div>
+      <p>newsletter, wee-log, running-challenge, book-writer, threads, eastasia, notion-to-docs, ai-club, maily-import, notion-print… 동시 가동 30+. 새 아이디어 점화는 빠른데 <b>종결(closing)</b> 신호가 거의 없다.</p></div>
+    </div>
+    <div>
+      <div class="finding"><div class="h">▸ "🚩 다음=" 꼬리표 증후군</div>
+      <p>거의 모든 프로젝트 메모가 "다음=", "후속과제", "🚩"로 끝난다. 완료가 아니라 <b>다음 미완료로의 인계</b>로 닫는 습관. 끝내는 쾌감보다 잇는 긴장을 선호.</p></div>
+    </div>
+  </div>
+  <div class="finding"><div class="h">▸ 픽셀·문장 단위 검수 강박 (양날)</div>
+  <p>줄바꿈 표시폭 실측, 정렬 픽셀 실측, 검토 메모 톤까지 규정. 품질엔 좋지만 <b>위임 불능</b>으로 직결된다. "남이 하면 못 미덥다"는 신호가 메모 곳곳에 박혀 있다.</p>
+  <div class="ev"><b>증거:</b> measure-layout-before-changing, korean-linebreak-visual-qa, review-memo-tone-terse.</div></div>
+
+  <h2><span class="n">03</span>맹점 (BLIND SPOTS)</h2>
+  <ul>
+    <li><b>버스 팩터 = 1.</b> 이 제국 전체가 대상 한 명의 머릿속·개인 시크릿·개인 Notion에 묶여 있다. 학교용 도구를 동료에게 나눠주면서도(skills-for-teachers), 정작 <b>본인이 빠지면 아무것도 안 굴러간다.</b> 교사 조직 안에서 이 의존성은 시한폭탄이다.</li>
+    <li><b>오늘 밤이 표본.</b> 23:30~23:38 사이, 뉴스레터 썸네일 버그 추적 → 원고 6편 검토 → git 브랜치 정리 → useToast 버그 수정을 동시에. 멀티트랙은 능력처럼 보이나, 7582~7602 로그는 <b>브랜치 혼선으로 "왜 안 보이지"를 한참 쫓은 흔적</b>이다. 분산이 곧 디버깅 비용으로 청구됐다.</li>
+    <li><b>도구를 의심하라 가르치면서, 자기 시스템은 의심하지 않는다.</b> AI엔 "재검증해라" 규칙을 60개 걸어두고, 정작 자신의 프로젝트 과부하·미완료 누적은 검증 대상에서 빠져 있다.</li>
+    <li><b>역할 과부하.</b> 본업(교사) 위에 자동화 엔지니어·문서 설계자·QA의 역할이 겹겹이 얹혀 있다. 그 모든 작업이 야간 시간대로 밀려나 있고, 본인은 이걸 "효율"로 분류하지만 실제로는 회복시간을 갈아넣는 구조다.</li>
+  </ul>
+
+  <h2><span class="n">04</span>미래에 터질 지점 (PROJECTED FAILURES)</h2>
+  <div class="finding"><div class="h">T-1 · 유지보수 부채 폭발</div>
+  <p>스킬·자동화·리포가 임계치를 넘으면, 만드는 시간보다 <b>안 깨지게 지키는 시간</b>이 커진다. 이미 "WSL 네이티브 모듈", "vercel env 개행", "node TS strip" 같은 환경 함정 지식이 쌓이는 중 — 도구 부채의 초기 증상이다.</p></div>
+  <div class="finding"><div class="h">T-2 · 번아웃 (확률 高)</div>
+  <p>야간 상시 가동 + 동시 30프로젝트 + 위임 불능 + 종결 회피. 이 네 변수의 곱은 한 방향만 가리킨다. 붕괴는 "더 못 하겠다"가 아니라 <b>어느 날 갑자기 전부 흥미를 잃는</b> 형태로 온다.</p></div>
+  <div class="finding"><div class="h">T-3 · "거의 다 됐는데" 묘지</div>
+  <p>MVP 90%에서 멈춘 프로젝트들이 심리적 미결 부채로 누적된다. 각각은 작지만, 합쳐지면 <b>새 시작을 막는 죄책감 총량</b>이 된다.</p></div>
+
+  <h2><span class="n">05</span>강점 (균형을 위해, 그러나 짧게)</h2>
+  <p>자기문서화·시스템 사고·실무 적용력은 상위 1%다. 이건 진짜다. 문제는 강점이 과용되어 약점의 가면을 쓴다는 것뿐. 도구는 훌륭하다 — 도구가 목적을 잡아먹기 전까지는.</p>
+
+  <h2><span class="n">06</span>위협 종합</h2>
+  <div class="scale">SELF-SABOTAGE INDEX</div>
+  <div class="bar"><span style="width:82%"></span></div>
+  <div class="scale">BURNOUT PROXIMITY</div>
+  <div class="bar"><span style="width:74%"></span></div>
+  <div class="scale">DELEGATION CAPACITY (낮을수록 위험)</div>
+  <div class="bar"><span style="width:28%"></span></div>
+
+  <div class="threat">
+    <div class="lbl">// 이 사람이 조심해야 할 단 한 가지 //</div>
+    <div class="big">"시스템을 만드는 일"을 "일을 끝내는 일"로 착각하지 마라.</div>
+    <p style="margin:0; font-size:13px;">당신은 도구·규칙·자동화를 짓는 동안 가장 안전하다고 느끼지만, 그건 진짜 끝맺음의 불확실성을 회피하는 가장 정교한 방식이다. 다음에 새 스킬·새 라우터·새 메모리 규칙을 만들고 싶어질 때, 한 번만 자문하라 — <b>"이게 미완료 프로젝트 하나를 진짜로 닫는 일인가, 아니면 닫지 않으려고 짓는 또 하나의 비계(scaffold)인가?"</b> 도구를 하나 더 짓기 전에, 멈춰 있는 90%짜리 하나를 100%로 닫아라. 그게 당신에게 가장 어려운 동작이고, 그래서 가장 필요한 동작이다.</p>
+  </div>
+
+  <div class="foot">
+    <span>PREPARED BY: ANALYTIC CELL // OPUS</span>
+    <span>2026-05-31 · 윤색 없음(no sugarcoating) 준수</span>
+  </div>
+</div>
+</body>
+</html>

@@ -30,3 +30,11 @@ originSessionId: 9f0164ae-a302-4900-a600-db80b0e05911
 
 **Why:** 자동 sync 가 세션 시작 지연·예기치 않은 push 유발. 명시적 사용자 승인 후에만 양방향 이동하도록 전환.
 **How to apply:** 작업 시작 시 다른 PC 변경 받으려면 `/sync-pull`. 보내려면 작업 끝나고 `/sync-push`. 둘 다 dry-run 먼저, 확인 후 apply.
+
+## 🔧 후순위 과제 — sync 동기화 리스크 점검 (2026-05-26 기록)
+- 2026-05-26, **skills 리포**(`~/.claude/skills`, repo `1000ssam/claude-skills` — config-sync의 config-repo와 별개)에서 **stash-pop 충돌 8개 파일이 미해결로 방치**된 채 발견됨(working tree에 충돌 마커, 인덱스 UU, origin/main보다 1커밋 뒤짐). config-sync 대상에 skills는 포함 안 됨 → 별도 수동 워크플로가 원인.
+- 점검할 것:
+  1. skills 리포의 수동 커밋/푸시(또는 다른 PC에서의 pull)가 **stash-pop 충돌을 남기고 방치**하게 된 경로 추적 — 어떤 절차가 stash를 만들고 pop 충돌을 무시했나.
+  2. `/sync-pull`·`/sync-push`(config-repo)도 같은 식으로 UU/마커 잔류를 남길 수 있는지. dry-run/dirty-abort 안전장치가 **skills 리포엔 적용 안 됨**.
+  3. 충돌 미해결 상태에서 다음 push가 **마커 박힌 파일을 origin에 올릴 위험** → 커밋 전 `<<<<<<<` 마커 검출 pre-commit 가드 필요.
+- 방향(미정): skills 리포에도 dirty-abort·마커검출 가드 도입, 또는 수동 워크플로에 "stash pop 후 충돌 확인" 단계 추가.

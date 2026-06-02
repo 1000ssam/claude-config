@@ -1,0 +1,66 @@
+# Subscriber list hygiene scan — 2026-05-27T15:47:31.366Z
+# Total subscribers: 554
+# Status breakdown: {"confirmed":554}
+
+## (1) MALFORMED / INVALID FORMAT (0)
+
+## (2) DOMAIN TYPOS (2)
+  [confirmed] tnqdi12@kakap.com   (typo domain: kakap.com)
+  [confirmed] dhcnsrlthsu@hanmail.ne   (typo domain: hanmail.ne)
+
+## (3) DUPLICATES (case-insensitive, trimmed) — 0 groups
+
+## (4) ROLE / DISPOSABLE / TEST (0)
+
+## (5) FORMAT EDGE-CASE WARNINGS (0)
+
+## DOMAIN DISTRIBUTION (top + rare)
+  distinct domains: 42; singleton domains: 31
+  -- top 15 --
+  289	naver.com
+  135	gmail.com
+  61	hanmail.net
+  10	kakao.com
+  8	korea.kr
+  5	daum.net
+  5	nate.com
+  3	gclass.ice.go.kr
+  3	goedu.kr
+  2	icloud.com
+  2	hotmail.com
+  1	sanggyejeil.ms.kr
+  1	snu.ac.kr
+  1	wilab.co.kr
+  1	allianceinternet.co.kr
+  -- singleton (count==1) domains --
+  1	sanggyejeil.ms.kr
+  1	snu.ac.kr
+  1	wilab.co.kr
+  1	allianceinternet.co.kr
+  1	eium.co.kr
+  1	edupower.kr
+  1	kakap.com
+  1	korea.ac.kr
+  1	catalyze-research.com
+  1	sonline20.sen.go.kr
+  1	simin.hs.kr
+  1	sen.go.kr
+  1	hafs.hs.kr
+  1	paran.com
+  1	dhkh.gwe.ms.kr
+  1	hwasung.hs.kr
+  1	hanmail.ne
+  1	g.gne.go.kr
+  1	gw1.kr
+  1	gjue.kr
+  1	muzi.kr
+  1	kyg.sen.hs.kr
+  1	gyeongju.hs.kr
+  1	me.com
+  1	cberi.go.kr
+  1	duckshin.net
+  1	o365.sen.go.kr
+  1	pusan.ac.kr
+  1	honam.hs.kr
+  1	vision-hub.co.kr
+  1	gegdeagu.org

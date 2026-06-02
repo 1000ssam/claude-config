@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>위스토리 — 공동 개발·유통 협업 제안서 (차별화 보강판)</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --font:'Inter','Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --bg:#fff;--bg-warm:#f6f5f4;--bg-dark:#141210;
+  --fg:#141210;--fg-muted:#615d59;--fg-subtle:#a39e98;
+  --primary:#0075de;--primary-dark:#005bab;--primary-bg:#f2f9ff;--primary-text:#097fe8;
+  --border:rgba(0,0,0,.1);--border-light:rgba(0,0,0,.06);
+  --radius:12px;
+  --shadow-card:rgba(0,0,0,.04) 0 4px 18px,rgba(0,0,0,.027) 0 2px 8px,rgba(0,0,0,.02) 0 1px 3px,rgba(0,0,0,.01) 0 0 1px;
+}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-family:var(--font);background:#e8e6e3;color:var(--fg);font-feature-settings:"lnum"1,"tnum"1,"calt"1;overflow:hidden;height:100vh;display:flex;align-items:center;justify-content:center}
+
+/* ── Deck ─────────────────────────────────────────────────── */
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;background:var(--bg);display:none;flex-direction:column;transform-origin:top left;overflow:hidden}
+.slide.active{display:flex}
+.slide.bg-warm{background:var(--bg-warm)}
+.slide.bg-dark{background:var(--bg-dark);color:#fff}
+.slide.bg-dark .slide-header{background:var(--bg-dark);border-bottom-color:rgba(255,255,255,.1)}
+
+/* ── Header ───────────────────────────────────────────────── */
+.slide-header{flex-shrink:0;display:flex;align-items:center;padding:0 100px;height:68px;border-top:3px solid var(--primary);border-bottom:1px solid var(--border);background:var(--bg)}
+.bg-warm .slide-header{background:var(--bg-warm)}
+.slide-header .header-section{margin-left:auto;font-size:18px;font-weight:600;letter-spacing:.12em;color:var(--fg-subtle);text-transform:uppercase}
+.bg-dark .slide-header .header-section{color:rgba(255,255,255,.4)}
+.slide-header .header-page{margin-left:28px;font-size:18px;font-weight:500;color:var(--fg-subtle);letter-spacing:.05em;font-feature-settings:"tnum"1}
+.bg-dark .slide-header .header-page{color:rgba(255,255,255,.3)}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.slide-body{flex:1;display:flex;flex-direction:column;padding:56px 100px 48px;min-height:0}
+.slide.no-header{padding:80px 160px;align-items:center;justify-content:center;text-align:center}
+
+/* ── Nav ──────────────────────────────────────────────────── */
+.nav-controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);padding:6px 18px;border-radius:9999px;border:1px solid var(--border);box-shadow:var(--shadow-card)}
+.nav-controls button{width:32px;height:32px;border:none;background:0 0;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--fg-muted);transition:.15s}
+.nav-controls button:hover{background:var(--bg-warm);color:var(--fg)}
+.nav-controls .page-info{font-size:13px;font-weight:600;color:var(--fg-muted);min-width:56px;text-align:center;letter-spacing:.05em}
+
+/* ══════════ TYPOGRAPHY SCALE ══════════ */
+.t-hero{font-size:80px;font-weight:700;letter-spacing:-.035em;line-height:1.08}
+.t-display{font-size:64px;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.t-title{font-size:52px;font-weight:700;letter-spacing:-.025em;line-height:1.15}
+.t-subtitle{font-size:30px;font-weight:600;letter-spacing:-.015em;line-height:1.35;color:var(--fg-muted)}
+.t-body{font-size:28px;font-weight:400;line-height:1.55;letter-spacing:-.01em}
+.t-body-sm{font-size:24px;font-weight:400;line-height:1.55;letter-spacing:-.005em}
+.t-caption{font-size:18px;font-weight:500;color:var(--fg-subtle);letter-spacing:.02em}
+.t-label{font-size:20px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-subtle)}
+.t-muted{color:var(--fg-muted)}
+.t-accent{color:var(--primary)}
+.t-white{color:#fff}
+.t-center{text-align:center}
+.t-bold{font-weight:700}
+
+/* Big number */
+.big-num{font-size:140px;font-weight:800;letter-spacing:-.04em;line-height:.95;color:var(--primary);font-feature-settings:"tnum"1}
+.big-num-md{font-size:96px;font-weight:800;letter-spacing:-.035em;line-height:.95;color:var(--primary);font-feature-settings:"tnum"1}
+.big-num-label{font-size:22px;font-weight:500;color:var(--fg-muted);margin-top:12px}
+
+/* ══════════ COMPONENTS ══════════ */
+.badge{display:inline-flex;align-items:center;padding:6px 16px;border-radius:9999px;font-size:15px;font-weight:600;letter-spacing:.06em}
+.badge-blue{background:var(--primary-bg);color:var(--primary-text)}
+.badge-warm{background:var(--bg-warm);color:var(--fg-muted)}
+.badge-dark{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+
+.card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:40px 36px}
+.card-flat{background:var(--bg-warm);border:1px solid var(--border-light);border-radius:var(--radius);padding:40px 36px}
+.card-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:40px 36px}
+
+.callout{padding:28px 36px;background:var(--primary-bg);border-radius:var(--radius);font-size:26px;font-weight:500;color:var(--primary-dark);line-height:1.45}
+.callout-dark{padding:28px 36px;background:rgba(0,117,222,.15);border-radius:var(--radius);font-size:26px;font-weight:500;color:rgba(255,255,255,.9);line-height:1.45}
+
+/* Tables */
+.cmp-table{width:100%;border-collapse:collapse;font-size:24px}
+.cmp-table th{text-align:left;font-weight:700;padding:18px 28px;font-size:22px}
+.cmp-table th:first-child{width:180px;color:var(--fg-muted)}
+.cmp-table th.col-a{background:var(--bg-warm);border-radius:var(--radius) var(--radius) 0 0;color:var(--fg-muted);text-align:center}
+.cmp-table th.col-b{background:var(--primary);border-radius:var(--radius) var(--radius) 0 0;color:#fff;text-align:center}
+.cmp-table td{padding:18px 28px;border-bottom:1px solid var(--border-light);vertical-align:middle;line-height:1.45}
+.cmp-table td:first-child{font-weight:600;color:var(--fg-muted);font-size:22px}
+.cmp-table td.col-a{background:rgba(246,245,244,.5);text-align:center}
+.cmp-table td.col-b{background:var(--primary-bg);text-align:center;font-weight:600}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table tr:last-child td.col-a{border-radius:0 0 0 var(--radius)}
+.cmp-table tr:last-child td.col-b{border-radius:0 0 var(--radius) 0}
+
+/* Feature list */
+.fl{list-style:none;display:flex;flex-direction:column;gap:20px}
+.fl li{font-size:26px;line-height:1.45;padding-left:28px;position:relative}
+.fl li::before{content:'';position:absolute;left:0;top:11px;width:10px;height:10px;border-radius:50%;background:var(--primary);opacity:.5}
+.fl li strong{font-weight:700;color:var(--fg)}
+.fl-dark li::before{background:#fff;opacity:.3}
+
+/* Layout */
+.cols{display:grid;gap:36px}
+.cols-2{grid-template-columns:1fr 1fr}
+.cols-3{grid-template-columns:1fr 1fr 1fr}
+.cols-5{grid-template-columns:repeat(5,1fr)}
+.split{flex:1;display:flex;flex-direction:column;justify-content:center;gap:36px}
+.flex-1{flex:1}
+.mb-12{margin-bottom:12px}
+.mb-20{margin-bottom:20px}
+.mb-32{margin-bottom:32px}
+.gap-24{gap:24px}
+.gap-48{gap:48px}
+
+/* Team */
+.team-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:44px;display:flex;flex-direction:column;gap:16px}
+
+/* Cover */
+.cover-title{font-size:88px;font-weight:900;letter-spacing:-.045em;line-height:1.02;margin-bottom:20px}
+.cover-sub{font-size:34px;font-weight:600;letter-spacing:-.015em;color:var(--fg-muted);margin-bottom:56px}
+
+/* ── Print ────────────────────────────────────────────────── */
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  body{background:#fff;overflow:visible;height:auto;display:block;align-items:initial;justify-content:initial}
+  .nav-controls{display:none!important}
+  .deck{width:auto;height:auto}
+  .slide{display:flex!important;position:relative!important;transform:none!important;top:0!important;left:0!important;width:1920px!important;height:1080px!important;break-after:page;break-inside:avoid;page-break-after:always}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ═══ 1. COVER ═══════════════════════════════════════════════════════ -->
+<div class="slide active" data-slide="1" style="padding:0">
+  <div style="display:grid;grid-template-columns:0.85fr 1.15fr;height:100%">
+    <div style="display:flex;flex-direction:column;justify-content:center;padding:80px 48px 80px 120px;gap:36px">
+      <svg height="40" width="182" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+      <div>
+        <div class="cover-title" style="font-size:84px">상담교사 전용<br>기록 관리 앱</div>
+        <div class="cover-sub" style="margin-bottom:0;font-size:36px">공동 개발 · 유통 협업 제안서</div>
+      </div>
+      <div style="width:48px;height:3px;background:var(--primary);border-radius:2px;opacity:.4"></div>
+      <div style="font-size:20px;color:var(--fg-subtle);line-height:1.8;font-weight:500">
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px">
+          <span style="color:var(--fg-muted)">제안자</span><span>김용천 (현직 교사, MVP 개발자)</span>
+          <span></span><span>조열음 (현직 전문상담교사)</span>
+          <span style="color:var(--fg-muted)">제안 대상</span><span>(주)아이스크림미디어</span>
+          <span style="color:var(--fg-muted)">작성일</span><span>2026년 4월</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;padding:40px 80px 40px 0">
+      <img src="screenshot-dashboard.png" style="width:100%;max-height:100%;object-fit:contain;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-card)">
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 2. EXECUTIVE SUMMARY ═══════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Summary</span><span class="header-page">2 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">SUMMARY</span></div>
+    <div class="t-display" style="margin:20px 0 20px">제안 요약</div>
+    <div class="split" style="gap:40px">
+      <div class="cols cols-3" style="gap:48px">
+        <div><div class="t-label t-accent mb-12">문제</div><div class="t-body" style="font-size:30px">전국 <strong>9,300개 위클래스</strong> 상담교사의 <strong>행정 반복</strong> — 일지, NEIS, 보고서를 따로 작성</div></div>
+        <div><div class="t-label t-accent mb-12">솔루션</div><div class="t-body" style="font-size:30px">현직 교사의 도메인 지식을 설계에 반영한 전용 앱 <strong>위스토리</strong>. 시장 내 전용 솔루션은 <strong>단 2개</strong></div></div>
+        <div><div class="t-label t-accent mb-12">검증</div><div class="t-body" style="font-size:30px">노션 템플릿으로 선행 검증. 마케팅 없이 <strong>1,100만원 매출</strong>, 전환율 <strong>11.2%</strong></div></div>
+      </div>
+      <div class="callout" style="font-size:28px;padding:36px 48px">
+        <div class="t-label" style="color:var(--primary-dark);margin-bottom:12px;font-size:18px">제안</div>
+        완성된 MVP와 <strong>3.5만 인플루언서 채널</strong>로 개인 시장을 공략하고, 아이스크림미디어의 <strong>오랜 업력과 B2C·B2G 판촉 인프라</strong>로 기관 계약까지 확장할 것을 제안합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 3. PROBLEM — STATEMENT (LOUD) ═════════════════════════════════ -->
+<div class="slide" data-slide="3">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Problem</span><span class="header-page">3 / 22</span>
+  </div>
+  <div class="slide-body" style="padding:56px 100px 48px">
+    <div><span class="badge badge-blue">PROBLEM 01</span></div>
+    <div class="t-display" style="margin:20px 0 20px">매일 반복되는 현실</div>
+    <div class="split" style="align-items:center;text-align:center">
+      <div>
+        <div class="t-hero" style="font-size:72px;max-width:1400px;margin:0 auto">
+          상담 일지 작성,<br>
+          <span class="t-accent">NEIS 재입력,</span><br>
+          관리자 보고서 별도 작성.
+        </div>
+        <div style="font-size:28px;color:var(--fg-muted);margin-top:48px;font-weight:400;line-height:1.5">
+          전국 9,300개 위클래스 상담교사의 <strong style="color:var(--fg)">3중 행정 반복</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 4. PROBLEM — TOOLS ════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="4">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Problem</span><span class="header-page">4 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">PROBLEM 02</span></div>
+    <div class="t-display" style="margin:20px 0 20px">기존 도구의 <span class="t-accent">한계</span></div>
+    <div class="split">
+      <div class="cols cols-3" style="gap:32px">
+        <div class="card" style="display:flex;flex-direction:column;gap:20px;padding:48px 40px"><div style="font-size:28px;font-weight:700">엑셀 / 메모장</div><div class="t-body-sm t-muted">데이터 구조화 불가. 검색·추적이 어렵고, 축적될수록 관리 부담 증가.</div></div>
+        <div class="card" style="display:flex;flex-direction:column;gap:20px;padding:48px 40px"><div style="font-size:28px;font-weight:700">나이스 직접 입력</div><div class="t-body-sm t-muted">카테고리 입력 구조가 복잡하여 기록 용도로는 부적합.</div></div>
+        <div class="card" style="display:flex;flex-direction:column;gap:20px;padding:48px 40px"><div style="font-size:28px;font-weight:700">노션 템플릿</div><div class="t-body-sm t-muted">데이터 구조 강제 불가. 사전 지식 요구, 업데이트 자동 적용 불가.</div></div>
+      </div>
+      <div class="callout" style="font-size:28px">데이터는 분산되고, <strong>같은 정보를 서로 다른 시스템에 반복 입력</strong>하고 있습니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 5. MARKET — BIG NUMBERS (LOUD) ════════════════════════════════ -->
+<div class="slide" data-slide="5">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Market</span><span class="header-page">5 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">MARKET</span></div>
+    <div class="t-display" style="margin:20px 0 20px">시장 규모</div>
+    <div class="split">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;flex:1">
+        <div style="display:flex;flex-direction:column;justify-content:center;padding:24px 48px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)"><div class="big-num">8,863</div><div class="big-num-label">위클래스 설치 학교 (설치율 76.8%)</div></div>
+        <div style="display:flex;flex-direction:column;justify-content:center;padding:24px 48px;border-bottom:1px solid var(--border)"><div class="big-num">4,772</div><div class="big-num-label">전문상담인력</div></div>
+        <div style="display:flex;flex-direction:column;justify-content:center;padding:24px 48px;border-right:1px solid var(--border)"><div class="big-num-md" style="color:var(--fg)">20,480</div><div class="big-num-label">전국 초중고 학교 수</div></div>
+        <div style="display:flex;flex-direction:column;justify-content:center;padding:24px 48px"><div class="big-num-md" style="color:var(--fg)">992명</div><div class="big-num-label">상담사 1인당 담당 학생</div></div>
+      </div>
+      <div class="t-caption" style="text-align:right">교육부 교육기본통계(2024.08), 국정감사 제출 자료(2024)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 6. SOLUTION ════════════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="6">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Solution</span><span class="header-page">6 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">SOLUTION</span></div>
+    <div class="t-display" style="margin:20px 0 20px">위스토리 <span class="t-accent">(Wee-story)</span></div>
+    <div class="split" style="gap:24px">
+      <div style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:start">
+        <img src="screenshot-dashboard.png" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-card)">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="t-subtitle" style="margin:0">위클래스 상담교사 전용<br>기록 관리 로컬 앱</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="font-size:24px;line-height:1.5"><strong style="color:var(--primary)">Electron 기반</strong> — 학교 PC에 설치, 별도 서버 불필요</div>
+            <div style="font-size:24px;line-height:1.5"><strong style="color:var(--primary)">로컬 저장</strong> — 민감한 상담 데이터가 외부로 전송되지 않음</div>
+            <div style="font-size:24px;line-height:1.5"><strong style="color:var(--primary)">원스톱</strong> — 사례 → 상담 → NEIS 출력 → 보고서</div>
+          </div>
+          <div class="callout" style="font-size:24px"><strong>3중 행정 반복을 하나의 워크플로로 통합합니다.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 7. FEATURE 01 ═════════════════════════════════════════════════ -->
+<div class="slide" data-slide="7">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Feature</span><span class="header-page">7 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">FEATURE 01</span></div>
+    <div class="t-display" style="margin:20px 0 20px">상담 기록 관리</div>
+    <div class="split" style="gap:24px">
+      <div style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:start">
+        <img src="screenshot-cases.png" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-card)">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="t-subtitle" style="margin:0">내담자 · 사례 · 상담<br>정규화된 데이터 구조</div>
+          <ul class="fl"><li><strong>학생 DB</strong> — 학적 이력, 재학/졸업, NEIS 반배정 Excel 가져오기</li><li><strong>사례 관리</strong> — 의뢰경로, 주호소, 사례 개념화</li><li><strong>상담 기록</strong> — NEIS 카테고리(대/중/소분류) 자동 매핑</li><li><strong>그룹 상담</strong> — 다수 학생 연결(다대다 구조)</li></ul>
+        </div>
+      </div>
+      <div class="callout" style="font-size:28px">한 번 기록하면 NEIS 서식과 보고서에 <strong>자동 반영</strong>됩니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 8. FEATURE 02 ═════════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="8">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Feature</span><span class="header-page">8 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">FEATURE 02</span></div>
+    <div class="t-display" style="margin:20px 0 20px">NEIS 연동</div>
+    <div class="split" style="gap:24px">
+      <div style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:start">
+        <img src="screenshot-neis.png" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-card)">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="t-subtitle" style="margin:0">NEIS와의 완벽한 연동</div>
+          <ul class="fl"><li>상담 일지를 NEIS 업로드 서식으로 즉시 내보내기</li><li>반배정 파일 업로드로 학생 신규 등록</li><li>진급 처리까지 앱 내에서 일괄 지원</li><li>NEIS 카테고리 체계(대/중/소분류) 내장</li></ul>
+          <div class="callout" style="font-size:24px">난잡한 양식, 반복되는 수기 입력에서 자유로워집니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 9. FEATURE 03 — 보고서 ════════════════════════════════════════ -->
+<div class="slide" data-slide="9">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Feature</span><span class="header-page">9 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">FEATURE 03</span></div>
+    <div class="t-display" style="margin:20px 0 20px">보고서 생성</div>
+    <div class="split" style="gap:24px">
+      <div style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:start">
+        <img src="screenshot-report.png" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-card)">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="t-subtitle" style="margin:0">상담 데이터 기반<br>보고서 자동 구성</div>
+          <ul class="fl"><li><strong>블록 에디터</strong> — 텍스트, 표, 차트 블록을 조합</li><li>A4 인쇄 최적화 레이아웃</li><li>관리자 요청 시 즉시 대응 가능</li></ul>
+          <div class="callout" style="font-size:24px">3중 행정의 마지막 고리를 끊습니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 10. FEATURE 04 — 캘린더 & 통계 ════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="10">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Feature</span><span class="header-page">10 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">FEATURE 04</span></div>
+    <div class="t-display" style="margin:20px 0 20px">캘린더 & 통계</div>
+    <div class="split" style="gap:24px">
+      <div style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:start">
+        <img src="screenshot-stats.png" style="width:100%;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-card)">
+        <div style="display:flex;flex-direction:column;gap:28px">
+          <div>
+            <div style="font-size:30px;font-weight:700;margin-bottom:14px">상담 캘린더</div>
+            <ul class="fl"><li>월간 / 주간 뷰 전환</li><li>드래그 시간 블록 배치 (15분 단위)</li><li>공휴일 · 학사일정 자동 연동</li></ul>
+          </div>
+          <div>
+            <div style="font-size:30px;font-weight:700;margin-bottom:14px">통계 대시보드</div>
+            <ul class="fl"><li>유형별 분포, 기간별 차트</li><li>상담 시간 추적 및 시각화</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 11. SECURITY ══════════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="11">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Security</span><span class="header-page">11 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">SECURITY</span></div>
+    <div class="t-display" style="margin:20px 0 20px">보안 설계</div>
+    <div class="split">
+      <div style="display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:center">
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v5c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V6l7-4z"/><path d="M9.5 12l2 2 4-4"/></svg>
+          <div style="font-size:48px;font-weight:800;color:var(--primary);letter-spacing:-.02em">AES-256</div>
+          <div style="font-size:28px;font-weight:700;color:var(--fg);line-height:1.3">로컬 퍼스트 보안</div>
+          <div style="font-size:22px;color:var(--fg-muted);line-height:1.5">민감한 상담 데이터는<br>학교 PC 밖으로 나가지 않습니다.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+          <div class="card" style="padding:36px 32px;display:flex;flex-direction:column;gap:12px"><div style="font-size:24px;font-weight:700;color:var(--primary)">로컬 저장</div><div class="t-body-sm t-muted">학교 PC에만 저장. 클라우드 전송 없이 데이터 주권 확보</div></div>
+          <div class="card" style="padding:36px 32px;display:flex;flex-direction:column;gap:12px"><div style="font-size:24px;font-weight:700;color:var(--primary)">필드 레벨 암호화</div><div class="t-body-sm t-muted">학생 이름 등 민감 필드를 개별 암호화하여 저장</div></div>
+          <div class="card" style="padding:36px 32px;display:flex;flex-direction:column;gap:12px"><div style="font-size:24px;font-weight:700;color:var(--primary)">접근 통제</div><div class="t-body-sm t-muted">마스터 비밀번호 설정, 자동 잠금 화면으로 무단 접근 차단</div></div>
+          <div class="card" style="padding:36px 32px;display:flex;flex-direction:column;gap:12px"><div style="font-size:24px;font-weight:700;color:var(--primary)">DB 무결성</div><div class="t-body-sm t-muted">CHECK 제약 조건으로 데이터 정합성 보장</div></div>
+        </div>
+      </div>
+      <div class="callout" style="font-size:26px">상담 정보는 네트워크를 경유하지 않습니다. 개인정보보호법 및 학생 상담 정보 보안 기준에 부합하는 설계입니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 12. AI ════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="12">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">AI</span><span class="header-page">12 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">AI INTEGRATION</span></div>
+    <div class="t-display" style="margin:20px 0 20px">AI 통합 — <span class="t-accent">함께 풀고 싶은 과제</span></div>
+    <div class="split">
+      <div class="t-body" style="font-size:30px;line-height:1.6">상담 일지 자동 작성, 사례 개념화 보조, 위기 징후 탐지<br>— AI 적용이 유효한 영역이 뚜렷합니다.</div>
+      <div class="t-body t-muted" style="font-size:28px">다만 <strong style="color:var(--fg)">기술적·법적 안전망 확보가 선행</strong>되어야 합니다.</div>
+      <div class="cols cols-3" style="gap:24px">
+        <div class="card-flat" style="text-align:center;padding:40px 32px"><div style="font-size:28px;font-weight:700;margin-bottom:12px">통제된 AI 추론</div><div class="t-body-sm t-muted">데이터를 국외·제3자로<br>보내지 않는 추론 인프라</div></div>
+        <div class="card-flat" style="text-align:center;padding:40px 32px"><div style="font-size:28px;font-weight:700;margin-bottom:12px">로컬 STT</div><div class="t-body-sm t-muted">상담 음성을 로컬에서 텍스트로 변환<br>일지 초안 자동 작성</div></div>
+        <div class="card-flat" style="text-align:center;padding:40px 32px"><div style="font-size:28px;font-weight:700;margin-bottom:12px">추가 아이디어</div><div class="t-body-sm t-muted">AI 활용 방안을<br>함께 발굴·검토</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 13. TRACTION — BIG NUMBERS (LOUD) ═════════════════════════════ -->
+<div class="slide bg-dark" data-slide="13">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#fff">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#fff" opacity=".45">STORY</text></svg>
+    <span class="header-section">Traction</span><span class="header-page">13 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-dark">TRACTION</span></div>
+    <div class="t-display" style="color:#fff;margin:20px 0 20px">이미 팔아봤습니다</div>
+    <div style="font-size:26px;color:rgba(255,255,255,.4);margin-bottom:24px">Wee Class Pro 노션 템플릿 · 2024.10 ~ 2026.04 · 마케팅 예산 0원 · 연수 및 설명회 단 2회 · SNS 피드 단 9개</div>
+    <div class="split" style="gap:28px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:32px">
+        <div><div class="big-num" style="font-size:120px;color:#fff">1,954<span style="font-size:72px;font-weight:600">건</span></div><div class="big-num-label" style="color:rgba(255,255,255,.45)">무료 다운로드</div></div>
+        <div><div class="big-num" style="font-size:120px;color:#fff">219<span style="font-size:72px;font-weight:600">건</span></div><div class="big-num-label" style="color:rgba(255,255,255,.45)">유료 판매</div></div>
+        <div><div class="big-num" style="font-size:120px;color:var(--primary)">11.2<span style="font-size:72px;font-weight:600">%</span></div><div class="big-num-label" style="color:rgba(255,255,255,.45)">유료 전환율</div></div>
+        <div><div class="big-num" style="font-size:100px;color:var(--primary);white-space:nowrap">~1,100<span style="font-size:60px;font-weight:600">만</span></div><div class="big-num-label" style="color:rgba(255,255,255,.45)">누적 매출</div></div>
+      </div>
+      <div class="cols cols-2" style="gap:24px">
+        <div class="callout-dark"><strong style="font-size:28px">수요는 실재한다</strong><br><span style="font-size:24px;opacity:.8">상담교사들은 생산성 향상을 위해 기꺼이 비용을 지불합니다.</span></div>
+        <div class="callout-dark"><strong style="font-size:28px">개인의 한계가 명확하다</strong><br><span style="font-size:24px;opacity:.8">배포·마케팅·B2G 영업 인프라 없이는 규모 확장에 한계가 있습니다.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 13. WHY APP ═══════════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="14">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Transition</span><span class="header-page">14 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">TRANSITION</span></div>
+    <div class="t-display" style="margin:20px 0 20px">왜 앱인가 — <span class="t-accent">노션의 한계</span></div>
+    <div class="t-body t-muted mb-32">노션 템플릿으로 시장을 개척했지만, 한계도 분명합니다.</div>
+    <div class="split">
+      <table class="cmp-table" style="table-layout:fixed">
+        <colgroup><col style="width:180px"><col style="width:33%"><col style="width:auto"></colgroup>
+        <thead><tr><th></th><th class="col-a">노션 템플릿</th><th class="col-b">위스토리 앱</th></tr></thead>
+        <tbody>
+          <tr><td>데이터 구조</td><td class="col-a">사용자가 임의 변경 → 일관성 붕괴</td><td class="col-b">정규화된 DB 스키마로 구조 강제, CHECK 제약으로 정합성 보장</td></tr>
+          <tr><td>진입 장벽</td><td class="col-a">노션 기본 지식 필요</td><td class="col-b">전용 UI, 학습 비용 제로. NEIS 카테고리 내장 선택식 입력</td></tr>
+          <tr><td>업데이트</td><td class="col-a">자동 적용 불가</td><td class="col-b">앱 업데이트로 전체 사용자 일괄 배포</td></tr>
+          <tr><td>보안</td><td class="col-a">노션 서버 저장, 통제 불가</td><td class="col-b">로컬 저장 + field-level 암호화 + 마스터 비밀번호 · 자동 잠금 · 복구코드</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="font-size:28px">동일한 도메인 지식과 데이터 스키마를, <strong>노션의 제약 없이 전용 앱으로 구현</strong>한 것이 위스토리입니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 14. POSITIONING ═══════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="15">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Positioning</span><span class="header-page">15 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">POSITIONING</span></div>
+    <div class="t-display" style="margin:20px 0 20px">시장 포지셔닝</div>
+    <div class="t-body t-muted mb-32">현재 시장에 알려진 전용 솔루션은 <strong style="color:var(--fg)">위노트(WeeNote AI)</strong>와 <strong style="color:var(--fg)">위로그(WeeLog)</strong> 단 2개.</div>
+    <div class="split" style="gap:28px">
+      <table class="cmp-table">
+        <thead><tr><th></th><th class="col-a">위노트 · 위로그</th><th class="col-b">위스토리 + 아이스크림미디어</th></tr></thead>
+        <tbody>
+          <tr><td>개발 주체</td><td class="col-a">1인 사업자</td><td class="col-b">현직 교사 + 3.5만 인플루언서 + 교육 시장 선도 기업</td></tr>
+          <tr><td>판매 채널</td><td class="col-a">개인 판매 중심 + 제한적 B2G</td><td class="col-b">아이스크림 B2C 판촉 인프라(학부모·가정 채널) + B2G 영업망(학교·교육청)</td></tr>
+          <tr><td>고객 지원</td><td class="col-a">1인 CS</td><td class="col-b">기업 수준 CS</td></tr>
+          <tr><td>브랜드</td><td class="col-a">개인 법인</td><td class="col-b">아이스크림 브랜드 + 조열음 개인 브랜드</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="font-size:28px">채널·브랜드는 출발선일 뿐입니다. 위노트가 따라오기 어려운 <strong>구조적 차별점</strong>은 다음 장에서 다룹니다.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ NEW. DIFFERENTIATION 01 — 위노트 다시 보기 ════════════════════ -->
+<div class="slide" data-slide="16">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Differentiation</span><span class="header-page">16 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">DIFFERENTIATION 01</span></div>
+    <div class="t-display" style="margin:20px 0 20px">위노트, 다시 보기 — <span class="t-accent">'로컬'이라는 표방의 이면</span></div>
+    <div class="t-body t-muted mb-32">공개 배포본을 직접 분석한 결과, 위노트의 '온디바이스' 포지셔닝에는 두 가지 구조적 공백이 있습니다.</div>
+    <div class="split" style="gap:28px">
+      <div class="cols cols-2" style="gap:32px">
+        <div class="card" style="display:flex;flex-direction:column;gap:18px;padding:44px 40px">
+          <div style="font-size:28px;font-weight:700">숨어 있는 클라우드 의존</div>
+          <ul class="fl">
+            <li>카카오 Kanana <strong>로컬 LLM</strong>을 핵심 가치로 내세움</li>
+            <li>그러나 별도의 <strong>클라우드 추론 계층(Google Gemini 2.5)</strong>이 함께 탑재</li>
+            <li>클라우드 사용 시 학생 상담 데이터가 Google 서버로 전송 — <strong>개인정보 국외 이전</strong>에 해당</li>
+            <li>그 동의는 상담 도중 <strong>교사 1인의 클릭 한 번</strong>에 의존</li>
+          </ul>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:18px;padding:44px 40px">
+          <div style="font-size:28px;font-weight:700">학교 PC에 묶인 모델 천장</div>
+          <ul class="fl">
+            <li>로컬 모델은 노후 학교 PC(<strong>최소 4GB RAM</strong>)에서 구동되도록 소형 양자화 모델로 제한</li>
+            <li>AI 출력 품질이 <strong>개별 학교의 PC 사양에 종속</strong>됨</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout" style="font-size:26px">위노트의 <strong>크레딧 차등 요금제</strong>는 — 로컬 모델이 아니라, 이 클라우드 계층의 사용량을 미터링하는 구조입니다.</div>
+      <div class="t-caption">분석 근거: 위노트 v2.2.5 공개 배포본 코드 분석</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NEW. DIFFERENTIATION 02 — 위스토리의 차별점 ════════════════════ -->
+<div class="slide bg-warm" data-slide="17">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Differentiation</span><span class="header-page">17 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">DIFFERENTIATION 02</span></div>
+    <div class="t-display" style="margin:20px 0 20px">차별점 — <span class="t-accent">항목별 비교</span></div>
+    <div class="t-body t-muted mb-32">차별점은 '같은 제품 + 더 나은 유통'이 아닙니다. 위노트가 '온디바이스'라는 정체성을 유지하는 한 동일하게 취하기 어려운 포지션입니다.</div>
+    <div class="split" style="gap:28px">
+      <table class="cmp-table">
+        <thead><tr><th></th><th class="col-a">위노트</th><th class="col-b">위스토리</th></tr></thead>
+        <tbody>
+          <tr><td>AI 추론 위치</td><td class="col-a">로컬 + Google Gemini 클라우드(국외)</td><td class="col-b">상담 기록은 학교 PC 로컬 저장 · AI 추론은 국내 기관 전용 서버</td></tr>
+          <tr><td>개인정보 국외 이전</td><td class="col-a">클라우드 계층 사용 시 발생</td><td class="col-b">발생하지 않음 — 제3자·해외 API 미경유</td></tr>
+          <tr><td>민감정보 처리 동의</td><td class="col-a">상담 중 교사 1인 클릭 모달</td><td class="col-b">기관 인가 — PIA·위탁계약·보안심의 기반</td></tr>
+          <tr><td>AI 모델 품질</td><td class="col-a">학교 PC 사양에 종속(소형 모델)</td><td class="col-b">서버 기반 — 모델 규모·품질 천장 없음</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="font-size:26px">B2G 조달에서 위노트가 거치지 않은 기관 절차(PIA · 위탁계약 · 국외이전 고지)를 — <strong>위스토리는 정면으로 충족합니다.</strong></div>
+      <div class="t-caption">AI 추론 인프라의 구체 설계는 12쪽 'AI 통합 — 함께 풀고 싶은 과제'와 연결되는 협업 항목입니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 15. BUSINESS ══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="18">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Business</span><span class="header-page">18 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">BUSINESS MODEL</span></div>
+    <div class="t-display" style="margin:20px 0 20px">비즈니스 모델</div>
+    <div class="t-subtitle mb-32">주력 타겟: B2G — 교육지원청 · 시도교육청 단위 일괄 라이선스</div>
+    <div class="split" style="gap:24px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px">
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:32px">
+          <div><div class="big-num" style="font-size:160px">176</div><div class="big-num-label" style="font-size:24px">교육지원청</div></div>
+          <div><div class="big-num" style="font-size:160px;color:var(--fg)">17</div><div class="big-num-label" style="font-size:24px">시도교육청</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:15px;justify-content:center">
+          <div class="card" style="padding:40px 36px;display:flex;flex-direction:column;gap:12px;flex:1"><div style="font-size:28px;font-weight:700;color:var(--primary)">베이직</div><div class="t-body-sm t-muted">경쟁사 대비 저가 책정.<br>기관(B2G)과 개인 모두에게 공급</div></div>
+          <div class="card" style="padding:40px 36px;display:flex;flex-direction:column;gap:12px;flex:1"><div style="font-size:28px;font-weight:700;color:var(--primary)">AI 프리미엄</div><div class="t-body-sm t-muted">AI 기능 포함 요금제.<br>기관 업셀링 또는 개인 애드온 구독</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 16. TEAM ══════════════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="19">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Team</span><span class="header-page">19 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">TEAM</span></div>
+    <div class="t-display" style="margin:20px 0 20px">팀 소개</div>
+    <div class="split">
+      <div class="cols cols-2" style="gap:36px">
+        <!-- 김용천 프로필 -->
+        <div class="team-card" style="flex-direction:row;gap:40px;align-items:flex-start;padding:48px;flex:1">
+          <img src="profile-kim.jpg" style="width:170px;height:170px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--border)">
+          <div style="display:flex;flex-direction:column;gap:16px;flex:1">
+            <div style="font-size:36px;font-weight:700">김용천</div>
+            <div style="font-size:22px;font-weight:600;color:var(--primary)">현직 교사 · MVP 개발자</div>
+            <div style="display:flex;gap:36px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="text-align:center"><div style="font-size:28px;font-weight:700">14년차</div><div style="font-size:16px;color:var(--fg-muted)">교직 경력</div></div>
+              <div style="text-align:center"><div style="font-size:28px;font-weight:700">노션</div><div style="font-size:16px;color:var(--fg-muted)">공식 앰버서더</div></div>
+              <div style="text-align:center"><div style="font-size:28px;font-weight:700">MVP</div><div style="font-size:16px;color:var(--fg-muted)">직접 개발</div></div>
+            </div>
+            <div class="t-body-sm t-muted" style="font-size:22px;line-height:1.55">노션 공식 앰버서더 · 추천 템플릿 크리에이터. Wee Class Pro 설계, 위스토리 MVP 직접 개발.</div>
+          </div>
+        </div>
+        <!-- 조열음 프로필 -->
+        <div class="team-card" style="flex-direction:row;gap:40px;align-items:flex-start;padding:48px;flex:1">
+          <img src="profile-cho.jpg" style="width:170px;height:170px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--border)">
+          <div style="display:flex;flex-direction:column;gap:16px;flex:1">
+            <div style="font-size:36px;font-weight:700">조열음</div>
+            <div style="font-size:22px;font-weight:600;color:var(--primary)">전문상담교사 · 교육 인플루언서</div>
+            <div style="display:flex;gap:36px;padding:12px 0;border-bottom:1px solid var(--border)">
+              <div style="text-align:center"><div style="font-size:28px;font-weight:700;color:var(--primary)">3.5만</div><div style="font-size:16px;color:var(--fg-muted)">팔로워</div></div>
+              <div style="text-align:center"><div style="font-size:28px;font-weight:700">Top 1</div><div style="font-size:16px;color:var(--fg-muted)">상담교사 인플루언서</div></div>
+            </div>
+            <div class="t-body-sm t-muted" style="font-size:22px;line-height:1.55">현직 전문상담교사. Wee Class Pro 기획 참여, 실제 업무 흐름을 설계에 반영. 상담교사 커뮤니티 최상위 인플루언서.</div>
+          </div>
+        </div>
+      </div>
+      <div class="callout" style="font-size:28px;text-align:center"><strong>현직 교사가 직접 설계하고, 현직 교사가 홍보합니다.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 17. PARTNERSHIP ═══════════════════════════════════════════════ -->
+<div class="slide" data-slide="20">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Partnership</span><span class="header-page">20 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">PARTNERSHIP</span></div>
+    <div class="t-display" style="margin:20px 0 20px">협업 제안 — <span class="t-accent">역할 분담</span></div>
+    <div class="split">
+      <div class="cols cols-2" style="gap:36px">
+        <div class="card" style="padding:44px 40px;display:flex;flex-direction:column;gap:20px">
+          <div style="font-size:32px;font-weight:700">제안자 측</div>
+          <div style="font-size:18px;font-weight:600;color:var(--fg-muted)">김용천 + 조열음</div>
+          <ul class="fl"><li>완성된 MVP 제공</li><li>위클래스 도메인 지식 · 설계 방향</li><li>3.5만 팔로워 인플루언서를 통한 초기 사용자 확보</li><li>상담교사 피드백 루프 운영</li></ul>
+        </div>
+        <div class="card" style="padding:44px 40px;display:flex;flex-direction:column;gap:20px;border:2px solid var(--primary)">
+          <div style="font-size:32px;font-weight:700">아이스크림미디어</div>
+          <div style="font-size:18px;font-weight:600;color:var(--primary)">요청 사항</div>
+          <ul class="fl"><li>코드 품질 고도화 (보안·배포)</li><li>에듀집 등록, 공식 채널 등재</li><li>교육청 B2G 영업 · 계약 체결</li><li>B2C·B2G 판촉 인프라를 통한 사용자 확산</li><li>마케팅 기획 및 집행</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 18. VISION ════════════════════════════════════════════════════ -->
+<div class="slide bg-warm" data-slide="21">
+  <div class="slide-header">
+    <svg height="22" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    <span class="header-section">Vision</span><span class="header-page">21 / 22</span>
+  </div>
+  <div class="slide-body">
+    <div><span class="badge badge-blue">VISION</span></div>
+    <div class="t-display" style="margin:20px 0 20px">왜 지금인가</div>
+    <div class="split" style="gap:32px;align-items:flex-start">
+    <div class="t-hero" style="font-size:56px;line-height:1.2;max-width:1400px">
+      위스토리는 <span class="t-accent">교사 바이브코더 + 에듀테크 기업</span><br>
+      협업 공식의 첫 번째 프로토타입입니다.
+    </div>
+    <div class="t-body t-muted" style="font-size:28px;max-width:1200px">
+      아이스크림미디어가 이 모델을 선점한다면, 다음 제품은 더 빠르게, 더 낮은 비용으로 시장에 나올 수 있습니다.
+    </div>
+    <div class="cols cols-2" style="gap:32px;max-width:1400px;margin-top:8px">
+      <div class="card" style="padding:40px 44px">
+        <div style="font-size:28px;font-weight:700;margin-bottom:16px">교사 바이브코더가 가진 것</div>
+        <div style="font-size:24px;color:var(--fg-muted);line-height:1.6">현장 도메인 지식 · 페인포인트를 아는 눈 · 커뮤니티 신뢰 · <strong style="color:var(--primary)">MVP 자체 개발 역량</strong></div>
+      </div>
+      <div class="card" style="padding:40px 44px">
+        <div style="font-size:28px;font-weight:700;margin-bottom:16px">아이스크림미디어가 가진 것</div>
+        <div style="font-size:24px;color:var(--fg-muted);line-height:1.6">교육 시장 선도 업력 · B2C·B2G 판촉 인프라 · 기관 영업 채널<br><strong style="color:var(--primary)">대체할 수 없는 브랜드의 가치</strong></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 20. CLOSING ═══════════════════════════════════════════════════ -->
+<div class="slide" data-slide="22" style="padding:0">
+  <div style="display:grid;grid-template-columns:1fr 1fr;height:100%">
+    <div style="display:flex;flex-direction:column;justify-content:flex-end;padding:120px 80px 120px 200px">
+      <div style="font-size:56px;font-weight:700;letter-spacing:-.03em;margin-bottom:24px">긍정적인 검토를<br>부탁드립니다.</div>
+      <div style="font-size:26px;color:var(--fg-muted);margin-bottom:64px;line-height:1.6">제품 시연 및 상세 논의를 위해<br>편하신 일정에 자리를 마련하겠습니다.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:24px;color:var(--fg-muted)"><div><strong style="color:var(--fg)">김용천</strong></div><div>slowly007@goedu.kr</div><div>010-4929-3427</div></div>
+    </div>
+    <div style="display:flex;align-items:flex-end;justify-content:flex-end;padding:0 120px 120px 0">
+      <svg height="120" viewBox="0 0 200 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="22" r="5" fill="#0075de"/><text x="20" y="36" font-family="'Inter','Pretendard Variable',sans-serif" font-size="36" font-weight="900" letter-spacing="-0.05em" fill="#141210">WEE</text><line x1="103" y1="10" x2="103" y2="36" stroke="#141210" stroke-width="1" stroke-linecap="round" opacity=".2"/><text x="115" y="27" font-family="'Inter','Pretendard Variable',sans-serif" font-size="12" font-weight="600" letter-spacing="0.38em" fill="#141210" opacity=".55">STORY</text></svg>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="nav-controls" id="nav">
+  <button id="btn-prev" aria-label="이전"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <span class="page-info" id="page-info">1 / 22</span>
+  <button id="btn-next" aria-label="다음"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+</div>
+
+<script>
+!function(){var T=22,c=+localStorage.getItem("wee-story-v2-slide")||1;c<1||c>T?c=1:0;var s=document.querySelectorAll(".slide"),p=document.getElementById("page-info");function R(){var w=innerWidth,h=innerHeight,k=Math.min(w/1920,h/1080);for(var i=0;i<s.length;i++){s[i].style.transform="scale("+k+")";s[i].style.left=(w-1920*k)/2+"px";s[i].style.top=(h-1080*k)/2+"px"}}function G(n){if(n<1||n>T)return;for(var i=0;i<s.length;i++)s[i].classList.remove("active");s[n-1].classList.add("active");c=n;p.textContent=n+" / "+T;localStorage.setItem("wee-story-v2-slide",""+n)}document.getElementById("btn-prev").onclick=function(){G(c-1)};document.getElementById("btn-next").onclick=function(){G(c+1)};document.onkeydown=function(e){if(e.key=="ArrowRight"||e.key==" "){e.preventDefault();G(c+1)}if(e.key=="ArrowLeft"){e.preventDefault();G(c-1)}if(e.key=="Home"){e.preventDefault();G(1)}if(e.key=="End"){e.preventDefault();G(T)}};onresize=R;R();G(c)}()
+</script>
+</body>
+</html>

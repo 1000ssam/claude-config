@@ -55,6 +55,16 @@
 - 사용자가 스킬 트리거 키워드를 사용하면 **반드시 Skill 도구로 해당 스킬을 먼저 호출**한 뒤 작업을 수행한다. (개별 키워드는 각 스킬의 프론트매터 description 참조)
 - 스킬의 워크플로 단계를 건너뛰지 않는다.
 
+### 자연어 트리거 충돌 처리 (단계형)
+
+한 발화에 여러 스킬이 매칭될 수 있으면, 아래 단계로 처리한다:
+
+1. **명백히 한 스킬이 우세** → 묻지 않고 그 스킬을 호출하되, **"○○ 스킬로 진행합니다" 한 줄 고지**(되돌릴 여지 제공).
+2. **문맥으로도 갈리지 않는 진짜 동률** → 그때만 `AskUserQuestion`으로 후보 스킬 선택지를 제시한다.
+3. 표면 키워드만 겹치는 가짜 충돌(예: "디자인"=UI vs 아키텍처)은 문맥으로 직접 판별하고 묻지 않는다.
+
+`/goal`·자율 실행 모드에서는 2단계도 합리적 기본값으로 자동 선택한다(사소한 질문 금지 원칙 우선).
+
 ## 스킬·스크립트 경로 규칙 (WSL 필수)
 
 - 스킬 파일(`.md`)과 스크립트(`.mjs`, `.js`, `.py`)에서 절대 경로를 쓸 때는 **반드시 `/mnt/c/` 마운트 경로**를 사용한다.
@@ -135,12 +145,20 @@ git worktree remove /mnt/c/dev/<repo-name>-<task>
 |--------|------|
 | 노션 OAuth, Notion OAuth, OAuth 리다이렉트, OAuth state | `~/.claude/knowledge/notion-oauth.md` |
 | iOS 줌, iOS 확대, input 확대, textarea 줌, 모바일 줌 | `~/.claude/knowledge/ios-input-zoom.md` |
-| WSL 바이너리, WSL native module, .node 파일 Windows, better-sqlite3 WSL, 네이티브 모듈 WSL | `~/.claude/knowledge/wsl-native-module.md` |
+| WSL 바이너리, WSL native module, .node 파일 Windows, better-sqlite3 WSL, 네이티브 모듈 WSL, rollup-linux-x64-gnu, rollup-win32-x64-msvc, optional dependencies 누락, npm 4828, MODULE_NOT_FOUND rollup | `~/.claude/knowledge/wsl-native-module.md` |
+| npm install 0바이트, release-assets.githubusercontent.com 차단, ffmpeg-static postinstall 타임아웃, prebuilt 다운로드 실패, GitHub 릴리스 에셋 차단, node_modules 롤백, --ignore-scripts 우회 | `~/.claude/knowledge/github-release-cdn-block.md` |
 | Claude 디자인, 아티팩트 프롬프트, 디자인 시스템 프롬프트, Tweaks 프로토콜, AI 슬롭, starter component, deck_stage | `~/.claude/knowledge/claude-design-system-prompt.md` |
 | 스레드 문투, 스레드 톤, 글 고쳐, 문투에 맞게, 스레드 작성, 스레드 스타일 | `~/.claude/knowledge/threads-writing-style.md` |
 | PowerShell symlink, mklink, 심볼릭 링크 권한, 배치 파일 인코딩, symlink 권한 | `~/.claude/knowledge/powershell-symlink.md` |
 | Vercel env add preview, git_branch_required, vercel CLI 50, preview 환경변수 등록 | `~/.claude/knowledge/vercel-cli-preview-env.md` |
 | 노션 archived, archived should be not present, in_trash, 페이지 삭제, 노션 휴지통, 페이지 복원 | `~/.claude/knowledge/notion-api-archived-to-in-trash.md` |
+| 노션 관계 방향성, relation 단방향, dual_property, single_property, 양방향 관계, 관계 링크 수 불일치, 수강생 참여한 콘텐츠, 관계 이관 | `~/.claude/knowledge/notion-relation-directionality.md` |
+| 노션 페이지 ID 파싱, Notion page id, parsePageId, 노션 URL 파싱, 페이지 ID 추출, page_id valid uuid, 32 hex | `~/.claude/knowledge/notion-page-id-parsing.md` |
+| Notion 마크다운 엔드포인트, retrieveMarkdown, updateMarkdown, replace_content, 마크다운 PATCH, unknown 블록, 이미지 재호스팅, 본문 이관 | `~/.claude/knowledge/notion-markdown-endpoint.md` |
+| ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX, strip-only, 파라미터 프로퍼티, Node 네이티브 TS, allowImportingTsExtensions, node 직접 .ts 실행, enum 런타임, tsc 통과인데 런타임 crash | `~/.claude/knowledge/node-ts-strip-only.md` |
+| SPF 레코드 없음, SPF 못 찾음, v=spf1 선행 공백, MAIL FROM SPF, SES SPF 인식 안됨, TXT 값 앞 공백, 가비아 SPF, DKIM 정렬 안됨, TXT 선행 공백 | `~/.claude/knowledge/spf-leading-whitespace.md` |
+| S3 HeadObject 403, GetObject 403 없는 객체, s3:ListBucket 없음, 객체 존재 확인 403, headObject 404 아님, NoSuchKey 403, UnknownError 403, S3 exists 체크 권한 | `~/.claude/knowledge/aws-s3-headobject-403-no-listbucket.md` |
+| WSL 한글 경로 깨짐, powershell -File 인코딩, CP949 ps1, 한글 파일명 PowerPoint 못 엶, wslpath, ASCII 임시폴더 렌더, UTF-8 BOM ps1, 공백 파일명 exe, ffmpeg 한글 경로 | `~/.claude/knowledge/wsl-windows-nonascii-path.md` |
 
 - knowledge 파일은 `~/.claude/knowledge/` 디렉토리에 주제별로 관리한다.
 - 새로운 범용 인사이트가 확인되면 해당 디렉토리에 파일을 추가하고 이 테이블을 업데이트한다.

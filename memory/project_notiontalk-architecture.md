@@ -9,8 +9,13 @@ originSessionId: cece47e0-0dbc-453d-b6e7-5b044b6f2d74
 ```
 notiontalk.com/                 → Vercel: Next.js 랜딩 (notiontalk-landing repo)
 notiontalk.com/contents/<slug>  → rewrite → notiontalk-bullet.pages.dev/<slug>
+notiontalk.com/newsletter/*     → rewrite → newsletter-self-host.vercel.app/newsletter/* (Multi-Zones, 2026-05-27 LIVE)
 notiontalk.com/<legacy-slug>    → redirect → /contents/<new-slug>
 ```
+
+**⚠️ apex 배포 = `vercel --prod` CLI 수동 (git 자동배포 아님)**. main push로는 안 뜸. notiontalk-landing 변경 시 반드시 `cd /mnt/c/dev/notiontalk-landing && vercel --prod --yes`. (canonical 호스트는 **www** — `notiontalk.com`→308→`www.notiontalk.com`. 검증 curl은 www로 칠 것.)
+
+**뉴스레터 존(Multi-Zones)**: 뉴스레터 앱(별도 Vercel `newsletter-self-host`)이 `basePath:/newsletter`+`trailingSlash:true`. apex rewrite는 `/contents` 패턴 미러링 — 확장자자산은 슬래시X, 하위경로 `:path+`→`/:path+/`, 루트는 명시규칙(`:path*` 0+는 루트에서 더블슬래시→무한루프 버그). 신규 페이지 추가 시 rewrite 수정 불필요(`:path+`가 다 잡음).
 
 **Why**:
 - 기존 bullet 단독 호스팅에서 Next.js 랜딩 + bullet 서브디렉토리 분리 구조로 이전

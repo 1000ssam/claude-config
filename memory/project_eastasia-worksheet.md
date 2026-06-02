@@ -1,7 +1,10 @@
 ---
 name: project_eastasia-worksheet
 description: 동아시아사 수업 자료 통합 제작 플로우 — 교과서→기출분석→폼DB까지 자동화 스킬 개발 프로젝트
-type: project
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 80c6a3bd-21bf-4768-bd27-8c288218b19b
 ---
 
 ## 현황
@@ -29,6 +32,16 @@ type: project
 **폼 주제 선택지 설계:**
 - 기출 폼: 단원명 그대로 (바이트 절약)
 - 성찰 폼: 핵심 질문 포괄 주제, 짧고 가치 드러나게 (생기부 바이트 고려)
+
+## 실제 산출물·정정 (2026-05-27, 주제 08)
+
+- **교과서/기출 폴더 실제 경로**: `/mnt/c/Users/user/Inbox/Desktop/동아시아사 수업 자료/` (OneDrive 아님). 08 기출 스크린샷: `08_기출_스크린샷/`.
+- **주제 08 3차시 분할**: 1차시 pp.102~105(교역 관계), 2차시 pp.106~107(은 유통), 3차시 pp.108~111(문물교류·제한무역).
+  - 1차시 page: `36bdd1dc-d644-81aa-86d5-d78c84a6acae` / 2차시 page: `36ddd1dc-d644-8162-9ceb-c200f45c8d52` (둘 다 완료). 3차시 TODO.
+  - 페이지 제목 규칙(실제): `08. 교역망의 발달과 은 유통 (N차시: 부제)`.
+- **🚨 폼 DB 실제 설계 = 수식 없음**: 핸드오프·스킬 STEP4는 학번/학급/영역 rollup + 누가기록 formula를 말하지만, **실제 1·2차시 폼 DB는 수식/롤업이 전혀 없다**. 구조 = `제출 제목`(title) + 문항별 `rich_text`(예 "2025 9월모평 12번") + `관련 학생`(relation, **single_property**) + `주제`(multi_select 1개="08. 교역망의 발달과 은 유통") + `답안 메모`(rich_text). → [[reference_notion-formula-api-relation]] 함정 자체가 발생 안 함. 3차시도 이 구조 복제할 것.
+- **createDatabase relation 함정**: API 2026-03-11에서 relation 속성 정의에 `database_id` 쓰면 `400 relation.data_source_id should be defined`. **`data_source_id`(DS id)를 써야 함**. 학생 명렬표 DS=`2eedd1dc-d644-81b7-814d-000b7c0ba6e2`.
+- **notion-api.mjs createDatabase 부작용**: 2-step(POST /databases → PATCH props). PATCH 실패 시 빈(Name만) **고아 DB가 남음** → 재시도하면 DB 2개. 정리: `DELETE /blocks/{dbId}`.
 
 ## 추후 과제
 

@@ -261,3 +261,30 @@ Notion Workers(ntn CLI)로 생기부 초안 생성 워커를 만들면서 연쇄
 - **Claude API 모델 ID는 `/v1/models` 엔드포인트로 확인하라.** 날짜 접미사 유무가 모델마다 다르다.
 - **워커 삭제 시 환경변수도 함께 삭제된다.** 재배포 후 `ntn workers env set` 필수.
 - **외부 API를 호출하는 코드에는 반드시 재시도 로직을 넣어라.** 특히 rate limit(429)과 서버 에러(5xx).
+
+## 10. WSL/Windows가 공유하는 node_modules에서 rollup native 바이너리 핑퐁
+
+### 문제
+`/mnt/c/dev/wee-log-ai`(WSL/Windows 공유 경로)에서 작업 중, WSL에서 `npm run build` 시도 → `Cannot find module @rollup/rollup-linux-x64-gnu`. 해결하려고 WSL에서 `npm i --no-save @rollup/rollup-linux-x64-gnu` 실행 → WSL 빌드 OK. 그런데 다음 순간 Windows에서 `npm run dev` 실행 시 `Cannot find module @rollup/rollup-win32-x64-msvc` 발생. Phase 3 코드 구현 후 사용자 실행 검증이 즉시 막힘.
+
+### 원인
+- 알려진 npm 버그(#4828): 플랫폼별 optional dependencies가 lockfile 생성 OS와 다를 때 누락된다.
+- rollup 4.x는 OS별 native 바이너리를 별도 패키지(`@rollup/rollup-<os>-<arch>-<abi>`)로 배포.
+- WSL/Windows가 같은 node_modules를 공유하면 한쪽에서 `npm i`가 자기 OS 바이너리만 정착시키면서 다른 OS 바이너리는 사라지거나 미설치 상태가 됨.
+
+### 해결
+양쪽에서 **누락된 OS 바이너리만 `--no-save`로 추가** — lockfile 안 건드림.
+```bash
+# WSL
+npm i --no-save @rollup/rollup-linux-x64-gnu
+
+# PowerShell
+npm i --no-save @rollup/rollup-win32-x64-msvc
+```
+1회씩 추가하면 두 바이너리가 공존해 이후 양쪽 명령이 정상 동작. `rm -rf node_modules && npm i`로 깨끗이 재설치도 가능하지만, 한쪽에서 재설치하면 다시 한쪽 바이너리만 남는 핑퐁이 재발하므로 차선.
+
+### 교훈
+- **공유 node_modules에 `npm i`는 가급적 한쪽에서만** — 검증 자동화 욕심에 WSL에서 `npm run build` 돌리려고 native bin 설치하면 Windows 측이 깨질 수 있다.
+- **WSL에서는 type-check까지만**, 빌드·dev·런타임은 Windows로 한정하는 게 가장 안전. 자동화가 꼭 필요하면 양 OS 바이너리를 모두 한 번씩 `--no-save`로 깔아둔 상태를 유지.
+- **임시 해결(npm i --no-save) 후엔 반대 OS 검증도 같이 돌려라** — 한쪽 OK만 보고 보고하면 사용자가 반대 OS에서 다시 막힌다 (이번 케이스).
+- **knowledge 라우터에 `rollup`/`MODULE_NOT_FOUND rollup`/`npm 4828` 등 키워드 등록**해서 다음에 비슷한 에러가 뜨면 바로 검색되게.
