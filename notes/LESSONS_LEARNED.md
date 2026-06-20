@@ -329,3 +329,24 @@ npm i --no-save @rollup/rollup-win32-x64-msvc
 - 검증 대상은 "고친 곳"이 아니라 "고침이 만든 새로운 전체 상태"다. 문항·코드·설정 모두 동일.
 - 생성자와 검수자는 컨텍스트를 분리해야 한다. 같은 컨텍스트의 자기 검수는 자기 결함에 눈멀다.
 - 규칙 기계 적용(예: '다음' 일괄 삭제)은 부수 효과(지시어 소실)를 동반한다 — 치환 후 의미 재검토 필수.
+
+## 13. config-sync push가 대용량 바이너리에서 무한정 멈춤 — GitHub 100MB 한도 + notes/ 통째 미러링
+
+### 문제
+`/sync-push`(config-sync.js)가 커밋은 생성했는데 `git push`에서 끝없이 멈춤(ahead 1 고정, 60초+ 무응답). 처음엔 HTTPS 인증 대기로 오인했으나 `credential.helper store`·`gh auth` 모두 정상이었다.
+
+### 원인
+- `/sync-push`는 `/mnt/c/dev/notes/`를 **통째로 미러링**한다. 프린터 디버깅 때 풀어둔 `notes/kyocera/`에 248MB `kxdriver.zip`(+ VC_redist.exe·.XMU 등 합 ~340MB, 파일 ~2,600개)이 섞여 있었다.
+- **GitHub는 100MB 초과 단일 파일을 거부**한다 → 해당 blob 업로드에서 행. 커밋은 로컬에만 남고(미push) 원격엔 무영향이라 "ahead 1"로 고정.
+- config-repo `.gitignore`에 바이너리 제외 규칙이 없어 자동 sync(PreCompact 훅)가 매 회 재유입시켰다.
+
+### 해결
+- 멈춘 push/node 종료. ⚠️ `pkill -f "config-sync.js"` / `pkill -f "git push..."`는 **명령줄에 같은 문자열이 든 호출 셸 자신까지 죽여** exit 144로 중단됨 → 자기매칭 회피 패턴(`git-remote-http[s]` 처럼 `[x]` 트릭)으로만 조회·종료.
+- `.gitignore`에 `notes/kyocera/`, `*.exe`, `*.msi` 추가 → 영구 차단(자동 sync 재발 방지).
+- `git reset --mixed HEAD~1`로 멈춘 커밋 되돌리고 정크 제외 재스테이징(3,432→771 파일, 최대 9.3MB) 후 재커밋·정상 push.
+- 커밋 전 검증 절차화: staged 최대 blob 크기 + 금지 경로 grep으로 100MB 초과·정크 혼입 여부 확인.
+
+### 교훈
+- "통째 미러링" 동기화에 임시 대용량 바이너리(드라이버·zip·exe·빌드 산출물)를 흘리면 동기화 전체가 막힌다. notes/ 같은 스크래치 공간엔 `.gitignore` 가드를 선제적으로 둔다.
+- push 행은 인증부터 의심하기 쉽지만, **커밋이 생성됐고 ahead가 고정**이면 인증이 아니라 업로드 단계(대용량/한도 초과)를 먼저 의심한다. `git ls-tree -r -l HEAD | sort`로 큰 blob을 즉시 식별.
+- `pkill -f <pattern>`은 호출 셸의 명령줄도 매칭한다. 패턴에 리터럴이 들어가면 자기 자신을 죽일 수 있으니 `[x]` 등으로 제외하라.

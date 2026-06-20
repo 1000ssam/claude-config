@@ -180,6 +180,7 @@
 - [project_ai-club.md](project_ai-club.md) — 고1 AI 동아리 웹페이지 + Notion 제출 시스템. 4회차까지 완료·배포(NotebookLM 학습자료 제작·공유). Vercel preview env는 빈문자열 브랜치 인자 필요.
 
 ## wee-linked 프로젝트 (상담교사 허브, Next.js+Supabase, wee-linked.com)
+- [project_wee-linked-institutions.md](project_wee-linked-institutions.md) — 게시판 개편(자유수다 학교급 카테고리·정보공유 신설)+유관기관 시/도 지도 디렉토리(/institutions, 시도지도/시군구체크박스/유형 즉시필터). 🟢프로덕션 라이브(main머지+prod). 다음=staff 입력 UI
 - [project_wee-linked-team-profiles.md](project_wee-linked-team-profiles.md) — 소개 운영진 팀 프로필(마스터+운영진 통합). feat/team-profiles(worktree 격리)·운영DB 0025 적용·프리뷰 라이브. main 머지+vercel --prod 대기
 - [project_wee-linked-deploy.md](project_wee-linked-deploy.md) — 🚩 main push≠프로덕션. 머지 후 반드시 `vercel --prod --yes` 실행해야 wee-linked.com 반영. DB는 `supabase db push` 별도. 게시판 카테고리(board_categories)+클린탭 레이아웃 라이브(2026-06-09)
 - [project_wee-linked-content-admin.md](project_wee-linked-content-admin.md) — 정적 페이지 문구 편집(`/admin/content`, site_content 단일테이블 덮어쓰기). 🔒 admin 전용(slowly007+조열음만) — staff로 넓히지 말 것. 0018/0019 라이브
@@ -191,6 +192,7 @@
 - [project_wee-log.md](project_wee-log.md) — 인수인계 시 필수 체크리스트 (API 키 처리 등)
 - [project_wee-log-lingle-design.md](project_wee-log-lingle-design.md) — 앱명 링글+패밀리룩(productName='Wee-Story' 유지 필수·미색배경=패착). v3.1"에어"=순백+블루차분 토큰 **main머지완료**(2026-06-17 9fada44). 원본복구=THEME-HISTORY.md(git checkout d789947)
 - [project_wee-log-subscription-decisions.md](project_wee-log-subscription-decisions.md) — 구독/인증 설계 확정 12개 결정(2026-06-07 grill). 테크빌 대행사+redemption code+멀티시트+1디바이스+서버주도 feature플래그+앱전용 Supabase. 미구현, SUBSCRIPTION_DESIGN.md 반영 필요
+- [project_wee-log-community-bridge.md](project_wee-log-community-bridge.md) — 커뮤니티 탭=위링 웹뷰 임베드+Supabase 세션 다리(feat/community-session-bridge, 미머지). 구현·검증완료 시각QA대기. 🚩다음세션: 권한모델(인증회원만 커뮤니티/그외 칼럼만, 위링작업)+토큰회전 근본해소
 - [feedback_diarization-no-manual-toggle.md](feedback_diarization-no-manual-toggle.md) — STT 화자 분리 '사용자가 화자마다 버튼 누르는' UX 절대 제안 금지. 자동 솔루션 우선, 안 되면 "안 된다"고 답함
 
 ## wee-consent 백엔드 (링글 서버)
