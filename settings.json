@@ -36,7 +36,7 @@
       "Bash"
     ]
   },
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "theme": "light",
   "agentPushNotifEnabled": true,
   "hooks": {

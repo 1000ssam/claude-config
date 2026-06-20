@@ -1,0 +1,13 @@
+import pw from 'file:///home/user/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.js';
+const { chromium } = pw;
+const b=await chromium.launch();
+const p=await (await b.newContext({viewport:{width:1440,height:1100}})).newPage();
+await p.goto('http://localhost:4123/contents/community/meetup-2/',{waitUntil:'networkidle'});
+await p.waitForTimeout(900);
+await p.screenshot({path:'/mnt/c/dev/notes/community-shots/v10-body-desktop.png',fullPage:true});
+console.log('desktop shot');
+const ctx2=await b.newContext({viewport:{width:390,height:844}});const p2=await ctx2.newPage();
+await p2.goto('http://localhost:4123/contents/community/meetup-2/',{waitUntil:'networkidle'});await p2.waitForTimeout(800);
+await p2.screenshot({path:'/mnt/c/dev/notes/community-shots/v10-body-mobile.png',fullPage:true});
+console.log('mobile shot');
+await b.close();console.log('DONE');

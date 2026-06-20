@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>위링 랜딩 — 파스텔 팔레트 미리보기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --font-display: "Pretendard", system-ui, sans-serif;
+    --font-sans: "Pretendard", system-ui, -apple-system, sans-serif;
+    --font-brand: "Jua", "Pretendard", system-ui, sans-serif;
+    --font-hand: "Gaegu", "Pretendard", cursive;
+    --radius: 14px;
+  }
+  body {
+    font-family: var(--font-sans);
+    word-break: keep-all;
+    -webkit-font-smoothing: antialiased;
+    background: #e9e9ee;
+    color: #221d19;
+  }
+  .frame {
+    width: 1180px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+  /* ── 라벨 바 (스크린샷 자체 설명용) ── */
+  .label {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 36px;
+    background: #1b1720; color: #fff;
+  }
+  .label .tag {
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 20px; letter-spacing: -0.01em;
+  }
+  .label .desc { font-size: 14px; color: #c9c2d0; }
+  .swatches { margin-left: auto; display: flex; gap: 6px; }
+  .sw { width: 46px; height: 30px; border-radius: 6px; position: relative; border: 1px solid rgba(255,255,255,.15); }
+  .sw span { position: absolute; bottom: -16px; left: 0; right: 0; text-align: center; font-size: 9px; color: #b7b0bf; letter-spacing: .02em; }
+  .swatches { padding-bottom: 14px; }
+
+  /* ── 헤더 ── */
+  header {
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px; padding: 0 40px;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(8px);
+  }
+  .brand { display: flex; align-items: baseline; gap: 8px; }
+  .brand .mark { font-family: var(--font-brand); font-size: 25px; color: var(--color-brand); }
+  .brand .en { font-size: 13px; font-weight: 600; color: var(--color-muted); }
+  nav.top { display: flex; align-items: center; gap: 4px; }
+  nav.top a {
+    padding: 8px 13px; border-radius: 999px;
+    font-size: 14px; font-weight: 500; color: color-mix(in srgb, var(--color-ink) 80%, transparent);
+    text-decoration: none;
+  }
+  nav.top a:hover { background: var(--color-accent-soft); color: var(--color-ink); }
+  .auth { display: flex; align-items: center; gap: 10px; }
+  .auth .login { font-size: 14px; font-weight: 600; color: color-mix(in srgb, var(--color-ink) 75%, transparent); text-decoration: none; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px; font-weight: 700; cursor: pointer; border: none;
+    font-family: var(--font-sans); text-decoration: none; white-space: nowrap;
+  }
+  .btn-primary { background: var(--color-accent); color: var(--color-ink); }
+  .btn-primary:hover { background: var(--color-accent-strong); }
+  .btn-soft { background: var(--color-accent-soft); color: var(--color-accent-strong); }
+  .btn-sm { padding: 9px 16px; font-size: 13px; }
+  .btn-md { padding: 11px 20px; font-size: 14px; }
+  .btn-lg { padding: 14px 26px; font-size: 16px; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+  .eyebrow { font-family: var(--font-hand); color: var(--color-accent-ink); }
+
+  /* ── 히어로 ── */
+  .hero { position: relative; overflow: hidden; }
+  .hero .grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px; padding: 84px 0 88px; }
+  .hero .eyebrow { font-size: 19px; margin-bottom: 14px; }
+  .hero h1 { font-family: var(--font-display); font-weight: 800; font-size: 54px; line-height: 1.12; letter-spacing: -0.02em; color: var(--color-ink); }
+  .hero p.sub { margin-top: 20px; max-width: 430px; font-size: 18px; line-height: 1.65; color: var(--color-muted); }
+  .hero .cta-row { margin-top: 32px; display: flex; gap: 12px; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(8px); opacity: .5; }
+  .blob.b1 { width: 320px; height: 320px; right: -60px; top: -40px; background: var(--color-accent-soft); }
+  .blob.b2 { width: 240px; height: 240px; left: -80px; bottom: -60px; background: var(--color-sage-soft); }
+
+  /* ── 피처 ── */
+  section.features { padding: 60px 0 56px; }
+  .features .head { text-align: center; margin-bottom: 40px; }
+  .features .eyebrow { font-size: 16px; }
+  .features h2 { font-family: var(--font-display); font-weight: 700; font-size: 36px; letter-spacing: -0.02em; margin-top: 4px; color: var(--color-ink); }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .card {
+    background: var(--color-surface); border: 1px solid var(--color-line);
+    border-radius: var(--radius); padding: 26px;
+    box-shadow: 0 1px 2px rgba(34,29,25,.04), 0 2px 8px -4px rgba(34,29,25,.06);
+  }
+  .chip { width: 54px; height: 54px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .chip.a { background: var(--color-accent-soft); color: var(--color-accent); }
+  .chip.s { background: var(--color-sage-soft); color: var(--color-sage); }
+  .card h3 { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--color-ink); }
+  .card p { margin-top: 8px; font-size: 13.5px; line-height: 1.6; color: var(--color-muted); }
+
+  /* ── 마스터 ── */
+  section.master { padding: 24px 0 56px; }
+  .master .box {
+    display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 40px;
+    background: color-mix(in srgb, var(--color-accent-soft) 50%, var(--color-bg));
+    border: 1px solid var(--color-line); border-radius: 28px; padding: 44px;
+  }
+  .avatar { position: relative; width: 168px; height: 168px; }
+  .avatar .circ {
+    width: 168px; height: 168px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--color-accent-sub) 70%, #fff);
+    color: var(--color-ink); font-family: var(--font-display); font-weight: 800; font-size: 64px;
+  }
+  .avatar .badge {
+    position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; background: var(--color-surface); color: var(--color-ink);
+    font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(34,29,25,.08);
+  }
+  .master .eyebrow { font-size: 16px; }
+  .master h2 { font-family: var(--font-display); font-weight: 700; font-size: 30px; margin-top: 4px; color: var(--color-ink); }
+  .master h2 small { font-size: 19px; color: var(--color-muted); font-weight: 700; }
+  .master .aff { margin-top: 4px; font-size: 14px; color: var(--color-muted); }
+  .master blockquote { margin-top: 20px; font-family: var(--font-hand); font-size: 22px; line-height: 1.5; color: color-mix(in srgb, var(--color-ink) 90%, transparent); }
+  .master .intro { margin-top: 14px; max-width: 560px; font-size: 14px; line-height: 1.65; color: var(--color-muted); }
+  .master .more { margin-top: 24px; }
+
+  /* ── 클로징 CTA ── */
+  section.closing { padding: 8px 0 64px; }
+  .closing .band {
+    position: relative; overflow: hidden; border-radius: 28px;
+    background: var(--cta-grad);
+    padding: 56px 40px; text-align: center; color: var(--color-ink);
+    box-shadow: 0 10px 30px -14px color-mix(in srgb, var(--color-accent) 70%, transparent);
+  }
+  .closing .band .ring { position: absolute; border-radius: 50%; }
+  .closing .band .r1 { width: 160px; height: 160px; left: -40px; top: -40px; background: color-mix(in srgb, #fff 55%, transparent); }
+  .closing .band .r2 { width: 190px; height: 190px; right: -32px; bottom: -48px; background: color-mix(in srgb, #fff 38%, transparent); }
+  .closing .band .eye { font-family: var(--font-hand); font-size: 18px; color: var(--color-accent-ink); position: relative; }
+  .closing .band h2 { font-family: var(--font-display); font-weight: 800; font-size: 36px; line-height: 1.25; margin: 10px auto 0; max-width: 620px; position: relative; }
+  .closing .band p { margin: 16px auto 0; max-width: 430px; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-ink) 72%, transparent); position: relative; }
+  .closing .band .more { margin-top: 30px; position: relative; }
+  .closing .band .btn-white { background: #fff; color: var(--color-ink); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+/* ── 테마 토큰: 실제 globals.css 의 --color-* 와 1:1 ──
+   sage = 보조 색 계열(원본은 세이지그린). 파스텔안에서는 하늘/분홍 보조로 재배정. */
+/* 방향: 배경 = 흰색/아주 옅은 미색. 포인트색 = 파스텔.
+   - 큰 면(버튼·칩·일러스트·CTA)은 파스텔 그대로.
+   - 작은 강조 글자(아이브로우 등)는 가독성을 위해 같은 계열 한 톤 진한 --color-accent-ink 사용.
+   - 버튼 글자는 흰색 대신 진한 잉크색. */
+const THEMES = [
+  {
+    id: "A",
+    tag: "A안 — 파스텔 분홍 포인트 (하늘 보조)",
+    desc: "흰 배경 · 솜사탕 분홍이 포인트",
+    t: {
+      "--color-bg": "#ffffff", "--color-surface": "#ffffff",
+      "--color-brand": "#ed9bba", "--color-accent": "#f2a7c3", "--color-accent-strong": "#e889ae",
+      "--color-accent-ink": "#c25e86",
+      "--color-accent-sub": "#f8cbdc", "--color-accent-soft": "#fcedf3",
+      "--color-sage": "#aad4ef", "--color-sage-soft": "#eaf4fb",
+      "--color-ink": "#2a2530", "--color-muted": "#8c8590", "--color-line": "#ece6e9"
+    },
+    art: { lL:"#F8CBDC", lD:"#ED9BBA", rL:"#C8E3F5", rD:"#9CCAEC", heart:"#F2A7C3", bubbleL:"#FBE3EC", dotL:"#ED9BBA", bubbleR:"#E4F1FA", dotR:"#9CCAEC", cardStroke:"#F3E7EC" },
+    cta: "linear-gradient(120deg, #fbd7e4, #d4e9f8)",
+    swKeys: ["--color-bg","--color-accent","--color-accent-sub","--color-sage","--color-accent-ink"]
+  },
+  {
+    id: "B",
+    tag: "B안 — 파스텔 하늘 포인트 (분홍 보조)",
+    desc: "흰 배경 · 맑은 하늘이 포인트",
+    t: {
+      "--color-bg": "#ffffff", "--color-surface": "#ffffff",
+      "--color-brand": "#7db6e2", "--color-accent": "#9ccaec", "--color-accent-strong": "#7db6e2",
+      "--color-accent-ink": "#3d7fb8",
+      "--color-accent-sub": "#c8e3f5", "--color-accent-soft": "#eaf4fb",
+      "--color-sage": "#f2a7c3", "--color-sage-soft": "#fcedf3",
+      "--color-ink": "#232a30", "--color-muted": "#828a91", "--color-line": "#e6ebef"
+    },
+    art: { lL:"#C8E3F5", lD:"#9CCAEC", rL:"#F8CBDC", rD:"#ED9BBA", heart:"#9CCAEC", bubbleL:"#E4F1FA", dotL:"#7DB6E2", bubbleR:"#FBE3EC", dotR:"#ED9BBA", cardStroke:"#E2EDF5" },
+    cta: "linear-gradient(120deg, #d4e9f8, #fbd7e4)",
+    swKeys: ["--color-bg","--color-accent","--color-accent-sub","--color-sage","--color-accent-ink"]
+  },
+  {
+    id: "C",
+    tag: "C안 — 파스텔 종합 (분홍+하늘+연보라)",
+    desc: "흰 배경 · 세 파스텔을 함께",
+    t: {
+      "--color-bg": "#ffffff", "--color-surface": "#ffffff",
+      "--color-brand": "#c9a0d8", "--color-accent": "#c2aee8", "--color-accent-strong": "#ad96de",
+      "--color-accent-ink": "#7e5fc0",
+      "--color-accent-sub": "#ddd0f2", "--color-accent-soft": "#f2ecfb",
+      "--color-sage": "#aad4ef", "--color-sage-soft": "#eaf4fb",
+      "--color-ink": "#272231", "--color-muted": "#888194", "--color-line": "#ece6f1"
+    },
+    art: { lL:"#F8CBDC", lD:"#ED9BBA", rL:"#C8E3F5", rD:"#9CCAEC", heart:"#C2AEE8", bubbleL:"#FBE3EC", dotL:"#ED9BBA", bubbleR:"#E4F1FA", dotR:"#9CCAEC", cardStroke:"#ECE3F4" },
+    cta: "linear-gradient(120deg, #fbd7e4 0%, #dcc9f0 50%, #cfe6f6 100%)",
+    swKeys: ["--color-bg","--color-accent","--color-accent-sub","--color-sage","--color-accent-ink"]
+  }
+];
+
+const SW_LABEL = {
+  "--color-bg":"배경(순백)", "--color-accent":"파스텔 포인트", "--color-accent-sub":"보조 파스텔",
+  "--color-sage":"보조 색", "--color-accent-ink":"강조 글자"
+};
+
+const ICON = {
+  users: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  feather: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>',
+  folder: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2"/><path d="M2 11h17a2 2 0 0 1 2 2l-1.5 5.5a2 2 0 0 1-2 1.5H4"/><path d="M12 17.5 10.5 16a1.4 1.4 0 0 1 2-2 1.4 1.4 0 0 1 2 0 1.4 1.4 0 0 1 0 2z"/></svg>',
+  app: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20"/><circle cx="5" cy="6.5" r=".6" fill="currentColor"/><circle cx="7.5" cy="6.5" r=".6" fill="currentColor"/></svg>'
+};
+
+const FEATURES = [
+  { icon:"users",  cls:"a", title:"커뮤니티",      desc:"사례와 마음을 나누는 상담교사 회원제 포럼. 혼자 끌어안던 고민을 함께 풀어요." },
+  { icon:"feather",cls:"s", title:"칼럼",          desc:"현장 상담 인사이트와 사회정서교육 이야기. 따뜻한 글로 서로의 시선을 넓혀요." },
+  { icon:"folder", cls:"a", title:"업무 자료실",    desc:"바로 쓰는 상담 활동지·자료를 나누는 공간. 검증된 자료를 손쉽게 찾고 공유해요." },
+  { icon:"app",    cls:"s", title:"Wee-Story 앱",   desc:"전문상담교사를 위한 상담 기록 관리 데스크톱 앱. 안전하게 기록하고 돌아봐요." }
+];
+
+function heroArt(a) {
+  return `<svg viewBox="0 0 360 320" width="100%" style="filter:drop-shadow(0 18px 30px rgba(80,60,80,.16))">
+    <rect x="24" y="40" width="312" height="232" rx="32" fill="#FFFDFB"/>
+    <rect x="24" y="40" width="312" height="232" rx="32" fill="none" stroke="${a.cardStroke}" stroke-width="2"/>
+    <circle cx="118" cy="150" r="30" fill="${a.lL}"/>
+    <path d="M78 214c0-26 18-44 40-44s40 18 40 44z" fill="${a.lD}"/>
+    <circle cx="242" cy="150" r="30" fill="${a.rL}"/>
+    <path d="M202 214c0-26 18-44 40-44s40 18 40 44z" fill="${a.rD}"/>
+    <path d="M180 116c8-14 30-12 30 6 0 14-22 26-30 32-8-6-30-18-30-32 0-18 22-20 30-6z" fill="${a.heart}"/>
+    <g><rect x="70" y="74" width="58" height="34" rx="17" fill="${a.bubbleL}"/>
+      <circle cx="88" cy="91" r="3.5" fill="${a.dotL}"/><circle cx="100" cy="91" r="3.5" fill="${a.dotL}"/><circle cx="112" cy="91" r="3.5" fill="${a.dotL}"/></g>
+    <g><rect x="234" y="74" width="58" height="34" rx="17" fill="${a.bubbleR}"/>
+      <circle cx="252" cy="91" r="3.5" fill="${a.dotR}"/><circle cx="264" cy="91" r="3.5" fill="${a.dotR}"/><circle cx="276" cy="91" r="3.5" fill="${a.dotR}"/></g>
+  </svg>`;
+}
+
+function buildMock(th) {
+  const cards = FEATURES.map(f => `
+    <div class="card">
+      <div class="chip ${f.cls}">${ICON[f.icon]}</div>
+      <h3>${f.title}</h3>
+      <p>${f.desc}</p>
+    </div>`).join("");
+
+  const swatches = th.swKeys.map(k => `<div class="sw" style="background:${th.t[k]}"><span>${SW_LABEL[k]}<br>${th.t[k]}</span></div>`).join("");
+
+  return `
+  <div class="label">
+    <div>
+      <div class="tag">${th.tag}</div>
+      <div class="desc">${th.desc}</div>
+    </div>
+    <div class="swatches">${swatches}</div>
+  </div>
+
+  <header>
+    <div class="brand"><span class="mark">위링</span><span class="en">WEE-linked</span></div>
+    <nav class="top">
+      <a>커뮤니티</a><a>칼럼</a><a>자료실</a><a>Wee-Story 앱</a><a>소개</a>
+    </nav>
+    <div class="auth"><a class="login">로그인</a><a class="btn btn-primary btn-sm">함께하기</a></div>
+  </header>
+
+  <section class="hero">
+    <span class="blob b1"></span><span class="blob b2"></span>
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="eyebrow">위클래스의 ‘위’, 그리고 우리의 ‘we’</p>
+          <h1>우리,<br>마음으로 잇다</h1>
+          <p class="sub">상담교사들이 따뜻하게 이어지는 공간, 위링.<br>사례와 마음, 자료와 노하우를 함께 나눠요.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-lg">위링 함께하기</a>
+            <a class="btn btn-soft btn-lg">둘러보기</a>
+          </div>
+        </div>
+        <div>${heroArt(th.art)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">위링이 건네는 것들</p>
+        <h2>상담교사의 하루를 가볍게</h2>
+      </div>
+      <div class="cards">${cards}</div>
+    </div>
+  </section>
+
+  <section class="master">
+    <div class="wrap">
+      <div class="box">
+        <div class="avatar">
+          <div class="circ">조</div>
+          <span class="badge">위링 마스터</span>
+        </div>
+        <div>
+          <p class="eyebrow">함께 걷는 사람</p>
+          <h2>조열음 <small>선생님</small></h2>
+          <p class="aff">서울시교육청 초등학교 전문상담교사</p>
+          <blockquote>“상담교사는 따듯함으로 살아간다고 자부합니다.”</blockquote>
+          <p class="intro">아이들의 작은 행동과 제스처에서 마음을 읽고, 오랜 시간 곁에서 변화를 함께 걸어온 전문상담교사예요. 학생 개인·집단 상담은 물론 학부모와 동료 교사까지 살피며, 심리교육 시간에 부를 마음 건강 노래를 직접 짓기도 합니다.</p>
+          <div class="more"><a class="btn btn-primary btn-md">마스터 이야기 더 보기</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <div class="wrap">
+      <div class="band">
+        <span class="ring r1"></span><span class="ring r2"></span>
+        <p class="eye">커뮤니티 · 칼럼 · 자료실, 곧 문을 열어요</p>
+        <h2>혼자 끌어안지 말아요, 위링에서 함께해요</h2>
+        <p>상담교사라면 누구나. 마음을 나누고 자료를 주고받는 가장 따뜻한 공간을 준비하고 있어요.</p>
+        <div class="more"><a class="btn btn-white btn-lg">위링 이야기 보기</a></div>
+      </div>
+    </div>
+  </section>`;
+}
+
+const root = document.getElementById("root");
+root.innerHTML = THEMES.map(th => {
+  const vars = Object.entries(th.t).map(([k,v]) => `${k}:${v}`).join(";");
+  return `<section class="frame" id="frame-${th.id}" style="${vars};--cta-grad:${th.cta}">${buildMock(th)}</section>`;
+}).join('<div style="height:28px"></div>');
+</script>
+</body>
+</html>

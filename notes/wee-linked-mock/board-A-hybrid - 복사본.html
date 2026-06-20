@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Batang:wght@400;700&display=swap">
+<style>
+  :root{
+    --bg:#f6f2ee; --surface:#ffffff; --ink:#1f1a17; --muted:#9a8d83;
+    --line:#efe7df; --line2:#f2ece5; --accent:#cf744f; --brand:#e89b7b;
+    --chip-bg:#eef4ef; --chip-fg:#5c8268;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Pretendard",sans-serif;background:var(--bg);color:var(--ink);}
+  .serif{font-family:"Gowun Batang",serif;font-weight:700;}
+
+  header.site{position:sticky;top:0;z-index:50;background:rgba(246,242,238,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(239,231,223,.7);}
+  .wrap{max-width:1024px;margin:0 auto;padding:0 20px;}
+  .site .bar{height:64px;display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-family:"Jua";font-size:24px;color:var(--brand);display:flex;align-items:baseline;gap:8px;}
+  .brand small{font-family:"Pretendard";font-weight:500;font-size:14px;color:var(--muted);}
+  nav.main{display:flex;gap:6px;align-items:center;}
+  nav.main a{font-size:14px;color:var(--ink);opacity:.8;padding:8px 12px;border-radius:999px;font-weight:500;}
+  .auth{display:flex;gap:14px;align-items:center;}
+  .auth .login{font-size:14px;color:var(--ink);opacity:.8;}
+  .cta{background:var(--accent);color:#fff;border-radius:10px;padding:9px 18px;font-size:14px;font-weight:700;}
+
+  /* 고정 탭바 */
+  .sticky{position:sticky;top:64px;z-index:40;background:rgba(246,242,238,.9);backdrop-filter:blur(8px);}
+  .tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);}
+  .tabs a{font-size:14px;color:var(--muted);padding:13px 0;font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px;}
+  .tabs a.on{color:var(--ink);border-color:var(--accent);font-weight:700;}
+  .cats{display:flex;gap:9px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(239,231,223,.6);font-size:14px;}
+  .cats a{color:var(--muted);}
+  .cats a.on{color:var(--accent);font-weight:700;}
+  .cats .dot{color:#ddd0c4;}
+
+  main .wrap{padding-top:34px;padding-bottom:40px;}
+  .ttl{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;}
+  .ttl h1{font-size:30px;font-weight:800;letter-spacing:-.025em;}
+  .ttl p{color:var(--muted);font-size:15px;margin-top:6px;}
+  .write{background:var(--accent);color:#fff;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:700;}
+
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(31,26,23,.04);}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line2);transition:background .15s;}
+  .row:last-child{border-bottom:0;}
+  .row:hover{background:#faf6f2;}
+  .row .t{display:flex;gap:9px;align-items:center;min-width:0;}
+  .row .t .name{font-weight:600;font-size:15.5px;color:var(--ink);}
+  .chip{background:var(--chip-bg);color:var(--chip-fg);border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600;flex:none;}
+  .cnt{color:var(--accent);font-weight:700;font-size:13px;display:inline-flex;gap:3px;align-items:center;}
+  .meta{display:flex;gap:11px;align-items:center;color:var(--muted);font-size:13px;flex:none;}
+  .meta .who{color:#6f635b;font-weight:600;}
+  .ic{display:inline-flex;gap:4px;align-items:center;}
+  svg{display:inline-block;vertical-align:-1px;}
+</style></head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <div class="brand">위링 <small>WEE-linked</small></div>
+    <nav class="main"><a>커뮤니티 ⌄</a><a>칼럼</a><a>자료실</a><a>Wee-Story 앱</a><a>소개</a></nav>
+    <div class="auth"><span class="login">로그인</span><span class="cta">회원가입</span></div>
+  </div>
+</header>
+
+<div class="sticky">
+  <div class="wrap">
+    <div class="tabs"><a>전체</a><a>공지사항</a><a class="on">자유수다</a><a>질문있어요</a><a>사례나눔</a></div>
+    <div class="cats"><a class="on">전체</a><span class="dot">·</span><a>일상</a><span class="dot">·</span><a>고민</a><span class="dot">·</span><a>자랑</a><span class="dot">·</span><a>연수후기</a><span class="dot">·</span><a>추천</a></div>
+  </div>
+</div>
+
+<main><div class="wrap">
+  <div class="ttl">
+    <div><h1>자유수다</h1><p>상담교사들의 일상과 소통 공간</p></div>
+    <span class="write"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> 글쓰기</span>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <div class="t"><span class="chip">일상</span><span class="name">상담실 환경 꾸미기, 작은 변화 공유해요</span></div>
+      <div class="meta"><span class="who">미소쌤</span><span>·</span><span>3일 전</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 0</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> 19</span></div>
+    </div>
+    <div class="row">
+      <div class="t"><span class="chip">고민</span><span class="name">새 학기 첫 주, 다들 어떻게 보내고 계세요?</span><span class="cnt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> 2</span></div>
+      <div class="meta"><span class="who">하늘</span><span>·</span><span>4일 전</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 0</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> 45</span></div>
+    </div>
+    <div class="row">
+      <div class="t"><span class="chip">자랑</span><span class="name">학부모 상담 후기 — 길게 통화한 날</span></div>
+      <div class="meta"><span class="who">연우샘</span><span>·</span><span>5일 전</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 12</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> 88</span></div>
+    </div>
+    <div class="row">
+      <div class="t"><span class="chip">연수후기</span><span class="name">SEL 직무연수 다녀온 솔직 후기 정리</span></div>
+      <div class="meta"><span class="who">바다</span><span>·</span><span>1주 전</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 24</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> 131</span></div>
+    </div>
+    <div class="row">
+      <div class="t"><span class="chip">추천</span><span class="name">관계 회복에 좋은 보드게임 추천해요</span><span class="cnt"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> 5</span></div>
+      <div class="meta"><span class="who">윤쌤</span><span>·</span><span>1주 전</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 31</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> 204</span></div>
+    </div>
+    <div class="row">
+      <div class="t"><span class="chip">일상</span><span class="name">오늘 아이가 건넨 쪽지 한 장에 울컥했네요</span></div>
+      <div class="meta"><span class="who">서연</span><span>·</span><span>2주 전</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 57</span><span class="ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> 312</span></div>
+    </div>
+  </div>
+</div></main>
+
+</body></html>

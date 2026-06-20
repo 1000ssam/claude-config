@@ -1,0 +1,7 @@
+﻿=== finalize log ===
+[10:41:11] Elevated: True
+[10:41:17] Added driver (from store): Kyocera TASKalfa 3554ci KX
+[10:41:17] Port present: TCPIP_10.51.90.63
+[10:41:38] Added printer Kyocera TASKalfa 3554ci (LAN) on TCPIP_10.51.90.63
+[10:41:42] Test page sent (return=0) -> check copier tray
+[10:41:42] RESULT: DONE | printer='Kyocera TASKalfa 3554ci (LAN)' driver='Kyocera TASKalfa 3554ci KX' port=TCPIP_10.51.90.63 (10.51.90.63)

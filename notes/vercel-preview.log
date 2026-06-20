@@ -1,0 +1,105 @@
+Retrieving project…
+Deploying 1000s-projects-a51f0c2a/notiontalk-landing
+Uploading [--------------------] (0.0B/7.2MB)
+Uploading [=====---------------] (1.8MB/7.2MB)
+Uploading [==========----------] (3.6MB/7.2MB)
+Uploading [===============-----] (5.4MB/7.2MB)
+Uploading [====================] (7.2MB/7.2MB)
+Inspect: https://vercel.com/1000s-projects-a51f0c2a/notiontalk-landing/9wDDyyh4LSHF4pqujcayfXsU64vY [5s]
+Preview: https://notiontalk-landing-kdt3intg3-1000s-projects-a51f0c2a.vercel.app [5s]
+Building...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Downloading 128 deployment files...
+Building: Restored build cache from previous deployment (7NwBDfk8owD2v4CDsbNZjjZ7RBYn)
+Building: Running "vercel build"
+Building: Vercel CLI 54.10.2
+Building: Installing dependencies...
+Building: up to date in 769ms
+Building: 144 packages are looking for funding
+Building: run `npm fund` for details
+Building: Detected Next.js version: 16.2.3
+Building: Running "npm run build"
+Building: > notiontalk-landing@0.1.0 prebuild
+Building: > node scripts/sync-creators.mjs && node scripts/sync-community.mjs
+Building: [sync-creators] DB: [REDACTED]
+Building: [sync-creators] 3 rows
+Building: chemi 실사 80550B
+Building: gomgom 실사 53702B
+Building: 1000 실사 137667B
+Building: 1000 캐릭터 34478B
+Building: [sync-creators] wrote 3 public + 3 email(s) (private)
+Building: [sync-community] DB: 323dd1dc-d644-8049-8131-fc5f2fd5de36
+Building: [sync-community] 5 rows
+Building: reading-challenge cover 173726B
+Building: running-challenge cover 148774B
+Building: meetup-2 cover 57372B
+Building: meetup-2 gallery 27 imgs
+Building: meetup-1 cover 153410B
+Building: meetup-1 gallery 2 imgs
+Building: [sync-community] wrote 4 events
+Building: > notiontalk-landing@0.1.0 build
+Building: > next build
+Building: Applying modifyConfig from Vercel
+Building: ▲ Next.js 16.2.3 (Turbopack)
+Building: Creating an optimized production build ...
+Building: ✓ Compiled successfully in 5.8s
+Building: Running TypeScript ...
+Building: Finished TypeScript in 3.9s ...
+Building: Collecting page data using 1 worker ...
+Building: Generating static pages using 1 worker (0/18) ...
+Building: Generating static pages using 1 worker (4/18)
+Building: Generating static pages using 1 worker (8/18)
+Building: Generating static pages using 1 worker (13/18)
+Building: ✓ Generating static pages using 1 worker (18/18) in 397ms
+Building: Finalizing page optimization ...
+Building: Running onBuildComplete from Vercel
+Building: Route (app)                                Revalidate  Expire
+Building: ┌ ○ /
+Building: ├ ○ /_not-found
+Building: ├ ƒ /api/notion-webhook
+Building: ├ ƒ /api/offer
+Building: ├ ○ /apple-icon.png
+Building: ├ ○ /contents/about-us
+Building: ├ ○ /contents/community
+Building: ├ ● /contents/community/[slug]
+Building: │ ├ /contents/community/meetup-1
+Building: │ ├ /contents/community/reading-challenge
+Building: │ ├ /contents/community/running-challenge
+Building: │ └ /contents/community/meetup-2
+Building: ├ ○ /icon.png
+Building: ├ ○ /robots.txt
+Building: ├ ○ /sitemap-content.xml                           1h      1y
+Building: ├ ○ /sitemap-landing.xml
+Building: └ �� /sitemap.xml
+Building: ○  (Static)   prerendered as static content
+Building: ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+Building: ƒ  (Dynamic)  server-rendered on demand
+Building: Build Completed in /vercel/output [25s]
+Building: Deploying outputs...
+[2K[1A[2K[GPreview: https://notiontalk-landing-kdt3intg3-1000s-projects-a51f0c2a.vercel.app [54s]
+Completing...
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_9wDDyyh4LSHF4pqujcayfXsU64vY",
+    "url": "https://notiontalk-landing-kdt3intg3-1000s-projects-a51f0c2a.vercel.app",
+    "inspectorUrl": "https://vercel.com/1000s-projects-a51f0c2a/notiontalk-landing/9wDDyyh4LSHF4pqujcayfXsU64vY",
+    "readyState": "READY",
+    "target": null,
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_9wDDyyh4LSHF4pqujcayfXsU64vY"
+  },
+  "message": "Deployment notiontalk-landing-kdt3intg3-1000s-projects-a51f0c2a.vercel.app ready.",
+  "next": [
+    {
+      "command": "vercel inspect notiontalk-landing-kdt3intg3-1000s-projects-a51f0c2a.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}

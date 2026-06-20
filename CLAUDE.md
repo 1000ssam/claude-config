@@ -147,6 +147,7 @@ git worktree remove /mnt/c/dev/<repo-name>-<task>
 | iOS 줌, iOS 확대, input 확대, textarea 줌, 모바일 줌 | `~/.claude/knowledge/ios-input-zoom.md` |
 | WSL 바이너리, WSL native module, .node 파일 Windows, better-sqlite3 WSL, 네이티브 모듈 WSL, rollup-linux-x64-gnu, rollup-win32-x64-msvc, optional dependencies 누락, npm 4828, MODULE_NOT_FOUND rollup | `~/.claude/knowledge/wsl-native-module.md` |
 | npm install 0바이트, release-assets.githubusercontent.com 차단, ffmpeg-static postinstall 타임아웃, prebuilt 다운로드 실패, GitHub 릴리스 에셋 차단, node_modules 롤백, --ignore-scripts 우회 | `~/.claude/knowledge/github-release-cdn-block.md` |
+| libsodium-wrappers ERR_MODULE_NOT_FOUND, libsodium.mjs 누락, modules-esm 형제 모듈, sealed box ESM, crypto_box_seal import 실패, exports import vs require 조건, libsodium 브라우저 셀프호스팅 | `~/.claude/knowledge/libsodium-wrappers-esm-sibling.md` |
 | Claude 디자인, 아티팩트 프롬프트, 디자인 시스템 프롬프트, Tweaks 프로토콜, AI 슬롭, starter component, deck_stage | `~/.claude/knowledge/claude-design-system-prompt.md` |
 | 스레드 문투, 스레드 톤, 글 고쳐, 문투에 맞게, 스레드 작성, 스레드 스타일 | `~/.claude/knowledge/threads-writing-style.md` |
 | PowerShell symlink, mklink, 심볼릭 링크 권한, 배치 파일 인코딩, symlink 권한 | `~/.claude/knowledge/powershell-symlink.md` |
@@ -159,6 +160,15 @@ git worktree remove /mnt/c/dev/<repo-name>-<task>
 | SPF 레코드 없음, SPF 못 찾음, v=spf1 선행 공백, MAIL FROM SPF, SES SPF 인식 안됨, TXT 값 앞 공백, 가비아 SPF, DKIM 정렬 안됨, TXT 선행 공백 | `~/.claude/knowledge/spf-leading-whitespace.md` |
 | S3 HeadObject 403, GetObject 403 없는 객체, s3:ListBucket 없음, 객체 존재 확인 403, headObject 404 아님, NoSuchKey 403, UnknownError 403, S3 exists 체크 권한 | `~/.claude/knowledge/aws-s3-headobject-403-no-listbucket.md` |
 | WSL 한글 경로 깨짐, powershell -File 인코딩, CP949 ps1, 한글 파일명 PowerPoint 못 엶, wslpath, ASCII 임시폴더 렌더, UTF-8 BOM ps1, 공백 파일명 exe, ffmpeg 한글 경로 | `~/.claude/knowledge/wsl-windows-nonascii-path.md` |
+| tailwind-merge 충돌, twMerge bg 충돌, cn 배경색 사라짐, bg-primary 탈락, bg-gradient 충돌, shadcn 그라데이션 버튼, 버튼 흰색 렌더, 클래스 머지 누락, background-color background-image 공존 | `~/.claude/knowledge/tailwind-merge-bg-conflict.md` |
+| 갑자기 인쇄 안됨, 프린터 무반응, 프린터 인쇄 안돼, WSD 인쇄 끊김, 프린터 이름 (5) 복사본, Microsoft IPP Class Driver, WSD 포트, 복합기 IP 바뀜, Kyocera 인쇄 안됨, 고정 IP 프린터 재등록, RAW 9100, 표준 TCP/IP 포트 프린터, 프린터 정상인데 인쇄 안됨 | `~/.claude/knowledge/wsd-printer-sudden-failure.md` |
+| tsc -b emit, composite 산출물, .d.ts 워킹트리 생성, tsc --noEmit composite, 타입체크 emit, stale js 서빙, useToast must be used within ToastProvider, useXxx must be used within Provider, Context Provider 중복 모듈, use-toast.js vs ts, Vite stale js, git status 깨끗한데 .js 잔재, git stash worktree 공유, stash 스택 공유, stash@{0} 다른 에이전트, 멀티 워크트리 stash 충돌, git clean 소스 삭제, 타입체크 신규 에러 판별 | `~/.claude/knowledge/git-worktree-stash-and-tsc-emit.md` |
+| Next 16 미들웨어, middleware proxy 개명, proxy.ts, Both middleware file and proxy file detected, middleware-to-proxy, export function proxy, 미들웨어 없음 오진 | `~/.claude/knowledge/nextjs16-middleware-to-proxy.md` |
+| supabase 로그인했는데 로그아웃 표시, 헤더 로그인 버튼 안 바뀜, onAuthStateChange 안 뜸, 서버 액션 로그인 헤더 stale, createBrowserClient 인메모리 세션, getSession stale, api/me, usePathname 인증 재동기화, supabase-ssr 헤더, signInWithPassword 서버액션 헤더 갱신 | `~/.claude/knowledge/supabase-ssr-server-action-header-staleness.md` |
+| Tailwind v4 변형 순서, min-[] md 충돌, columns 의도치 않게, 후행 ! important, mt-0!, 반응형 어긋남 변형 특이도, 비중첩 브레이크포인트, 임의값 변형 명명 브레이크포인트 충돌 | `~/.claude/knowledge/tailwind-v4-variant-order-important.md` |
+| WSL /mnt/c 핫리로드 안됨, next dev HMR 미반영, inotify 미전달, 9p 파일감시, CHOKIDAR_USEPOLLING, 편집 반영 안됨 dev, watchOptions.poll, vite usePolling, dev 서버 재기동 | `~/.claude/knowledge/wsl-mnt-c-next-dev-hot-reload.md` |
+| 노션 select multi_select 변경, property type does not match filter, multi_select does not match select, does_not_equal does_not_contain, 옵션명 변경 필터 깨짐, ISR stale 캐시 동결, revalidate 실패 조용히, 노션 스키마 드리프트, 새 내용 반영 안됨 겉보기 정상 | `~/.claude/knowledge/notion-select-to-multiselect-isr-stale.md` |
+| ISR 페이지 레이턴시 폭증, 한 페이지만 느림, x-vercel-cache MISS 매번, private no-cache no-store, revalidate 무시 동적 강등, force-dynamic 의도치 않게, unstable_cache 밖 no-store, @upstash/redis no-store ISR, upstash 동적 강등, gunzip premature close, ERR_STREAM_PREMATURE_CLOSE, FetchError Premature close, @notionhq/client gzip 빌드 실패, Vercel 빌드 프리렌더 실패, prerender-error 노션, accept-encoding identity 노션, 빌드만 실패 로컬 정상 | `~/.claude/knowledge/nextjs-isr-static-external-client-pitfalls.md` |
 
 - knowledge 파일은 `~/.claude/knowledge/` 디렉토리에 주제별로 관리한다.
 - 새로운 범용 인사이트가 확인되면 해당 디렉토리에 파일을 추가하고 이 테이블을 업데이트한다.
@@ -177,10 +187,8 @@ git worktree remove /mnt/c/dev/<repo-name>-<task>
 ## Slack 알림
 
 - 슬랙 작업 시 `~/.claude/skills/slack-pilot.md` 스킬을 읽고 따른다.
-- 작업 시작 시 현재 시각을 기억해둔다.
-- 작업 완료 시 경과 시간이 **5분 이상**이면 `#자동화메시지` 채널에 완료 알림을 보낸다.
-- 백그라운드 에이전트 완료 시에는 시간 무관하게 **항상** 알림을 보낸다.
-- 알림 형식: `✅ 작업 완료: {한줄 요약} ({경과시간})`
+- **5분 이상 걸린 턴의 완료 알림은 Stop 훅(`~/.claude/hooks/slack-notify-stop.mjs`)이 자동 발송**한다(모델 기억에 의존하던 구버전이 안 먹혀서 훅으로 전환). **이 경우 모델이 별도로 보내지 않는다**(중복 방지). 형식: `✅ 작업 완료: {한줄 요약} ({경과}분)`.
+- **백그라운드 에이전트 완료**는 Stop 훅 범위 밖이므로(메인 턴이 짧을 수 있음), 그 보고 시 모델이 **직접** `#자동화메시지`에 알린다(시간 무관).
 
 ## RTK (Rust Token Killer)
 

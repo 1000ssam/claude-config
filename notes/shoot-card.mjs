@@ -1,0 +1,10 @@
+import pw from 'file:///home/user/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.js';
+const { chromium } = pw;
+const b=await chromium.launch();
+const p=await (await b.newContext({viewport:{width:1440,height:900}})).newPage();
+await p.goto('http://localhost:4123/contents/community/',{waitUntil:'networkidle'});
+await p.waitForTimeout(800);
+const card=await p.locator('div.bg-paper').first();
+await card.screenshot({path:'/mnt/c/dev/notes/community-shots/v4-cta-card.png'});
+console.log('done');
+await b.close();

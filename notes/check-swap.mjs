@@ -1,0 +1,14 @@
+import pw from 'file:///home/user/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.js';
+const { chromium } = pw;
+const b=await chromium.launch();
+const p=await (await b.newContext({viewport:{width:1440,height:1000}})).newPage();
+await p.goto('http://localhost:4123/contents/community/meetup-2/',{waitUntil:'networkidle'});
+await p.waitForTimeout(800);
+const largeSrc=async()=>{ const img=await p.$('div.aspect-\\[3\\/2\\] img'); return img? (await img.getAttribute('src')) : 'none'; };
+console.log('initial large src:', (await largeSrc()).slice(0,80));
+const btns=await p.$$('button[aria-label*="보기"]');
+await btns[6].click(); await p.waitForTimeout(1500);
+console.log('after click #7 :', (await largeSrc()).slice(0,80));
+await btns[14].click(); await p.waitForTimeout(1500);
+console.log('after click #15:', (await largeSrc()).slice(0,80));
+await b.close();

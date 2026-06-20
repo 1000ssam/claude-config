@@ -1,0 +1,11 @@
+﻿=== Printer fix log ===
+[10:30:29] Elevated: True
+[10:30:29] Created Standard TCP/IP port TCPIP_10.51.90.63 -> 10.51.90.63 (RAW 9100 default).
+[10:30:29] No Kyocera driver installed. Attempting to add from staged INF / Windows Update...
+[10:30:30]   driver not available: Kyocera TASKalfa 3554ci KX
+[10:30:30]   driver not available: Kyocera TASKalfa 3554ci (KPDL)
+[10:30:30]   driver not available: Kyocera TASKalfa 3554ci
+[10:30:30]   driver not available: Kyocera Classic Universal Driver
+[10:30:30]   driver not available: Kyocera KX
+[10:30:30] RESULT: NO_KYOCERA_DRIVER -- need to install Kyocera driver (e.g. via Add Printer wizard > Windows Update > Kyocera > TASKalfa 3554ci, or download KX driver).
+[10:30:30] Port is created and ready; printer add deferred until driver is available.

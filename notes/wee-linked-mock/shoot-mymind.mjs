@@ -1,0 +1,12 @@
+import pw from 'file:///home/user/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.js';
+const { chromium } = pw;
+const DIR = '/mnt/c/dev/notes/wee-linked-mock';
+const b = await chromium.launch({ args: ['--allow-file-access-from-files'] });
+const ctx = await b.newContext({ viewport: { width: 1180, height: 1400 }, deviceScaleFactor: 2 });
+const p = await ctx.newPage();
+await p.goto('file://' + DIR + '/mymind-mock.html', { waitUntil: 'load' });
+await p.evaluate(() => Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 4000))]));
+await p.waitForTimeout(1200);
+await p.screenshot({ path: DIR + '/mymind-mock.png', fullPage: true });
+await b.close();
+console.log('OK');

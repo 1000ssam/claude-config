@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>위링 · 한글 세리프 6종 비교</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Diphylleia&family=Hahmlet:wght@400;500;600&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#2b2630; --muted:#8c8590; --faint:#b6b0bb; --line:#efebee;
+  --hl-rose:#f6d3e0; --hl-rose-ink:#8a4763; --hl-blue:#d6e6f5; --hl-blue-ink:#3f6890; --hl-lilac:#e7ddf4; --hl-lilac-ink:#6b569c;
+  --glow-rose:#f6d9e4; --glow-peach:#f8e6dd; --glow-blue:#dde9f5;
+  --sans:"Pretendard",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:#fbfafb;color:var(--ink);word-break:keep-all;
+  -webkit-font-smoothing:antialiased;font-synthesis:none}
+.page{max-width:1080px;margin:0 auto;padding:36px 40px 70px}
+.top{padding:8px 0 6px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.top h1{font-size:21px;font-weight:800;letter-spacing:-.02em}
+.top p{margin-top:6px;font-size:13.5px;color:var(--muted)}
+.hl{padding:.02em .2em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hl.r{background:var(--hl-rose);color:var(--hl-rose-ink)}
+.hl.b{background:var(--hl-blue);color:var(--hl-blue-ink)}
+.hl.l{background:var(--hl-lilac);color:var(--hl-lilac-ink)}
+
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;
+  padding:46px 48px 40px;margin-top:22px;overflow:hidden}
+.card .glow{position:absolute;left:42px;top:-60px;width:360px;height:260px;border-radius:50%;filter:blur(54px);pointer-events:none;
+  background:radial-gradient(closest-side,var(--glow-rose),transparent 72%),radial-gradient(closest-side,var(--glow-peach),transparent 70%);
+  background-position:30% 40%,65% 30%;background-size:70% 80%,55% 60%;background-repeat:no-repeat;opacity:.8}
+.badge{position:relative;display:inline-flex;align-items:center;gap:9px;margin-bottom:20px}
+.badge .no{width:24px;height:24px;border-radius:7px;background:var(--ink);color:#fff;font-size:12px;font-weight:800;
+  display:flex;align-items:center;justify-content:center}
+.badge .nm{font-size:14px;font-weight:800;letter-spacing:-.01em}
+.badge .ft{font-size:12px;color:var(--faint);font-weight:600}
+.badge .note{font-size:11.5px;color:var(--muted);margin-left:4px}
+
+/* 동일 조건: 장평 scaleX(.88) · 자간 -.045em · 줄간격 1.04 */
+.h{position:relative;font-size:62px;line-height:1.04;letter-spacing:-.045em;color:var(--ink);
+  display:inline-block;transform:scaleX(.88);transform-origin:left}
+.sub{position:relative;margin-top:20px;max-width:560px;font-family:var(--sans);font-size:18px;line-height:1.7;color:#5b545f;font-weight:500}
+
+.f-song .h{font-family:"Song Myung",serif}
+.f-diph .h{font-family:"Diphylleia",serif}
+.f-hahm .h{font-family:"Hahmlet",serif;font-weight:500}
+.f-nanum .h{font-family:"Nanum Myeongjo",serif;font-weight:800}
+.f-gowun .h{font-family:"Gowun Batang",serif;font-weight:700}
+.f-noto .h{font-family:"Noto Serif KR",serif;font-weight:600}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <h1>위링 · 한글 세리프 6종 비교</h1>
+    <p>동일 조건(장평 88% · 자간 −.045em · 줄간격 1.04)으로 같은 히어로 문구를 렌더. 본문·하이라이트는 Pretendard 고정.</p>
+  </div>
+
+  <div class="card f-song"><span class="glow"></span>
+    <div class="badge"><span class="no">1</span><span class="nm">송명체</span><span class="ft">Song Myung</span><span class="note">고대비·우아 · 굵기 400 한 종 · mymind 무드 근접</span></div>
+    <div class="h">우리,<br>마음으로 잇다</div>
+    <p class="sub">상담교사들이 따뜻하게 이어지는 공간, 위링.<br><span class="hl r">사례</span>와 <span class="hl r">마음</span>, <span class="hl b">자료</span>와 <span class="hl l">노하우</span>를 함께 나눠요.</p>
+  </div>
+
+  <div class="card f-diph"><span class="glow"></span>
+    <div class="badge"><span class="no">2</span><span class="nm">디필레이아</span><span class="ft">Diphylleia</span><span class="note">초고대비 디스플레이 명조 · 가장 화려·세련 · 굵기 400</span></div>
+    <div class="h">우리,<br>마음으로 잇다</div>
+    <p class="sub">상담교사들이 따뜻하게 이어지는 공간, 위링.<br><span class="hl r">사례</span>와 <span class="hl r">마음</span>, <span class="hl b">자료</span>와 <span class="hl l">노하우</span>를 함께 나눠요.</p>
+  </div>
+
+  <div class="card f-hahm"><span class="glow"></span>
+    <div class="badge"><span class="no">3</span><span class="nm">함렛</span><span class="ft">Hahmlet</span><span class="note">모던 에디토리얼 고대비 · 굵기 100~900 다양 · 서구 세리프 페어링</span></div>
+    <div class="h">우리,<br>마음으로 잇다</div>
+    <p class="sub">상담교사들이 따뜻하게 이어지는 공간, 위링.<br><span class="hl r">사례</span>와 <span class="hl r">마음</span>, <span class="hl b">자료</span>와 <span class="hl l">노하우</span>를 함께 나눠요.</p>
+  </div>
+
+  <div class="card f-nanum"><span class="glow"></span>
+    <div class="badge"><span class="no">4</span><span class="nm">나눔명조 ExtraBold</span><span class="ft">Nanum Myeongjo 800</span><span class="note">클래식·묵직 · 안정적·범용 · 굵기 400/700/800</span></div>
+    <div class="h">우리,<br>마음으로 잇다</div>
+    <p class="sub">상담교사들이 따뜻하게 이어지는 공간, 위링.<br><span class="hl r">사례</span>와 <span class="hl r">마음</span>, <span class="hl b">자료</span>와 <span class="hl l">노하우</span>를 함께 나눠요.</p>
+  </div>
+
+  <div class="card f-gowun"><span class="glow"></span>
+    <div class="badge"><span class="no">5</span><span class="nm">고운바탕 Bold</span><span class="ft">Gowun Batang</span><span class="note">부드럽고 모던한 바탕 · 따뜻·친근 · 굵기 400/700</span></div>
+    <div class="h">우리,<br>마음으로 잇다</div>
+    <p class="sub">상담교사들이 따뜻하게 이어지는 공간, 위링.<br><span class="hl r">사례</span>와 <span class="hl r">마음</span>, <span class="hl b">자료</span>와 <span class="hl l">노하우</span>를 함께 나눠요.</p>
+  </div>
+
+  <div class="card f-noto"><span class="glow"></span>
+    <div class="badge"><span class="no">6</span><span class="nm">본 노토 (현재)</span><span class="ft">Noto Serif KR</span><span class="note">휴머니스트·중립 · 밋밋(사용자 불호) · 비교 기준</span></div>
+    <div class="h">우리,<br>마음으로 잇다</div>
+    <p class="sub">상담교사들이 따뜻하게 이어지는 공간, 위링.<br><span class="hl r">사례</span>와 <span class="hl r">마음</span>, <span class="hl b">자료</span>와 <span class="hl l">노하우</span>를 함께 나눠요.</p>
+  </div>
+
+</div>
+</body>
+</html>

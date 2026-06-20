@@ -1,0 +1,11 @@
+HARD gap page-counts:
+  db_view_table      45
+  toggle             36
+  video              25
+  embed_iframe       24
+  file_attachment    13
+  db_view_gallery    8
+  db_view_board      6
+  button             5
+  equation           3
+Pages with >=2 hard gaps: 54

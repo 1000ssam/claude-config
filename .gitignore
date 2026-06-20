@@ -24,3 +24,8 @@ credentials.json
 *.pem
 .env
 .env.*
+
+# 대용량 바이너리 덤프 (프린터 드라이버 등) — GitHub 100MB 초과로 push 차단 유발
+notes/kyocera/
+*.exe
+*.msi

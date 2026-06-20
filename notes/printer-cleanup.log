@@ -1,0 +1,12 @@
+﻿=== cleanup log ===
+[10:46:04] Set default -> 'Kyocera TASKalfa 3554ci (LAN)' (return=0)
+[10:46:05] Removed dead printer 'Kyocera TASKalfa 3554ci (5)'
+[10:46:05] --- Final printers ---
+[10:46:06]   Kyocera TASKalfa 3554ci (LAN) (DEFAULT)  [TCPIP_10.51.90.44]
+[10:46:07]   교무부 컬러 복합기  [WSD-daa0fef4-ff84-4799-b0cd-df8b0ff1f032]
+[10:46:08]   OneNote (Desktop)  [nul:]
+[10:46:09]   Microsoft Print to PDF  [PORTPROMPT:]
+[10:46:10]   Kyocera TASKalfa 4012i  [WSD-8f7aed4f-64f9-4ae0-a318-b73d916ae6f0]
+[10:46:11]   Hancom PDF  [Hancom PDF Port]
+[10:46:11]   Fax  [SHRFAX:]
+[10:46:11] RESULT: DONE

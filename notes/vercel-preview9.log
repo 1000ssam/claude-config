@@ -1,0 +1,34 @@
+Retrieving project…
+Deploying 1000s-projects-a51f0c2a/notiontalk-landing
+Uploading [--------------------] (0.0B/19.7KB)
+Uploading [=======-------------] (7.8KB/19.7KB)
+Uploading [===================-] (19.5KB/19.7KB)
+Uploading [====================] (19.7KB/19.7KB)
+Inspect: https://vercel.com/1000s-projects-a51f0c2a/notiontalk-landing/BExM5WWHo8yjEiTHUAaMRyKePKyN [4s]
+Preview: https://notiontalk-landing-aocs937xv-1000s-projects-a51f0c2a.vercel.app [4s]
+Building...
+Building...
+[2K[1A[2K[GPreview: https://notiontalk-landing-aocs937xv-1000s-projects-a51f0c2a.vercel.app [53s]
+Completing...
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_BExM5WWHo8yjEiTHUAaMRyKePKyN",
+    "url": "https://notiontalk-landing-aocs937xv-1000s-projects-a51f0c2a.vercel.app",
+    "inspectorUrl": "https://vercel.com/1000s-projects-a51f0c2a/notiontalk-landing/BExM5WWHo8yjEiTHUAaMRyKePKyN",
+    "readyState": "READY",
+    "target": null,
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_BExM5WWHo8yjEiTHUAaMRyKePKyN"
+  },
+  "message": "Deployment notiontalk-landing-aocs937xv-1000s-projects-a51f0c2a.vercel.app ready.",
+  "next": [
+    {
+      "command": "vercel inspect notiontalk-landing-aocs937xv-1000s-projects-a51f0c2a.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}

@@ -24,21 +24,30 @@ metadata:
 |------|------|------|-----|------|
 | 1 | 03.27 | 동아리 조직 + 온보딩 | /session-01/ | ✅ |
 | 2 | 04.10 | 프롬프트 스킬 | /session-02/ | ✅ |
-| 3 | 05.22 | AI로 발표 자료 만들기 | /session-03/ | - |
+| 3 | 05.22 | NotebookLM 제작·공유 | /session-03/ | ✅ |
+| 4 | 06.12 | NotebookLM 학습자료 제작·공유 | /session-04/ | ✅ |
+| 5 | 07.10 | AI 윤리(외부강사)+진로 | - | - |
 
 ## Notion DB
 - **1회차**: `f1897643-1197-44a4-ac10-77a61dcedaa7` — 이름/반/AI경험/별명/AI비교소감/프로젝트아이디어/느낀점
 - **2회차**: `33edd1dc-d644-81c8-b5da-cc865467b432` — 이름/최고의프롬프트/오늘의발견/1회차기록(텍스트, 추후 relation으로 수동 변경)
-- **위치**: RESOURCES > AI 동아리 (같은 부모 페이지)
+- **3회차**: `a1c0ce36-7550-493d-8416-b30bebb30950` — 이름/이메일/내노트북주제/공유시도움/인상깊은스튜디오기능/다음에해보고싶은것
+- **4회차**: `77fd16b9-ec9d-4230-9e7b-8fbdf87afcae` — 이름/이메일/공부주제단원/만든학습기능(multi_select)/AI자료검수/친구자료소감/다음에만들것
+- **위치/부모페이지**: RESOURCES > AI 동아리 `368dd1dc-d644-80a9-9ab9-fbd45efcea25` (전 회차 공통)
 
 ## Vercel 환경변수
 - `NOTION_TOKEN` — 공통
 - `NOTION_DB_ID` — 1회차 DB
 - `NOTION_S02_DB_ID` — 2회차 DB
+- `NOTION_S03_DB_ID` — 3회차 DB (prod+preview)
+- `NOTION_S04_DB_ID` — 4회차 DB (prod+preview)
+- ⚠️ preview 등록 시 git-branch 인자 필수: `vercel env add NAME preview "" --value V --yes` (빈 문자열). 라우터 knowledge: vercel-cli-preview-env
 
 ## API 구조
 - `api/submit.js` — 1회차: create(행 생성) + update(단계별 업데이트) 분리
 - `api/submit-s02.js` — 2회차: 마지막 스텝에서 한 번에 제출
+- `api/submit-s03.js` — 3회차: register/complete (시작 게이트 등록 → 마지막 PATCH)
+- `api/submit-s04.js` — 4회차: register/complete + 만든학습기능 multi_select 처리
 
 ## 2회차 프롬프트 6원칙 (역할 부여 제거, 현대화)
 1. 맥락 제공

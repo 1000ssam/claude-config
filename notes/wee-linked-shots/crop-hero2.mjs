@@ -1,0 +1,10 @@
+import { chromium } from '/home/user/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs';
+const browser = await chromium.launch({ executablePath:'/home/user/.cache/ms-playwright/chromium-1223/chrome-linux64/chrome' });
+const page = await browser.newPage({ viewport:{width:1280, height:560}, deviceScaleFactor:2 });
+await page.goto('http://localhost:3100/', { waitUntil:'networkidle' });
+await page.addStyleTag({ content:'*{opacity:1 !important; transform:none !important;}' });
+await page.evaluate(()=>document.fonts.ready);
+await page.waitForTimeout(250);
+await page.screenshot({ path:'/mnt/c/dev/notes/wee-linked-shots/hero-aligned.png', clip:{x:0,y:0,width:1280,height:430} });
+console.log('saved hero-aligned.png');
+await browser.close();

@@ -1,0 +1,25 @@
+<!doctype html><meta charset=utf-8><title>WebP 변환 검토</title>
+<style>body{font-family:system-ui,sans-serif;margin:24px;background:#fafafa}
+h1{font-size:20px}p{color:#555}table{border-collapse:collapse;width:100%}
+td{border:1px solid #ddd;padding:10px;vertical-align:top;background:#fff}
+td.lbl{width:160px;font-size:13px;color:#333}
+img{max-width:380px;width:100%;height:auto;display:block;border:1px solid #eee}
+.meta{font-size:12px;color:#666;margin-top:6px}b{color:#c0392b}
+th{background:#f0f0f0;padding:8px;font-size:13px}code{font-size:11px;color:#888}</style>
+<h1>WebP 변환 화질 검토 — 원본 vs 변환본</h1>
+<p>왼쪽(원본)과 오른쪽(변환본 WebP)을 나란히 비교하세요. 화면을 확대해 텍스트·얼굴·디테일이 깨지지 않는지 보면 됩니다.</p>
+<table><tr><th>구분</th><th>원본</th><th>변환본 (실제 적용될 WebP)</th></tr><tr><td class=lbl>밋업1 갤러리 사진<br><code>01.jpg</code></td>
+    <td><img src="orig-01.jpg"><div class=meta>원본 2657KB · jpg</div></td>
+    <td><img src="new-01.jpg.webp"><div class=meta>변환 118KB · webp <b>(-96%)</b></div></td></tr><tr><td class=lbl>밋업1 갤러리 사진<br><code>02.jpg</code></td>
+    <td><img src="orig-02.jpg"><div class=meta>원본 2450KB · jpg</div></td>
+    <td><img src="new-02.jpg.webp"><div class=meta>변환 134KB · webp <b>(-95%)</b></div></td></tr><tr><td class=lbl>특강 포스터(PNG·텍스트 많음)<br><code>notion-special-db-cover.png</code></td>
+    <td><img src="orig-notion-special-db-cover.png"><div class=meta>원본 200KB · png</div></td>
+    <td><img src="new-notion-special-db-cover.png.webp"><div class=meta>변환 24KB · webp <b>(-88%)</b></div></td></tr><tr><td class=lbl>특강 포스터(PNG·텍스트 많음)<br><code>notion-special-layout-cover.png</code></td>
+    <td><img src="orig-notion-special-layout-cover.png"><div class=meta>원본 190KB · png</div></td>
+    <td><img src="new-notion-special-layout-cover.png.webp"><div class=meta>변환 24KB · webp <b>(-87%)</b></div></td></tr><tr><td class=lbl>크리에이터 실사<br><code>1000-real.jpg</code></td>
+    <td><img src="orig-1000-real.jpg"><div class=meta>원본 134KB · jpg</div></td>
+    <td><img src="new-1000-real.jpg.webp"><div class=meta>변환 21KB · webp <b>(-85%)</b></div></td></tr><tr><td class=lbl>크리에이터 캐릭터<br><code>1000-char.png</code></td>
+    <td><img src="orig-1000-char.png"><div class=meta>원본 34KB · png</div></td>
+    <td><img src="new-1000-char.png.webp"><div class=meta>변환 6KB · webp <b>(-81%)</b></div></td></tr><tr><td class=lbl>커버 이미지<br><code>reading-challenge-cover.jpg</code></td>
+    <td><img src="orig-reading-challenge-cover.jpg"><div class=meta>원본 170KB · jpg</div></td>
+    <td><img src="new-reading-challenge-cover.jpg.webp"><div class=meta>변환 101KB · webp <b>(-41%)</b></div></td></tr></table>

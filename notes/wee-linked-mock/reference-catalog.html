@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>위링 · 파스텔 레퍼런스 카탈로그</title>
+<style>
+  :root{
+    --ink:#1c1b1f; --muted:#6b6770; --line:#e9e6ec; --bg:#f7f6f8; --card:#ffffff;
+    --pink:#e7a6c0; --sky:#9fc7e8; --lilac:#bca7e0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);
+    word-break:keep-all;-webkit-font-smoothing:antialiased;line-height:1.6;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  header.top{padding:64px 0 28px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  header.top .kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  header.top h1{font-size:38px;letter-spacing:-.02em;margin-top:10px;font-weight:800}
+  header.top p{margin-top:14px;max-width:680px;color:var(--muted);font-size:15.5px}
+
+  /* 원칙 박스 */
+  .principles{margin:34px 0 10px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .principles .p{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .principles .n{display:inline-flex;width:26px;height:26px;border-radius:8px;align-items:center;justify-content:center;
+    font-weight:800;font-size:13px;background:linear-gradient(135deg,var(--pink),var(--sky));color:#23202a;margin-bottom:10px}
+  .principles h3{font-size:15px;letter-spacing:-.01em}
+  .principles p{margin-top:6px;font-size:13px;color:var(--muted)}
+
+  .why{margin:18px 0 6px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--pink);border-radius:12px;padding:18px 20px}
+  .why b{font-weight:700}
+  .why span{color:var(--muted);font-size:14px}
+
+  section.group{margin-top:44px}
+  section.group > h2{font-size:21px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  section.group > h2 .dot{width:10px;height:10px;border-radius:50%}
+  section.group > .sub{color:var(--muted);font-size:14px;margin:4px 0 18px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:920px){.grid,.principles{grid-template-columns:1fr 1fr}}
+  .ref{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease;text-decoration:none;color:inherit}
+  .ref:hover{transform:translateY(-3px);box-shadow:0 14px 30px -16px rgba(30,25,40,.28)}
+  .ref .shot{aspect-ratio:4/3;overflow:hidden;background:#f0eef2;border-bottom:1px solid var(--line)}
+  .ref .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .ref .body{padding:16px 17px 18px}
+  .ref .name{font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .ref .name .ext{font-size:11px;color:var(--muted);font-weight:500;white-space:nowrap}
+  .ref .note{margin-top:8px;font-size:13px;color:var(--muted)}
+  .ref .url{margin-top:10px;font-size:11.5px;color:#9a96a2;word-break:break-all}
+  .ref .pal{display:flex;margin-top:12px;border-radius:7px;overflow:hidden;border:1px solid var(--line)}
+  .ref .pal i{flex:1;height:22px}
+
+  .sect-label{margin-top:48px;font-size:22px;letter-spacing:-.01em;font-weight:800;display:flex;align-items:center;gap:10px}
+  .sect-label .pill{font-size:11px;font-weight:700;color:#23202a;background:linear-gradient(135deg,var(--pink),var(--sky));padding:3px 10px;border-radius:999px}
+  .sect-desc{color:var(--muted);font-size:14px;margin:8px 0 2px;max-width:760px}
+
+  .derived{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:920px){.derived{grid-template-columns:1fr}}
+  .derived .d{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .derived .d h3{font-size:17px;letter-spacing:-.01em}
+  .derived .d .tagline{color:var(--muted);font-size:13px;margin-top:3px}
+  .derived .bar{display:flex;margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+  .derived .bar i{flex:1;height:56px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;font-size:9px;font-weight:700}
+  .derived .roles{margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.75}
+  .derived .roles b{color:var(--ink);font-weight:700}
+  .derived .from{margin-top:10px;font-size:11.5px;color:#9a96a2}
+
+  footer{margin:56px 0 70px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line);padding-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">wee-linked · color direction</div>
+    <h1>파스텔 레퍼런스 카탈로그</h1>
+    <p>"촌스럽지 않은" 파스텔 방향을 잡기 위해 모은 실제 사이트 13곳. 멘탈케어·상담 무드를 중심으로,
+       파스텔을 절제 있게 쓴 사례를 골랐습니다. 카드를 클릭하면 원본 사이트가 열립니다.</p>
+  </header>
+
+  <div class="why">
+    <b>왜 앞선 시안이 촌스러웠나</b> &nbsp;<span>— ① 채도 높은 캔디 핑크 ② 색을 큰 면에 ③ 손글씨·둥근 만화 폰트 ④ 두 사람+하트 직설 클립아트. 네 가지가 겹치면 "유치"로 읽힙니다. 아래 사례들은 정확히 그 반대로 갑니다.</span>
+  </div>
+
+  <div class="principles">
+    <div class="p"><span class="n">1</span><h3>채도를 낮춘다</h3><p>쨍한 파스텔 대신 흐릿한 더스티 톤. 색이 연할수록 고급스러워집니다.</p></div>
+    <div class="p"><span class="n">2</span><h3>색은 점, 면은 여백</h3><p>화면 대부분은 흰색·뉴트럴. 파스텔은 1~2곳 강조에만.</p></div>
+    <div class="p"><span class="n">3</span><h3>타이포가 8할</h3><p>정제된 산세리프 + 큰 여백 + 또렷한 정렬. 손글씨체는 지양.</p></div>
+    <div class="p"><span class="n">4</span><h3>일러스트는 추상</h3><p>직설적 클립아트 대신 추상 도형·은은한 그라데이션·실사진.</p></div>
+  </div>
+
+  <div class="sect-label"><span class="pill">결론</span> 위링 추천 팔레트 <span style="font-weight:500;font-size:15px;color:var(--muted)">— 레퍼런스에서 도출</span></div>
+  <div class="sect-desc">아래 13곳의 추출색 중 '더스티(흐릿한) 파스텔'만 골라 <b>흰 배경 기준</b>으로 재구성했습니다. 채도를 낮춰 유치함을 걷어낸 게 핵심. 각 hex는 <code>globals.css</code>의 <code>--color-*</code> 토큰에 그대로 대응합니다.</div>
+  <div class="derived">
+    <div class="d">
+      <h3>① 더스티 로즈 × 미스트 블루</h3>
+      <div class="tagline">따뜻·포근 우세 · 상담 톤에 가장 적합</div>
+      <div class="bar">
+        <i style="background:#ffffff;color:#bbb">bg #fff</i>
+        <i style="background:#faeef3;color:#b08;opacity:.85">soft</i>
+        <i style="background:#e3aebf;color:#fff">accent</i>
+        <i style="background:#d093a7;color:#fff">strong</i>
+        <i style="background:#b0617e;color:#fff">강조글자</i>
+        <i style="background:#aec4e0;color:#235">보조블루</i>
+        <i style="background:#2b2630;color:#fff">본문</i>
+      </div>
+      <div class="roles"><b>포인트</b> #e3aebf 더스티 로즈 · <b>보조</b> #aec4e0 미스트 블루 · <b>강조글자</b> #b0617e · <b>본문</b> #2b2630 — 배경은 순백, 색은 버튼·아이콘 칩에만.</div>
+      <div class="from">도출: Trevor Project(#dcb0b0·#c6b0dc) · Katrine(#f2c6dc) · Lifer(#f2c6c6·#c6c6f2)</div>
+    </div>
+    <div class="d">
+      <h3>② 미스트 블루 리드 × 로즈 포인트</h3>
+      <div class="tagline">맑음·차분 우세 · 신뢰감</div>
+      <div class="bar">
+        <i style="background:#ffffff;color:#bbb">bg #fff</i>
+        <i style="background:#eef4fa;color:#258;opacity:.85">soft</i>
+        <i style="background:#a9c4e1;color:#fff">accent</i>
+        <i style="background:#88a9cd;color:#fff">strong</i>
+        <i style="background:#4a78a4;color:#fff">강조글자</i>
+        <i style="background:#e6afc1;color:#723">보조로즈</i>
+        <i style="background:#283038;color:#fff">본문</i>
+      </div>
+      <div class="roles"><b>포인트</b> #a9c4e1 미스트 블루 · <b>보조</b> #e6afc1 로즈 · <b>강조글자</b> #4a78a4 · <b>본문</b> #283038 — 블루가 주인공, 로즈는 강조에만.</div>
+      <div class="from">도출: Katrine(#586eb0·#6e84c6) · Facetune(#c6f2ff) · Trevor(#dcdcf2)</div>
+    </div>
+  </div>
+
+  <div class="sect-label" style="margin-top:52px">레퍼런스 13곳 <span class="pill">추출색 자동 표기</span></div>
+  <div class="sect-desc">각 카드 하단 색띠 = 해당 스크린샷에서 자동 추출한 대표 6색(왼→오 빈도순). 카드를 클릭하면 원본 사이트가 열립니다.</div>
+  <div id="root"></div>
+
+  <footer>위링 색 방향 리서치 · 레퍼런스 13곳 + 추출색 + 추천 팔레트 2종 · /mnt/c/dev/notes/wee-linked-mock/reference-catalog.html</footer>
+</div>
+
+<script src="palettes.js"></script>
+<script>
+const GROUPS = [
+  {
+    title:"멘탈케어 · 상담 무드", dot:"#e7a6c0",
+    sub:"위링과 성격이 가장 가까운 영역 — 따뜻하고 안심되는 톤을 어떻게 만드는지",
+    items:[
+      {img:"refs/headspace.png", name:"Headspace", ext:"headspace.com",
+        note:"명상·멘탈케어의 대명사. 따뜻한 일러스트 + 부드러운 색으로 신뢰감. 상담 톤에 가장 가까운 참고.",
+        url:"https://www.headspace.com/articles"},
+      {img:"refs/trevor.png", name:"The Trevor Project", ext:"thetrevorproject.org",
+        note:"\"We're here for you\" 지지 메시지 + 큰 액션 버튼. 위기상담 서비스의 안심되는 무드.",
+        url:"https://www.thetrevorproject.org/get-help/"},
+      {img:"refs/breathwrk.png", name:"Breathwrk", ext:"breathwrk.com",
+        note:"호흡·명상 콘텐츠 허브. 차분한 카드 그리드 + 절제된 색. 자료실/칼럼 레이아웃 참고.",
+        url:"https://www.breathwrk.com/blog"},
+      {img:"refs/enerjoy.png", name:"Enerjoy (me+)", ext:"enerjoy.life",
+        note:"정신 안정·수면 등 웰니스 영역을 부드러운 타일로 구성. 기능 소개 섹션 참고.",
+        url:"https://enerjoy.life/about-us/"},
+      {img:"refs/unwind.png", name:"Unwind", ext:"unwindiowa.com",
+        note:"색(블루·레드·옐로우·그린)을 테마로 쓴 웰니스 섹션. 컬러를 의미로 쓰는 방식 참고.",
+        url:"https://www.unwindiowa.com/"}
+    ]
+  },
+  {
+    title:"부드러운 파스텔 그라데이션", dot:"#bca7e0",
+    sub:"흰 배경 위에서 파스텔을 '점'으로 쓰는 정석 — 우리가 가야 할 핵심 방향",
+    items:[
+      {img:"refs/mymind.png", name:"mymind", ext:"mymind.com",
+        note:"옅은 그라데이션 배경 + 미니멀 타이포. '절제된 파스텔'의 교과서. 가장 추천하는 톤.",
+        url:"https://mymind.com/what"},
+      {img:"refs/lifer.png", name:"Lifer", ext:"lifer-diabetes.com",
+        note:"흰 배경 위 분홍-보라 그라데이션 글로우. 포인트 그라데이션을 은은하게 쓰는 법.",
+        url:"https://www.lifer-diabetes.com/"},
+      {img:"refs/facetune.png", name:"Facetune (AI Color)", ext:"facetuneapp.com",
+        note:"AI 컬러 분석 — 시즌별 파스텔 팔레트 샘플이 그대로 노출. 색 조합 자체의 레퍼런스.",
+        url:"https://www.facetuneapp.com/features/ai-color-analysis"}
+    ]
+  },
+  {
+    title:"분홍 × 하늘 / 파스텔 브랜딩", dot:"#9fc7e8",
+    sub:"분홍과 블루를 함께 쓰되 유치하지 않게 — 톤 다운과 위트로 푸는 사례",
+    items:[
+      {img:"refs/katrine.png", name:"Katrine Mehl", ext:"katrinemehl.com",
+        note:"연분홍 배경 + 파란 카드. 처음 말한 '분홍×하늘' 조합 그 자체. 색 비율 참고.",
+        url:"https://katrinemehl.com/"},
+      {img:"refs/oatly.png", name:"Oatly", ext:"oatly.com",
+        note:"솔리드 핑크 배경의 위트있는 브랜딩. 파스텔도 톤·타이포가 정돈되면 안 유치.",
+        url:"https://www.oatly.com/en-us/sustainability"},
+      {img:"refs/mozi.png", name:"Mozi", ext:"mozi.app",
+        note:"파스텔 톤의 부드러운 회원가입 폼. 로그인/가입 화면 톤 참고.",
+        url:"https://www.mozi.app/sign-up"},
+      {img:"refs/canva.png", name:"Canva", ext:"canva.com",
+        note:"친근·컬러풀하지만 정돈된 무드. 색을 많이 쓰되 난잡하지 않게 묶는 법.",
+        url:"https://www.canva.com/website-builder"}
+    ]
+  },
+  {
+    title:"절제된 미니멀 (색 적게, 격조)", dot:"#cfcad6",
+    sub:"색을 거의 안 써도 고급스러운 반례 — 여백·타이포·정렬의 힘",
+    items:[
+      {img:"refs/figma.png", name:"Figma", ext:"figma.com",
+        note:"색은 절제, 여백·타이포·정렬로 고급감. '파스텔을 더 빼는' 선택지의 기준점.",
+        url:"https://www.figma.com/web-design/"}
+    ]
+  }
+];
+
+document.getElementById("root").innerHTML = GROUPS.map(g => `
+  <section class="group">
+    <h2><span class="dot" style="background:${g.dot}"></span>${g.title}</h2>
+    <div class="sub">${g.sub}</div>
+    <div class="grid">
+      ${g.items.map(it => {
+        const key = it.img.split('/').pop().replace('.png','');
+        const pal = (window.PALETTES && window.PALETTES[key]) || [];
+        return `
+        <a class="ref" href="${it.url}" target="_blank" rel="noopener">
+          <div class="shot"><img src="${it.img}" alt="${it.name}" loading="lazy"></div>
+          <div class="body">
+            <div class="name">${it.name}<span class="ext">${it.ext} ↗</span></div>
+            <div class="note">${it.note}</div>
+            <div class="pal">${pal.map(c => `<i style="background:${c}" title="${c}"></i>`).join("")}</div>
+            <div class="url">${it.url}</div>
+          </div>
+        </a>`; }).join("")}
+    </div>
+  </section>`).join("");
+</script>
+</body>
+</html>

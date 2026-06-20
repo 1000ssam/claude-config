@@ -1,0 +1,48 @@
+
+> notiontalk-landing@0.1.0 prebuild
+> node scripts/sync-creators.mjs && node scripts/sync-community.mjs
+
+[sync-creators] NOTION_TOKEN missing — leaving existing data in place. (set NOTION_TOKEN to refresh)
+[sync-community] NOTION_TOKEN missing — leaving existing data in place. (set NOTION_TOKEN to refresh)
+
+> notiontalk-landing@0.1.0 build
+> next build
+
+▲ Next.js 16.2.3 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 16.3s
+  Running TypeScript ...
+  Finished TypeScript in 28.6s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/18) ...
+  Generating static pages using 11 workers (4/18) 
+  Generating static pages using 11 workers (8/18) 
+  Generating static pages using 11 workers (13/18) 
+✓ Generating static pages using 11 workers (18/18) in 9.4s
+  Finalizing page optimization ...
+
+Route (app)                                Revalidate  Expire
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/notion-webhook
+├ ƒ /api/offer
+├ ○ /apple-icon.png
+├ ○ /contents/about-us
+├ ○ /contents/community
+├ ● /contents/community/[slug]
+│ ├ /contents/community/meetup-1
+│ ├ /contents/community/reading-challenge
+│ ├ /contents/community/running-challenge
+│ └ /contents/community/meetup-2
+├ ○ /icon.png
+├ ○ /robots.txt
+├ ○ /sitemap-content.xml                           1h      1y
+├ ○ /sitemap-landing.xml
+└ ○ /sitemap.xml
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

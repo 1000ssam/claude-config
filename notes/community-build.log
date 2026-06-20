@@ -1,0 +1,62 @@
+
+> notiontalk-landing@0.1.0 prebuild
+> node scripts/sync-creators.mjs && node scripts/sync-community.mjs
+
+[sync-creators] DB: f6d8edc1-68b7-435e-8bee-4b0ee579dda3
+[sync-creators] 3 rows
+  chemi 실사 80550B
+  gomgom 실사 53702B
+  1000 실사 137667B
+  1000 캐릭터 34478B
+[sync-creators] wrote 3 public + 3 email(s) (private)
+[sync-community] DB: 323dd1dc-d644-8049-8131-fc5f2fd5de36
+[sync-community] 5 rows
+  reading-challenge cover 173726B
+  running-challenge cover 148774B
+  meetup-2 cover 57372B
+  meetup-2 gallery 27 imgs
+  meetup-1 cover 153410B
+  meetup-1 gallery 2 imgs
+[sync-community] wrote 4 events
+
+> notiontalk-landing@0.1.0 build
+> next build
+
+▲ Next.js 16.2.3 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 11.6s
+  Running TypeScript ...
+  Finished TypeScript in 19.9s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/18) ...
+  Generating static pages using 11 workers (4/18) 
+  Generating static pages using 11 workers (8/18) 
+  Generating static pages using 11 workers (13/18) 
+✓ Generating static pages using 11 workers (18/18) in 2.9s
+  Finalizing page optimization ...
+
+Route (app)                                Revalidate  Expire
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/notion-webhook
+├ ƒ /api/offer
+├ ○ /apple-icon.png
+├ ○ /contents/about-us
+├ ○ /contents/community
+├ ● /contents/community/[slug]
+│ ├ /contents/community/meetup-1
+│ ├ /contents/community/reading-challenge
+│ ├ /contents/community/running-challenge
+│ └ /contents/community/meetup-2
+├ ○ /icon.png
+├ ○ /robots.txt
+├ ○ /sitemap-content.xml                           1h      1y
+├ ○ /sitemap-landing.xml
+└ ○ /sitemap.xml
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

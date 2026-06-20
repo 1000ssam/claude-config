@@ -1,0 +1,7 @@
+﻿=== repoint to .44 log ===
+[10:45:01] Elevated: True
+[10:45:02] Created port TCPIP_10.51.90.44 (RAW 9100)
+[10:45:03] Repointed 'Kyocera TASKalfa 3554ci (LAN)' -> TCPIP_10.51.90.44
+[10:45:03] Removed wrong port TCPIP_10.51.90.63
+[10:45:06] Test page sent (return=0) -> check YOUR copier tray
+[10:45:06] RESULT: DONE | 'Kyocera TASKalfa 3554ci (LAN)' now on TCPIP_10.51.90.44 (10.51.90.44)

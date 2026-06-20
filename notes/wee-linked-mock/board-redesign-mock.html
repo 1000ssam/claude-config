@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Batang:wght@400;700&display=swap">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Pretendard",sans-serif; background:#e9e4df; padding:36px; display:flex; gap:28px; align-items:flex-start; }
+  .col { width:540px; }
+  .tag { font-size:13px; font-weight:700; color:#6b6b6b; margin-bottom:10px; letter-spacing:.02em; }
+  .frame { border-radius:18px; overflow:hidden; box-shadow:0 10px 40px -12px rgba(0,0,0,.18); }
+
+  /* ── 공통 SVG 아이콘 ── */
+  svg { vertical-align:-2px; }
+
+  /* ===================== 현재(A) ===================== */
+  .cur { background:#fff8f2; padding:0; }
+  .cur .hd { display:flex; align-items:center; justify-content:space-between; padding:16px 22px; border-bottom:1px solid rgba(240,228,216,.6); }
+  .cur .brand { font-family:"Jua"; font-size:22px; color:#e89b7b; }
+  .cur .cta { background:#e89b7b; color:#fff; border-radius:999px; padding:8px 16px; font-size:13px; font-weight:700; }
+  .cur .tabs { display:flex; gap:18px; padding:14px 22px 0; }
+  .cur .tabs a { font-size:14px; color:#8a7b70; padding-bottom:12px; }
+  .cur .tabs a.on { color:#4a3f38; border-bottom:2px solid #e89b7b; font-weight:600; }
+  .cur .cats { display:flex; gap:8px; padding:12px 22px; border-top:1px solid rgba(240,228,216,.5); font-size:13px; align-items:center;}
+  .cur .cats a { color:#8a7b70; }
+  .cur .cats a.on { color:#d97f5c; font-weight:700; }
+  .cur .cats .dot{color:#f0e4d8;}
+  .cur .title { font-family:"Jua"; font-size:34px; color:#4a3f38; padding:24px 22px 4px; }
+  .cur .sub { color:#8a7b70; padding:0 22px 18px; font-size:14px;}
+  .cur .panel { margin:0 22px 26px; background:#fffdfb; border:1px solid #f0e4d8; border-radius:18px; box-shadow:0 4px 20px -8px rgba(160,110,80,.18); overflow:hidden;}
+  .cur .row { display:flex; justify-content:space-between; align-items:center; padding:15px 18px; border-bottom:1px solid #f0e4d8; }
+  .cur .row:last-child{border-bottom:0;}
+  .cur .row .t { font-weight:600; color:#4a3f38; font-size:15px; display:flex; gap:8px; align-items:center;}
+  .cur .chip { background:#e6f0e8; color:#4f7a5e; border-radius:999px; padding:2px 8px; font-size:12px; font-weight:600;}
+  .cur .meta { color:#8a7b70; font-size:12px; display:flex; gap:10px; align-items:center;}
+
+  /* ===================== 제안 공통(B/C) ===================== */
+  .new { background:#f6f2ee; }
+  .new .hd { display:flex; align-items:center; justify-content:space-between; padding:16px 22px; border-bottom:1px solid #ece3da; }
+  .new .brand { font-weight:800; font-size:21px; color:#1f1a17; letter-spacing:-.02em; }
+  .new .brand b{color:#cf744f;}
+  .new .cta { background:#cf744f; color:#fff; border-radius:10px; padding:9px 16px; font-size:13px; font-weight:700; }
+  .new .tabs { display:flex; gap:20px; padding:14px 22px 0; }
+  .new .tabs a { font-size:14px; color:#9a8d83; padding-bottom:12px; font-weight:500;}
+  .new .tabs a.on { color:#1f1a17; border-bottom:2px solid #cf744f; font-weight:700; }
+  .new .cats { display:flex; gap:8px; padding:12px 22px; border-top:1px solid #ece3da; font-size:13px; align-items:center;}
+  .new .cats a { color:#9a8d83; }
+  .new .cats a.on { color:#cf744f; font-weight:700; }
+  .new .cats .dot{color:#ddd0c4;}
+  .new .title { font-size:30px; color:#1f1a17; padding:26px 22px 4px; letter-spacing:-.02em; font-weight:800;}
+  .new .sub { color:#9a8d83; padding:0 22px 20px; font-size:14px;}
+  .new .panel { margin:0 22px 26px; background:#ffffff; border:1px solid #efe7df; border-radius:14px; overflow:hidden; box-shadow:0 1px 2px rgba(31,26,23,.04);}
+  .new .row { display:flex; justify-content:space-between; align-items:center; padding:15px 18px; border-bottom:1px solid #f2ece5; transition:background .15s;}
+  .new .row:last-child{border-bottom:0;}
+  .new .row:hover{background:#faf6f2;}
+  .new .row .t { font-weight:600; color:#1f1a17; font-size:15px; display:flex; gap:8px; align-items:center;}
+  .new .chip { background:#eef4ef; color:#5c8268; border-radius:6px; padding:2px 7px; font-size:11.5px; font-weight:600;}
+  .new .meta { color:#9a8d83; font-size:12px; display:flex; gap:10px; align-items:center;}
+  .new .cnt{color:#cf744f; font-weight:700;}
+
+  /* 세리프 제목(C) */
+  .serif .brand, .serif .title { font-family:"Gowun Batang"; font-weight:700; letter-spacing:0; }
+  .serif .title{font-size:31px;}
+</style></head>
+<body>
+
+<!-- 현재 -->
+<div class="col">
+  <div class="tag">현재 (Jua · 살구 워시)</div>
+  <div class="frame cur">
+    <div class="hd"><div class="brand">위링 <span style="font-family:Pretendard;font-size:13px;color:#8a7b70">WEE-linked</span></div><div class="cta">회원가입</div></div>
+    <div class="tabs"><a>전체</a><a>공지사항</a><a class="on">자유수다</a><a>질문있어요</a><a>사례나눔</a></div>
+    <div class="cats"><a class="on">전체</a><span class="dot">·</span><a>일상</a><span class="dot">·</span><a>고민</a><span class="dot">·</span><a>자랑</a><span class="dot">·</span><a>연수후기</a><span class="dot">·</span><a>추천</a></div>
+    <div class="title">자유수다</div><div class="sub">상담교사들의 일상과 소통 공간</div>
+    <div class="panel">
+      <div class="row"><div class="t"><span class="chip">일상</span>상담실 환경 꾸미기, 작은 변화 공유해요</div><div class="meta">test · 3일 전 · ♡ 19</div></div>
+      <div class="row"><div class="t"><span class="chip">고민</span>새 학기 첫 주, 다들 어떻게 보내고 계세요?</div><div class="meta">test · 4일 전 · ♡ 45</div></div>
+      <div class="row"><div class="t"><span class="chip">자랑</span>학부모 상담 후기 — 길게 통화한 날</div><div class="meta">미소쌤 · 5일 전 · ♡ 12</div></div>
+      <div class="row"><div class="t"><span class="chip">추천</span>관계 회복에 좋은 보드게임 추천해요</div><div class="meta">하늘 · 1주 전 · ♡ 31</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 제안 A: 산세리프 -->
+<div class="col">
+  <div class="tag" style="color:#cf744f">제안 A — 정제 산세리프 + 중립 앵커</div>
+  <div class="frame new">
+    <div class="hd"><div class="brand">위링 <span style="font-weight:500;font-size:13px;color:#9a8d83">WEE-linked</span></div><div class="cta">회원가입</div></div>
+    <div class="tabs"><a>전체</a><a>공지사항</a><a class="on">자유수다</a><a>질문있어요</a><a>사례나눔</a></div>
+    <div class="cats"><a class="on">전체</a><span class="dot">·</span><a>일상</a><span class="dot">·</span><a>고민</a><span class="dot">·</span><a>자랑</a><span class="dot">·</span><a>연수후기</a><span class="dot">·</span><a>추천</a></div>
+    <div class="title">자유수다</div><div class="sub">상담교사들의 일상과 소통 공간</div>
+    <div class="panel">
+      <div class="row"><div class="t"><span class="chip">일상</span>상담실 환경 꾸미기, 작은 변화 공유해요</div><div class="meta">test · 3일 전 · ♥ 19</div></div>
+      <div class="row"><div class="t"><span class="chip">고민</span>새 학기 첫 주, 다들 어떻게 보내고 계세요? <span class="cnt">2</span></div><div class="meta">test · 4일 전 · ♥ 45</div></div>
+      <div class="row"><div class="t"><span class="chip">자랑</span>학부모 상담 후기 — 길게 통화한 날</div><div class="meta">미소쌤 · 5일 전 · ♥ 12</div></div>
+      <div class="row"><div class="t"><span class="chip">추천</span>관계 회복에 좋은 보드게임 추천해요</div><div class="meta">하늘 · 1주 전 · ♥ 31</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 제안 B: 세리프 -->
+<div class="col">
+  <div class="tag" style="color:#cf744f">제안 B — 따뜻한 세리프 제목</div>
+  <div class="frame new serif">
+    <div class="hd"><div class="brand">위링 <span style="font-family:Pretendard;font-weight:500;font-size:13px;color:#9a8d83">WEE-linked</span></div><div class="cta" style="font-family:Pretendard">회원가입</div></div>
+    <div class="tabs" style="font-family:Pretendard"><a>전체</a><a>공지사항</a><a class="on">자유수다</a><a>질문있어요</a><a>사례나눔</a></div>
+    <div class="cats" style="font-family:Pretendard"><a class="on">전체</a><span class="dot">·</span><a>일상</a><span class="dot">·</span><a>고민</a><span class="dot">·</span><a>자랑</a><span class="dot">·</span><a>연수후기</a><span class="dot">·</span><a>추천</a></div>
+    <div class="title">자유수다</div><div class="sub" style="font-family:Pretendard">상담교사들의 일상과 소통 공간</div>
+    <div class="panel" style="font-family:Pretendard">
+      <div class="row"><div class="t"><span class="chip">일상</span>상담실 환경 꾸미기, 작은 변화 공유해요</div><div class="meta">test · 3일 전 · ♥ 19</div></div>
+      <div class="row"><div class="t"><span class="chip">고민</span>새 학기 첫 주, 다들 어떻게 보내고 계세요? <span class="cnt">2</span></div><div class="meta">test · 4일 전 · ♥ 45</div></div>
+      <div class="row"><div class="t"><span class="chip">자랑</span>학부모 상담 후기 — 길게 통화한 날</div><div class="meta">미소쌤 · 5일 전 · ♥ 12</div></div>
+      <div class="row"><div class="t"><span class="chip">추천</span>관계 회복에 좋은 보드게임 추천해요</div><div class="meta">하늘 · 1주 전 · ♥ 31</div></div>
+    </div>
+  </div>
+</div>
+
+</body></html>
